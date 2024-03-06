@@ -1,0 +1,31 @@
+Assignment: Personal Finance Dashboard
+Overview:
+Develop a Personal Finance Dashboard that allows users to track their expenses, incomes, and visualize their financial health over time. This application should provide insightful analytics, enabling users to make informed decisions about their personal finances.
+
+Core Features:
+User Authentication: Implement a simple login/logout functionality with mock authentication.
+Dashboard: Present a summary of the user's financial overview, including total balance, income, and expenses.
+Transaction Management: Allow users to add, edit, and delete transactions (income and expenses) with details such as amount, category, date, and description.
+Categorisation: Transactions should be categorised (e.g., groceries, salary, rent) for better analysis.
+Analytics: Provide graphical representations (e.g., pie charts, bar graphs) of expenses and income, categorized by type over selectable periods (month, year).
+Responsive Design: Ensure the application is responsive and provides a consistent experience across desktop and mobile devices.
+Budget Planning: Allow users to set monthly budgets for different categories and track their progress.
+Alerts: Notify users when they exceed their budget or reach a financial goal.
+
+
+Technical Stack:
+
+React
+Ant Design charts
+Styled Components and Material UI library
+
+
+Views:
+
+1- Splash/Login (gradient bg with loading logo, slides up and shows dashobard after load, or login input fields)
+2- Top Navbar (dashboard, transaction list, financial goal setup)
+3- Dashboard (total balance, income, and expenses) (charts) (filters for category, month/year)
+4- Transaction Page (list of transactions, edit/delete option)
+  each list item has (amount, category, date, and description)
+  (a filter in the view to filter by specific category)
+5- A warning popup if user is exceeding monthly budget/financial goal(antd guage)

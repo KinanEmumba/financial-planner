@@ -1,16 +1,23 @@
-import styled from 'styled-components';
 
-import NxWelcome from './nx-welcome';
 
-const StyledApp = styled.div`
-  // Your style here
-`;
+import { ThemeProvider } from '@mui/material/styles';
+import { createContext } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+
+import AppRoutes from 'src/app/routes';
+import { theme } from 'src/app/theme';
+
+export const AuthContext = createContext(null);
 
 export function App() {
   return (
-    <StyledApp>
-      <NxWelcome title="personal-finance" />
-    </StyledApp>
+    <BrowserRouter>
+      <AuthContext.Provider value={null}>
+        <ThemeProvider theme={theme}>
+          <AppRoutes />
+        </ThemeProvider>
+      </AuthContext.Provider>
+    </BrowserRouter>
   );
 }
 
