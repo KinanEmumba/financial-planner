@@ -1,17 +1,25 @@
 import { createTheme } from "@mui/material/styles";
-import { blue } from "@mui/material/colors";
+import { blueGrey } from "@mui/material/colors";
 
-export const themeColor = '#5acba1';
-export const themeColorLight = '#5acba150';
-export const iceBlue = blue[700];
+const baseWhite = blueGrey[50];
+const baseGrey = blueGrey[800];
+const baseBlack = blueGrey[900];
+
 
 export const theme = createTheme({
+	typography: {
+    fontFamily: 'Georgia, Serif'
+  },
   palette: {
+		text: {
+			primary: baseWhite,
+			secondary: baseBlack,
+		},
     primary: {
-      main: '#5acba1',
+			main: baseGrey,
     },
     secondary: {
-      main: '#000000',
+			main: baseWhite,
     },
   },
 });
