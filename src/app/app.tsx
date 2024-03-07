@@ -1,24 +1,27 @@
-import { BrowserRouter } from 'react-router-dom';
 import { createContext } from 'react';
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { BrowserRouter } from 'react-router-dom';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from '@mui/material/styles';
+import { SnackbarProvider } from 'notistack';
 
 import AppRoutes from 'src/app/routes';
 import { theme } from 'src/app/theme';
 import useAppUserContext from 'src/app/app-user-context';
 import { AppUserContextType } from 'src/helpers/shared-types';
+import { queryClient } from 'src/api/react-query-setup';
 
 export const AuthContext = createContext<AppUserContextType>(null);
 
 export function App() {
 	const {userToken, saveToken, user, saveUser, gotoHome, signout} = useAppUserContext();
-  const queryClient = new QueryClient();
   return (
     <BrowserRouter>
       <AuthContext.Provider value={{userToken, saveToken, user, saveUser, gotoHome, signout}}>
         <ThemeProvider theme={theme}>
 					<QueryClientProvider client={queryClient}>
-          	<AppRoutes />
+						<SnackbarProvider>
+          		<AppRoutes />
+						</SnackbarProvider>
 					</QueryClientProvider>
         </ThemeProvider>
       </AuthContext.Provider>

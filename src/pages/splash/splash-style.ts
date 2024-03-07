@@ -14,6 +14,7 @@ export const SingleRowContainer = styled('div')(({ theme }) =>`
 	justify-content: center;
 	align-items: center;
 	margin-top: 50px;
+	height: 75px;
 `);
 
 export const StyledTitle = styled('div')(({ theme }) =>`

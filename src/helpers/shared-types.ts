@@ -1,5 +1,6 @@
 import { data } from "src/api/api-data";
 
+export type API_ERROR_TYPE = {status: number, message: string};
 export type TokenType = string | undefined;
 export type TokenResponseType = {userToken : TokenType};
 

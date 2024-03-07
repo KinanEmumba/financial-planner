@@ -1,6 +1,7 @@
 import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, CircularProgress } from "@mui/material";
+
 import { StyledContainer } from "src/components/styled-components";
 import { CenterContainer, SingleRowContainer, StyledTextField, StyledTitle } from "src/pages/splash/splash-style";
 import { useGetToken, useGetUser } from "src/api/apis";
@@ -12,25 +13,25 @@ const Splash = () => {
 	const contextValue = useContext(AuthContext);
 	const userToken = contextValue?.userToken;
 	const [loginInfo, setLoginInfo] = useState<UserLoginType>({username: '', password: ''});
-	const getUserTokenMutation = useGetToken({loginInfo});
-	const getUserQuery = useGetUser({userToken});
-	const localLoading = getUserTokenMutation.isPending || getUserQuery.isLoading;
+	const tokenAPI = useGetToken({loginInfo});
+	const userAPI = useGetUser({userToken});
+	const localLoading = tokenAPI.isPending || userAPI.isLoading;
 
 	useEffect(() => {
-		if (getUserQuery.data) {
-			contextValue?.saveUser({user: getUserQuery.data});
+		if (userAPI.data) {
+			contextValue?.saveUser({user: userAPI.data});
 			navigate('/dashboard');
 		}
-	},[contextValue, getUserQuery.data, navigate])
+	},[contextValue, userAPI.data, navigate])
 
 	useEffect(() => {
-		if (getUserTokenMutation.data) {
-			contextValue?.saveToken({userTokenResponse: getUserTokenMutation.data});
+		if (tokenAPI.data) {
+			contextValue?.saveToken({userTokenResponse: tokenAPI.data});
 		}
-	},[contextValue, getUserTokenMutation.data])
+	},[contextValue, tokenAPI.data])
 	
 	const login = async () => {
-		getUserTokenMutation.mutate();
+		tokenAPI.mutate();
 	}
 
 	const setLogin = (e: ChangeEvent<HTMLInputElement>) => {
@@ -46,18 +47,27 @@ const Splash = () => {
 				<StyledTitle>
 					Financial Planner
 				</StyledTitle>
-				{!userToken &&
-					<SingleRowContainer>
-					<StyledTextField label="User name" name="username" onChange={setLogin} />
-					<StyledTextField label="Password" name="password" type="password" onChange={setLogin} />
-				</SingleRowContainer>}
-				{!userToken && <SingleRowContainer>
-					<Button variant="contained" onClick={login}>Login</Button>
-				</SingleRowContainer>}
-				{localLoading && 
 				<SingleRowContainer>
-					<CircularProgress color="primary" size={75} />
-				</SingleRowContainer>}
+					<StyledTextField
+						label="User name"
+						name="username"
+						onChange={setLogin}
+						disabled={userAPI.isLoading}
+					/>
+					<StyledTextField
+						label="Password"
+						name="password"
+						type="password"
+						onChange={setLogin}
+						disabled={userAPI.isLoading}
+					/>
+				</SingleRowContainer>
+				<SingleRowContainer>
+					{!localLoading && <Button variant="contained" onClick={login}>Login</Button>}
+				</SingleRowContainer>
+				<SingleRowContainer>
+					{localLoading && <CircularProgress color="primary" size={75} />}
+				</SingleRowContainer>
 			</CenterContainer>
     </StyledContainer>
   )

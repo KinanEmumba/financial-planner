@@ -8,6 +8,9 @@ export const API = async ({ url }: { url: keyof typeof data }) => {
 		const maxValue = 3.5;
 		const randomTime = (Math.random() * (maxValue - minValue) + minValue) * 1000;
 		setTimeout(() => resolve(valueToReturn), randomTime);
+		if (url === 'user-token') {
+			setTimeout(() => reject({status: 123, message: `opps! not working`}), randomTime);
+		}
 	})
 	console.log('API response', response);
 	return response;
