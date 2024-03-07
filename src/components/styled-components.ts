@@ -15,7 +15,7 @@ export const StyledLinkButton = styled(IconButton)(({ theme }) =>`
 	font-size: 20px;
 	font-weight: 400;
 	border: none;
-	margin: 0px 20px;
+	margin: 0px 10px;
 	padding: 20px;
 `);
 

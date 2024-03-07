@@ -1,27 +1,44 @@
-import { StyledContainer, StyledLinkButton } from "src/components/styled-components";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, CircularProgress } from "@mui/material";
+import { StyledContainer } from "src/components/styled-components";
 import { CenterContainer, SingleRowContainer, StyledTextField, StyledTitle } from "src/pages/splash/splash-style";
-import { useGetUser } from "src/api/apis";
-import { UserLoginType, UserType } from "src/helpers/shared-types";
-import { useEffect, useState } from "react";
+import { useGetToken, useGetUser } from "src/api/apis";
+import { UserLoginType } from "src/helpers/shared-types";
+import { AuthContext } from "src/app/app";
 
 const Splash = () => {
+	const navigate = useNavigate();
+	const contextValue = useContext(AuthContext);
+	const userToken = contextValue?.userToken;
 	const [loginInfo, setLoginInfo] = useState<UserLoginType>({username: '', password: ''});
-	const {isLoading, data, error} = useGetUser({...loginInfo});
-	const [user, setUser] = useState<null | UserType>(null);
-	const [localLoading, setLocalLoading] = useState<boolean>(true);
-	const loading = isLoading || localLoading;
+	const getUserTokenMutation = useGetToken({loginInfo});
+	const getUserQuery = useGetUser({userToken});
+	const localLoading = getUserTokenMutation.isPending || getUserQuery.isLoading;
 
 	useEffect(() => {
-		const storedUser = sessionStorage.getItem('stored-user');
-		if (storedUser) {
-			const userObj = JSON.parse(storedUser);
-			setUser(userObj); // goto homepage
-		} else {
-			setLocalLoading(false);
+		if (getUserQuery.data) {
+			contextValue?.saveUser({user: getUserQuery.data});
+			navigate('/dashboard');
 		}
-	}, []);
+	},[contextValue, getUserQuery.data, navigate])
 
+	useEffect(() => {
+		if (getUserTokenMutation.data) {
+			contextValue?.saveToken({userTokenResponse: getUserTokenMutation.data});
+		}
+	},[contextValue, getUserTokenMutation.data])
+	
+	const login = async () => {
+		getUserTokenMutation.mutate();
+	}
+
+	const setLogin = (e: ChangeEvent<HTMLInputElement>) => {
+		setLoginInfo(prev => ({
+			...prev,
+			[e.target?.name]: e.target?.value
+		}));
+	}
 
   return (
     <StyledContainer>
@@ -29,19 +46,15 @@ const Splash = () => {
 				<StyledTitle>
 					Financial Planner
 				</StyledTitle>
-				{!localLoading &&
-				<SingleRowContainer>
-					<StyledTextField label="User name" />
-					<StyledTextField
-						label="Password"
-						type="password"
-						autoComplete="current-password"
-					/>
+				{!userToken &&
+					<SingleRowContainer>
+					<StyledTextField label="User name" name="username" onChange={setLogin} />
+					<StyledTextField label="Password" name="password" type="password" onChange={setLogin} />
 				</SingleRowContainer>}
-				<SingleRowContainer>
-					<Button variant="contained">Login</Button>
-				</SingleRowContainer>
-				{loading && 
+				{!userToken && <SingleRowContainer>
+					<Button variant="contained" onClick={login}>Login</Button>
+				</SingleRowContainer>}
+				{localLoading && 
 				<SingleRowContainer>
 					<CircularProgress color="primary" size={75} />
 				</SingleRowContainer>}
