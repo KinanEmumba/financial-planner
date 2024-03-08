@@ -11,8 +11,6 @@ export const CenterContainer = styled('div')(({ theme }) =>`
 export const SingleRowContainer = styled('div')(({ theme }) =>`
 	display: flex;
 	flex-direction: column;
-	// justify-content: center;
-	// align-items: center;
 	margin: 20px;
 `);
 
