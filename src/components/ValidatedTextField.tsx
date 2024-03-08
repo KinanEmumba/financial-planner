@@ -3,12 +3,16 @@ import { StyledTextField } from './styled-components';
 
 const ValidatedTextField = ({
 	label,
+	name,
 	validator,
-	onChange
+	onChange,
+	type
 }: {
 	label: string,
-	validator: (value: string) => boolean | string,
-	onChange: (isValid: boolean) => boolean;
+	name: string,
+	validator?: (value: string) => boolean | string,
+	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+	type?: React.HTMLInputTypeAttribute | undefined
 
 }) => {
   const [value, setValue] = useState("");
@@ -16,14 +20,16 @@ const ValidatedTextField = ({
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
-    const errorMessage = validator(newValue);
+    const errorMessage = validator ? validator(newValue) : '';
     setValue(newValue);
     setError(errorMessage);
-    onChange(!errorMessage);
+    onChange(e);
   };
 	
   return (
     <StyledTextField
+			name={name}
+			type={type}
       label={label}
       value={value}
       onChange={handleChange}
