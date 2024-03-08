@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { TokenResponseType, TokenType, UserType } from 'src/helpers/shared-types';
+import { TokenResponseType, TokenType, UserType } from 'src/utils/shared-types';
 
 const useAppUserContext = () => {
   const storedToken = sessionStorage.getItem('userToken');

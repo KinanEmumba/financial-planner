@@ -1,12 +1,14 @@
-import { ChangeEvent, useContext, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, CircularProgress } from "@mui/material";
+import { Box, Button, CircularProgress } from "@mui/material";
 
 import { StyledContainer } from "src/components/styled-components";
-import { CenterContainer, SingleRowContainer, StyledTextField, StyledTitle } from "src/pages/splash/splash-style";
+import { CenterContainer, SingleRowContainer, StyledTitle } from "src/pages/splash/splash-style";
 import { useGetToken, useGetUser } from "src/api/apis";
-import { UserLoginType } from "src/helpers/shared-types";
 import { AuthContext } from "src/app/app";
+import ValidatedTextField from "src/components/ValidatedTextField";
+import { emailValidator, nameValidator } from "src/utils/input-validators";
+import { UserLoginType } from "src/utils/shared-types";
 
 const Splash = () => {
 	const navigate = useNavigate();
@@ -16,6 +18,7 @@ const Splash = () => {
 	const tokenAPI = useGetToken({loginInfo});
 	const userAPI = useGetUser({userToken});
 	const localLoading = tokenAPI.isPending || userAPI.isLoading;
+	const formValid = useRef({ name: false, email: false });
 
 	useEffect(() => {
 		if (userAPI.data) {
@@ -41,30 +44,39 @@ const Splash = () => {
 		}));
 	}
 
+	const handleSubmit = (e: FormEvent) => {
+		console.log(e);
+    e.preventDefault();
+    if (Object.values(formValid.current).every(isValid => isValid)) {
+      alert("Form is valid! Submitting the form...");
+    } else {
+      alert("Form is invalid! Please check the fields...");
+    }
+  };
+
   return (
     <StyledContainer>
 			<CenterContainer>
 				<StyledTitle>
 					Financial Planner
 				</StyledTitle>
-				<SingleRowContainer>
-					<StyledTextField
-						label="User name"
-						name="username"
-						onChange={setLogin}
-						disabled={userAPI.isLoading}
-					/>
-					<StyledTextField
-						label="Password"
-						name="password"
-						type="password"
-						onChange={setLogin}
-						disabled={userAPI.isLoading}
-					/>
-				</SingleRowContainer>
-				<SingleRowContainer>
-					{!localLoading && <Button variant="contained" onClick={login}>Login</Button>}
-				</SingleRowContainer>
+					<Box component="form" onSubmit={handleSubmit} noValidate>
+						<SingleRowContainer>
+							<ValidatedTextField
+								label="Name"
+								validator={nameValidator}
+								onChange={isValid => (formValid.current.name = isValid)}
+							/>
+							<ValidatedTextField
+								label="Email"
+								validator={emailValidator}
+								onChange={isValid => (formValid.current.email = isValid)}
+							/>
+						</SingleRowContainer>
+						<SingleRowContainer>
+							{!localLoading && <Button type="submit" variant="contained">Login</Button>}
+						</SingleRowContainer>
+					</Box>
 				<SingleRowContainer>
 					{localLoading && <CircularProgress color="primary" size={75} />}
 				</SingleRowContainer>

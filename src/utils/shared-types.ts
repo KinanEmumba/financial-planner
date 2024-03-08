@@ -16,6 +16,7 @@ export type UserLoginType = {
 export type UserType = {
 	name: string;
 	email: string;
+	avatar?: string;
 };
 
 export type AppUserContextType = null | {

@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { API } from "./api";
-import { TokenResponseType, TokenType, UserLoginType, UserType } from "src/helpers/shared-types";
+import { API } from "src/api/api";
+import { TokenResponseType, TokenType, UserLoginType, UserType } from "src/utils/shared-types";
 
 export const useGetToken = ({ loginInfo } : {loginInfo: UserLoginType}) => {
   return useMutation<TokenResponseType, Error>({

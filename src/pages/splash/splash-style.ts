@@ -1,4 +1,4 @@
-import { TextField, styled } from "@mui/material";
+import { styled } from "@mui/material";
 
 export const CenterContainer = styled('div')(({ theme }) =>`
 	display: flex;
@@ -10,22 +10,18 @@ export const CenterContainer = styled('div')(({ theme }) =>`
 	
 export const SingleRowContainer = styled('div')(({ theme }) =>`
 	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	margin-top: 50px;
-	height: 75px;
+	flex-direction: column;
+	// justify-content: center;
+	// align-items: center;
+	margin: 20px;
 `);
 
 export const StyledTitle = styled('div')(({ theme }) =>`
 	background: transparent;
 	color: ${theme.palette.text.secondary};
-	font-size: 80px;
+	font-size: calc(60px + 0.3vw);
 	font-weight: 400;
 	font-family: ${theme.typography.fontFamily};
 	text-align: center;
 `);
 
-export const StyledTextField = styled(TextField)(({ theme }) =>`
-	margin-right: 5px;
-`);

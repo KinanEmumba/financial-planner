@@ -7,7 +7,7 @@ import { SnackbarProvider } from 'notistack';
 import AppRoutes from 'src/app/routes';
 import { theme } from 'src/app/theme';
 import useAppUserContext from 'src/app/app-user-context';
-import { AppUserContextType } from 'src/helpers/shared-types';
+import { AppUserContextType } from 'src/utils/shared-types';
 import { queryClient } from 'src/api/react-query-setup';
 
 export const AuthContext = createContext<AppUserContextType>(null);

@@ -1,13 +1,13 @@
-import { useContext } from "react";
-import { AppBar } from "@mui/material"
-import { StyledDashboard } from "src/pages/dashboard/dashboard-style"
-import { StyledToolbar, StyledLinkButton } from "src/components/styled-components"
-import { AuthContext } from "src/app/app";
+import { AppBar} from "@mui/material"
+import UserAvatar from "src/components/UserAvatar"
 
+import {
+	StyledDashboard,
+	StyledLinkButton,
+	StyledToolbar,
+} from "src/pages/dashboard/dashboard-style"
 
 const Dashboard = () => {
-	const contextValue = useContext(AuthContext);
-	console.log('dashboard contextValue', contextValue);
 	return (
 		<StyledDashboard>
 			<AppBar position="sticky">
@@ -15,7 +15,9 @@ const Dashboard = () => {
 					<StyledLinkButton>Dashboard</StyledLinkButton>
 					<StyledLinkButton>Financials</StyledLinkButton>
 					<StyledLinkButton>Goals Setup</StyledLinkButton>
-					<button onClick={() => contextValue?.signout()}>logout</button>
+					<StyledLinkButton>
+						<UserAvatar/>
+					</StyledLinkButton>
 				</StyledToolbar>
 			</AppBar>
 		</StyledDashboard>

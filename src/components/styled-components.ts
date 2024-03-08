@@ -1,4 +1,4 @@
-import { IconButton, Toolbar, styled } from '@mui/material';
+import { MenuItem, TextField, styled } from '@mui/material';
 
 export const StyledContainer = styled('div')(({ theme }) =>`
 	min-height: 1080px;	
@@ -9,16 +9,13 @@ export const StyledContainer = styled('div')(({ theme }) =>`
 	);
 `);
 
-export const StyledLinkButton = styled(IconButton)(({ theme }) =>`
-	background: transparent;
-	color: ${theme.palette.text.primary};
-	font-size: 20px;
-	font-weight: 400;
-	border: none;
-	margin: 0px 10px;
-	padding: 20px;
+export const StyledMenuItem = styled(MenuItem)(({ theme }) =>`
+	color: ${theme.palette.text.secondary}
 `);
 
-export const StyledToolbar = styled(Toolbar)(({ theme }) =>`
-	justify-content: center;
+export const StyledTextField = styled(TextField)(({ theme }) =>`
+	height: 75px;
+	margin: 5px 0px;
+	width: 250px;
 `);
+
