@@ -22,7 +22,7 @@ const Splash = () => {
 	useEffect(() => {
 		if (userAPI.data) {
 			contextValue?.saveUser({user: userAPI.data});
-			navigate('/dashboard');
+			navigate('/home');
 		}
 	},[contextValue, userAPI.data, navigate])
 
@@ -44,7 +44,6 @@ const Splash = () => {
 		}));
 	}
 
-	console.log('rerendering');
   return (
     <StyledContainer>
 			<CenterContainer>

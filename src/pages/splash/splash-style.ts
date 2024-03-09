@@ -19,7 +19,6 @@ export const StyledTitle = styled('div')(({ theme }) =>`
 	color: ${theme.palette.text.secondary};
 	font-size: calc(60px + 0.3vw);
 	font-weight: 400;
-	font-family: ${theme.typography.fontFamily};
 	text-align: center;
 `);
 
