@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { Tabs, Tab, Box } from "@mui/material";
+import { Tabs, Tab, AppBar } from "@mui/material";
 import UserAvatar from "src/components/UserAvatar";
 
 const HomeTabs = () => {
@@ -25,8 +25,14 @@ const HomeTabs = () => {
   };
 
 	return (
-		<Box>
-			<Tabs value={getTabIndex()} role="navigation" variant="fullWidth">
+		<AppBar position="sticky" color={"primary"}>
+			<Tabs
+				value={getTabIndex()}
+				role="navigation"
+				variant="fullWidth"
+				textColor="secondary"
+				indicatorColor="secondary"
+			>
 				{tabs.map((tab, index) => (
 					<Tab
 						key={index}
@@ -34,13 +40,12 @@ const HomeTabs = () => {
 						component={Link}
 						to={tab.to}
 						disableTouchRipple={index === 3}
-						sx={index !== 3 ? undefined : {maxWidth: '50px' }}
 						icon={index !== 3 ? undefined : <UserAvatar />}
 					/>
 				))}
 			</Tabs>
 			<Outlet />
-		</Box>
+		</AppBar>
 	)
 }
 

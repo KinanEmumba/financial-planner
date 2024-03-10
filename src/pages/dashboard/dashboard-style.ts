@@ -1,5 +1,5 @@
 import { styled } from "@mui/material";
 
-export const StyledDashboard = styled('div')(({ theme }) =>`
-  
+export const StyledDiv = styled('div')(({ theme }) =>`
+	
 `);

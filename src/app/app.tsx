@@ -2,6 +2,7 @@ import { createContext } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from '@mui/material/styles';
+import { CssBaseline } from '@mui/material';
 import { SnackbarProvider } from 'notistack';
 
 import AppRoutes from 'src/app/routes';
@@ -20,6 +21,7 @@ export function App() {
         <ThemeProvider theme={theme}>
 					<QueryClientProvider client={queryClient}>
 						<SnackbarProvider>
+							<CssBaseline />
           		<AppRoutes />
 						</SnackbarProvider>
 					</QueryClientProvider>

@@ -1,8 +1,13 @@
+import { Typography } from "@mui/material"
+import { StyledPaper } from "src/components/styled-components"
+
 const Goals = () => {
 	return (
-		<div style={{color: 'red'}}>
-			<div>Goals</div>
-		</div>
+		<StyledPaper>
+			<Typography>
+				Goals
+			</Typography>
+		</StyledPaper>
 	)
 }
 

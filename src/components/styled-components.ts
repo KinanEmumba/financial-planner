@@ -1,4 +1,4 @@
-import { MenuItem, TextField, styled } from '@mui/material';
+import { AppBar, Paper, TextField, styled } from '@mui/material';
 
 export const StyledContainer = styled('div')(({ theme }) =>`
 	min-height: 1080px;	
@@ -8,9 +8,8 @@ export const StyledContainer = styled('div')(({ theme }) =>`
 		${theme.palette.primary.main}
 	);
 `);
-
-export const StyledMenuItem = styled(MenuItem)(({ theme }) =>`
-	// color: ${theme.palette.text.secondary}
+export const StyledAppBar = styled(AppBar)(({ theme }) =>`
+	color: white;
 `);
 
 export const StyledTextField = styled(TextField)(({ theme }) =>`
@@ -19,7 +18,10 @@ export const StyledTextField = styled(TextField)(({ theme }) =>`
 	width: 250px;
 `);
 
-export const StyledUserAvatar = styled('div')(({ theme }) =>`
-	display: flex;
+export const StyledPaper = styled(Paper)(({ theme }) =>`
+	padding: 20px;
+	min-height: 1080px;
 `);
+
+
 

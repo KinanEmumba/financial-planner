@@ -1,10 +1,13 @@
-import { StyledDashboard } from "src/pages/dashboard/dashboard-style"
+import { Typography } from "@mui/material"
+import { StyledPaper } from "src/components/styled-components"
 
 const Dashboard = () => {
 	return (
-		<StyledDashboard>
-			DASHBOARD
-		</StyledDashboard>
+		<StyledPaper>
+			<Typography>
+				Dashboard
+			</Typography>
+		</StyledPaper>
 	)
 }
 

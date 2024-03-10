@@ -16,7 +16,7 @@ export const SingleRowContainer = styled('div')(({ theme }) =>`
 
 export const StyledTitle = styled('div')(({ theme }) =>`
 	background: transparent;
-	color: ${theme.palette.text.secondary};
+	color: ${theme.palette.primary.main};
 	font-size: calc(60px + 0.3vw);
 	font-weight: 400;
 	text-align: center;

@@ -1,8 +1,13 @@
+import { Typography } from "@mui/material"
+import { StyledPaper } from "src/components/styled-components"
+
 const Transactions = () => {
 	return (
-		<div style={{background: 'pink'}}>
-			Transactions
-		</div>
+		<StyledPaper>
+			<Typography>
+				Transactions
+			</Typography>
+		</StyledPaper>
 	)
 }
 

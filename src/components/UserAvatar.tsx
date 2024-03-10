@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react'
 import { Avatar, Menu, Divider, MenuItem } from '@mui/material'
 import { AuthContext } from 'src/app/app';
-import { StyledUserAvatar } from 'src/components/styled-components';
 
 const UserAvatar = () => {
 	const { user, signout } = useContext(AuthContext) || {};
@@ -16,7 +15,7 @@ const UserAvatar = () => {
   };
 
 	return (
-		<StyledUserAvatar>
+		<>
 			<Avatar src={user?.avatar} onClick={avatarClicked}/>
 			<Menu
 				id="basic-menu"
@@ -31,7 +30,7 @@ const UserAvatar = () => {
 				<Divider />
 				<MenuItem onClick={() => signout && signout()}>Logout</MenuItem>
 			</Menu>
-		</StyledUserAvatar>
+		</>
 	)
 }
 
