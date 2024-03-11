@@ -8,7 +8,7 @@ export const CenterContainer = styled('div')(({ theme }) =>`
 	height: 720px;
 `);
 	
-export const SingleRowContainer = styled('div')(({ theme }) =>`
+export const SplashFieldsContainer = styled('div')(({ theme }) =>`
 	display: flex;
 	flex-direction: column;
 	margin: 20px;

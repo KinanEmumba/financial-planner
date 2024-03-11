@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Box, Button, CircularProgress } from "@mui/material";
 
 import { StyledContainer } from "src/components/styled-components";
-import { CenterContainer, SingleRowContainer, StyledTitle } from "src/pages/splash/splash-style";
+import { CenterContainer, SplashFieldsContainer, StyledTitle } from "src/pages/splash/splash-style";
 import { useGetToken, useGetUser } from "src/api/apis";
 import { AuthContext } from "src/app/app";
 import ValidatedTextField from "src/components/ValidatedTextField";
@@ -51,7 +51,7 @@ const Splash = () => {
 					Financial Planner
 				</StyledTitle>
 					<Box component="form" onSubmit={handleSubmit} noValidate>
-						<SingleRowContainer>
+						<SplashFieldsContainer>
 							<ValidatedTextField
 								name="username"
 								label="Email"
@@ -64,14 +64,14 @@ const Splash = () => {
 								type="password"
 								onChange={setLoginData}
 							/>
-						</SingleRowContainer>
-						<SingleRowContainer>
+						</SplashFieldsContainer>
+						<SplashFieldsContainer>
 							{!localLoading && <Button type="submit" variant="contained">Login</Button>}
-						</SingleRowContainer>
+						</SplashFieldsContainer>
 					</Box>
-				<SingleRowContainer>
-					{localLoading && <CircularProgress color="primary" size={75} />}
-				</SingleRowContainer>
+				<SplashFieldsContainer>
+					{localLoading && <CircularProgress color="primary" size={50} />}
+				</SplashFieldsContainer>
 			</CenterContainer>
     </StyledContainer>
   )
