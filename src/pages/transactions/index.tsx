@@ -1,17 +1,26 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import AddIcon from '@mui/icons-material/Add';
 
-import { StyledPaper } from "src/components/styled-components"
+import { FullCenteredView, StyledPaper } from "src/components/styled-components"
 import { StyledFab } from "src/pages/transactions/transactions-style";
 import { CenteredLoader, CenteredText } from "src/components/shared-components";
 import { AuthContext } from "src/app/app";
 import { useGetExpenses } from "src/api/apis";
 import ExpensesTable from "src/pages/transactions/ExpensesTable";
+import { SnackBarContext } from "src/app/snackbar-context";
 
 const Transactions = () => {
 	const { user } = useContext(AuthContext) || {};
-	const {data, isLoading} = useGetExpenses({id: user?.id || ''});
-	console.log('got expenses data', data);
+	const {showSnackbar} = useContext(SnackBarContext);
+	const {data, isLoading, error} = useGetExpenses({id: user?.id || ''});
+	
+	useEffect(()=> {
+		if (error)
+		showSnackbar({
+			message: `Error logging in ${error.message}`,
+			type: "error"
+		});
+	}, [error, showSnackbar])
 
 	const addNewExpense = () => {
 		console.log('adding new expense');
@@ -20,11 +29,14 @@ const Transactions = () => {
 	return (
 		<StyledPaper>
 			<CenteredText variant='h2'> Transactions </CenteredText>
-			<StyledFab color="secondary" onClick={addNewExpense}>
-        <AddIcon />
-      </StyledFab>
-			{isLoading && <CenteredLoader />}
-			{data && <ExpensesTable expenses={data.expenses}/>}
+			<FullCenteredView>
+				<StyledFab color="secondary" onClick={addNewExpense}>
+					<AddIcon />
+				</StyledFab>
+				{isLoading && <CenteredLoader />}
+				{error && <CenteredText variant='h6'> Unable to get expenses </CenteredText>}
+				{data && <ExpensesTable expenses={data?.expenses} />}
+			</FullCenteredView>
 		</StyledPaper>
 	)
 }

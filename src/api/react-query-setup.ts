@@ -17,10 +17,10 @@ export const queryClient = new QueryClient({
 			// enqueueSnackbar(`Error: ${error.message}`, { variant: 'error' });
 		},
 	}),
-	defaultOptions: {
-		queries: {
-			refetchOnWindowFocus: true,
-			retry: 0,
-		},
-	}
+	// defaultOptions: {
+	// 	queries: {
+	// 		refetchOnWindowFocus: true,
+	// 		retry: 0,
+	// 	},
+	// }
 });

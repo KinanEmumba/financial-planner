@@ -24,7 +24,10 @@ const Splash = () => {
 	
 	useEffect(() => {
 		if (userAPI.error) {
-			showSnackbar({message: `Error logging in ${userAPI.error.message}`, type: "error"});
+			showSnackbar({
+				message: `Error logging in ${userAPI.error.message}`,
+				type: "error"
+			});
 		}
 	},[userAPI.error, showSnackbar])
 

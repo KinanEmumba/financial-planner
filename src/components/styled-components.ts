@@ -22,7 +22,8 @@ export const StyledPaper = styled(Paper)(({ theme }) =>`
 	padding: 20px;
   min-height: 1000px;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
+	overflow-x: auto;
 `);
 
 export const CenteredView = styled('div')(({ theme }) =>`

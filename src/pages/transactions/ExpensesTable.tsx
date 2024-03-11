@@ -1,35 +1,38 @@
 
 import { Box, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material';
+import { CenteredText } from 'src/components/shared-components';
 import { ExpenseDataType } from 'src/utils/shared-types';
+import { StyledTableCell } from './transactions-style';
 
 const ExpensesTable = ({expenses}: {expenses?: ExpenseDataType[]}) => {
 	console.log('table has expenses', expenses);
-	const totalAmount = expenses?.reduce((sum, entry) => sum + entry.amount, 0);
+
+	if (!expenses?.length)
+	return (
+		<CenteredText variant='h6'> Click + icon to start adding expenses </CenteredText>
+	);
+	const expensesKeys = Object.keys(expenses[0]);
 	return (
 		<Box>
 			<Table aria-label="basic table">
 				<TableHead>
 					<TableRow>
-						<TableCell><Typography variant="h5">Date</Typography></TableCell>
-						<TableCell><Typography variant="h5">Category</Typography></TableCell>
-						<TableCell><Typography variant="h5">Amount</Typography></TableCell>
-						<TableCell><Typography variant="h5">Description</Typography></TableCell>
+						{expensesKeys?.map((key, index) => <TableCell key={index}>
+							<Typography variant="h5">
+								{key.charAt(0).toUpperCase() + key.slice(1)}
+							</Typography>
+						</TableCell>)}
 					</TableRow>
 				</TableHead>
 				<TableBody>
 					{expenses?.map((row, index) => (
 						<TableRow key={index}>
-							<TableCell>{new Date(row.date).toLocaleDateString()}</TableCell>
-							<TableCell>{row.category}</TableCell>
-							<TableCell>{row.amount}</TableCell>
-							<TableCell>{row.description}</TableCell>
+							<StyledTableCell valign="top">{new Date(row.date).toLocaleDateString()}</StyledTableCell>
+							<StyledTableCell valign="top">{row.category}</StyledTableCell>
+							<StyledTableCell>{row.amount}</StyledTableCell>
+							<StyledTableCell>{row.description}</StyledTableCell>
 						</TableRow>
 					))}
-					<TableRow>
-						<TableCell colSpan={4} style={{ textAlign: 'right', fontWeight: 'bold' }}>
-							Total: {totalAmount}
-						</TableCell>
-					</TableRow>
 				</TableBody>
 			</Table>
 		</Box>
