@@ -28,7 +28,6 @@ const useSnackbar = () => {
 				onClose={handleClose}
 				severity={snackbar.options.type}
 				variant="filled"
-				sx={{ width: '100%' }}
 			>
 				{snackbar.options.message}
 			</Alert>

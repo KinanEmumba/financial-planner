@@ -22,12 +22,18 @@ const Splash = () => {
 	const localLoading = tokenAPI.isPending || userAPI.isLoading;
 	
 	useEffect(() => {
-		if (userAPI.isSuccess && userAPI.data) {
+		if (userAPI.error) {
+			showSnackbar({message: `Error logging in ${userAPI.error.message}`, type: "error"});
+		}
+	},[userAPI.error, showSnackbar])
+
+	useEffect(() => {
+		if (userAPI.data) {
 			showSnackbar({message: 'Successful Login', type: "success"});
 			contextValue?.saveUser({user: userAPI.data});
 			navigate('/home');
 		}
-	},[contextValue, userAPI.data, navigate, userAPI.isSuccess, showSnackbar])
+	},[contextValue, userAPI.data, navigate, showSnackbar])
 
 	useEffect(() => {
 		if (tokenAPI.data) {
