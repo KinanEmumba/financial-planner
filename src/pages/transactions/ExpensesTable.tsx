@@ -10,18 +10,18 @@ const ExpensesTable = ({expenses}: {expenses?: ExpenseDataType[]}) => {
 			<Table aria-label="basic table">
 				<TableHead>
 					<TableRow>
-						<TableCell><Typography variant="h5">Amount</Typography></TableCell>
-						<TableCell><Typography variant="h5">Category</Typography></TableCell>
 						<TableCell><Typography variant="h5">Date</Typography></TableCell>
+						<TableCell><Typography variant="h5">Category</Typography></TableCell>
+						<TableCell><Typography variant="h5">Amount</Typography></TableCell>
 						<TableCell><Typography variant="h5">Description</Typography></TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
 					{expenses?.map((row, index) => (
 						<TableRow key={index}>
-							<TableCell>{row.amount}</TableCell>
-							<TableCell>{row.category}</TableCell>
 							<TableCell>{new Date(row.date).toLocaleDateString()}</TableCell>
+							<TableCell>{row.category}</TableCell>
+							<TableCell>{row.amount}</TableCell>
 							<TableCell>{row.description}</TableCell>
 						</TableRow>
 					))}
