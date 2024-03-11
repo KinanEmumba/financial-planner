@@ -25,7 +25,7 @@ const useAppUserContext = () => {
 		setUser(user);
 	}
 
-  return {userToken, saveToken, user, saveUser, gotoHome, signout};
+  return {userToken, saveToken, user, saveUser, signout};
 }
 
 export default useAppUserContext

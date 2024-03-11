@@ -24,7 +24,6 @@ export type AppUserContextType = null | {
 	saveUser: ({user}: {user: UserType}) => void,
 	user: UserType | null,
 	userToken: string | undefined,
-	gotoHome: () => void,
 	signout: () => void,
 };
 
