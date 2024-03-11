@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { Tabs, Tab, AppBar } from "@mui/material";
+import { Tabs, Tab, AppBar, Typography } from "@mui/material";
 import UserAvatar from "src/components/UserAvatar";
 
 const HomeTabs = () => {
@@ -13,10 +13,10 @@ const HomeTabs = () => {
 	},[location.pathname, navigate]);
 
   const tabs = [
-    { label: 'Dashboard', to: '/home/dashboard' },
-    { label: 'Transactions', to: '/home/transactions' },
+		{ label: 'Dashboard', to: '/home/dashboard' },
     { label: 'Goals', to: '/home/goals' },
-    { label: '', to: '/home/goals' },
+    { label: 'Transactions', to: '/home/transactions' },
+    { label: '', to: '' },
   ];
 
 	const getTabIndex = () => {
@@ -36,11 +36,12 @@ const HomeTabs = () => {
 				{tabs.map((tab, index) => (
 					<Tab
 						key={index}
-						label={tab.label}
+						label={<Typography variant="subtitle1">{tab.label}</Typography>}
 						component={Link}
 						to={tab.to}
 						disableTouchRipple={index === 3}
 						icon={index !== 3 ? undefined : <UserAvatar />}
+						onClick={index !== 3 ? undefined : (e) => e.preventDefault()}
 					/>
 				))}
 			</Tabs>

@@ -3,13 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { Box, Button, CircularProgress } from "@mui/material";
 
 import { StyledContainer } from "src/components/styled-components";
-import { CenterContainer, SplashFieldsContainer, StyledTitle } from "src/pages/splash/splash-style";
+import { CenterContainer, SplashFieldsContainer } from "src/pages/splash/splash-style";
 import { useGetToken, useGetUser } from "src/api/apis";
 import { AuthContext } from "src/app/app";
 import ValidatedTextField from "src/components/ValidatedTextField";
 import { emailValidator, passwordValidator } from "src/utils/input-validators";
 import { UserLoginType } from "src/utils/shared-types";
 import { SnackBarContext } from "src/app/snackbar-context";
+import { CenteredText } from "src/components/shared-components";
 
 const Splash = () => {
 	const navigate = useNavigate();
@@ -57,9 +58,7 @@ const Splash = () => {
   return (
     <StyledContainer>
 			<CenterContainer>
-				<StyledTitle>
-					Financial Planner
-				</StyledTitle>
+				<CenteredText variant='h2'>Financial Planner</CenteredText>
 					<Box component="form" onSubmit={handleSubmit} noValidate>
 						<SplashFieldsContainer>
 							<ValidatedTextField

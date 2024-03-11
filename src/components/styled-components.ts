@@ -20,8 +20,18 @@ export const StyledTextField = styled(TextField)(({ theme }) =>`
 
 export const StyledPaper = styled(Paper)(({ theme }) =>`
 	padding: 20px;
-	min-height: 1080px;
+  min-height: 1000px;
+  display: flex;
+  flex-direction: column; 
 `);
 
+export const CenteredView = styled('div')(({ theme }) =>`
+	margin: 0px auto;
+	text-align: center;
+`);
 
+export const FullCenteredView = styled('div')(({ theme }) =>`
+	margin: auto;
+	text-align: center;
+`);
 

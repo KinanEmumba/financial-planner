@@ -13,12 +13,3 @@ export const SplashFieldsContainer = styled('div')(({ theme }) =>`
 	flex-direction: column;
 	margin: 20px;
 `);
-
-export const StyledTitle = styled('div')(({ theme }) =>`
-	background: transparent;
-	color: ${theme.palette.primary.main};
-	font-size: calc(60px + 0.3vw);
-	font-weight: 400;
-	text-align: center;
-`);
-

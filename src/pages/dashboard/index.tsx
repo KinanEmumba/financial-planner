@@ -1,12 +1,10 @@
-import { Typography } from "@mui/material"
+import { CenteredText } from "src/components/shared-components"
 import { StyledPaper } from "src/components/styled-components"
 
 const Dashboard = () => {
 	return (
 		<StyledPaper>
-			<Typography>
-				Dashboard
-			</Typography>
+			<CenteredText variant='h2'> Dashboard </CenteredText>
 		</StyledPaper>
 	)
 }

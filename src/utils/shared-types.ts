@@ -16,6 +16,7 @@ export type UserLoginType = {
 };
 
 export type UserType = {
+	id: string;
 	name: string;
 	email: string;
 	avatar?: string;
@@ -34,6 +35,15 @@ export type AppUserContextType = null | {
 	userToken: string | undefined,
 	signout: () => void,
 };
+
+export type ExpenseDataType = {
+	amount: number,
+	category: string,
+	date: string,
+	description: string,
+};
+
+export type ExpensesResponseType = {expenses: ExpenseDataType[]};
 
 export type APIDataType = {
 	'user-auth': UserLoginType,
