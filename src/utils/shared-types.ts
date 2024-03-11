@@ -1,3 +1,5 @@
+import { AlertColor } from "@mui/material";
+import { ReactNode } from "react";
 import { data } from "src/api/api-data";
 
 export type API_ERROR_TYPE = {status: number, message: string};
@@ -18,6 +20,12 @@ export type UserType = {
 	email: string;
 	avatar?: string;
 };
+
+export type SnackbarOptions = {
+  message: ReactNode,
+  duration?: number,
+  type?: AlertColor,
+}
 
 export type AppUserContextType = null | {
 	saveToken: ({userTokenResponse}: {userTokenResponse: TokenResponseType}) => void,

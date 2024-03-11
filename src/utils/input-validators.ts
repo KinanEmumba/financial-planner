@@ -3,3 +3,9 @@ export const emailValidator = (value: string) => {
     return "Invalid email address";
   return false;
 };
+
+export const passwordValidator = (value: string) => {
+  if (value.length < 8)
+    return "Password must be atleast 8 characters";
+  return false;
+};

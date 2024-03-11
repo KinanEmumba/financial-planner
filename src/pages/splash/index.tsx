@@ -7,27 +7,31 @@ import { CenterContainer, SplashFieldsContainer, StyledTitle } from "src/pages/s
 import { useGetToken, useGetUser } from "src/api/apis";
 import { AuthContext } from "src/app/app";
 import ValidatedTextField from "src/components/ValidatedTextField";
-import { emailValidator } from "src/utils/input-validators";
+import { emailValidator, passwordValidator } from "src/utils/input-validators";
 import { UserLoginType } from "src/utils/shared-types";
+import { SnackBarContext } from "src/app/snackbar-context";
 
 const Splash = () => {
 	const navigate = useNavigate();
 	const contextValue = useContext(AuthContext);
+	const {showSnackbar} = useContext(SnackBarContext);
 	const userToken = contextValue?.userToken;
 	const [loginInfo, setLoginInfo] = useState<UserLoginType>({ username: '', password: '' });
 	const tokenAPI = useGetToken({loginInfo});
 	const userAPI = useGetUser({userToken});
 	const localLoading = tokenAPI.isPending || userAPI.isLoading;
-
+	
 	useEffect(() => {
-		if (userAPI.data) {
+		if (userAPI.isSuccess && userAPI.data) {
+			showSnackbar({message: 'Successful Login', type: "success"});
 			contextValue?.saveUser({user: userAPI.data});
 			navigate('/home');
 		}
-	},[contextValue, userAPI.data, navigate])
+	},[contextValue, userAPI.data, navigate, userAPI.isSuccess, showSnackbar])
 
 	useEffect(() => {
 		if (tokenAPI.data) {
+			console.log('tokenAPI.data');
 			contextValue?.saveToken({userTokenResponse: tokenAPI.data});
 		}
 	},[contextValue, tokenAPI.data])
@@ -62,6 +66,7 @@ const Splash = () => {
 								name="password"
 								label="Password"
 								type="password"
+								validator={passwordValidator}
 								onChange={setLoginData}
 							/>
 						</SplashFieldsContainer>
