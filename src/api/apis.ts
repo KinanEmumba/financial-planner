@@ -1,6 +1,14 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { API } from "src/api/api";
-import { ExpensesResponseType, TokenResponseType, TokenType, UserLoginType, UserType } from "src/utils/shared-types";
+import {
+	CreateExpenseResponseType,
+	ExpenseDataType,
+	ExpensesResponseType,
+	TokenResponseType,
+	TokenType,
+	UserLoginType,
+	UserType
+} from "src/utils/shared-types";
 
 export const useGetToken = ({ loginInfo } : { loginInfo: UserLoginType }) => {
   return useMutation<TokenResponseType, Error>({
@@ -22,5 +30,13 @@ export const useGetExpenses = ({ id } : { id: string }) => {
     queryKey: ['expenses', {id}],
 		queryFn: () => API({url: 'expenses'}) as Promise<ExpensesResponseType>,
 		enabled: !!id,
+  });
+};
+
+export const usePostExpense = ({ expense } : { expense: ExpenseDataType }) => {
+	expense.date = new Date().toISOString();
+  return useMutation<CreateExpenseResponseType, Error>({
+    mutationKey: ['expense'],
+		mutationFn: () => API({url: 'expense'}) as Promise<CreateExpenseResponseType>
   });
 };

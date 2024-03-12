@@ -2,8 +2,8 @@ import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Button, CircularProgress } from "@mui/material";
 
-import { StyledContainer } from "src/components/styled-components";
-import { CenterContainer, SplashFieldsContainer } from "src/pages/splash/splash-style";
+import { StyledContainer, VerticalFieldsContainer } from "src/components/styled-components";
+import { CenterContainer } from "src/pages/splash/splash-style";
 import { useGetToken, useGetUser } from "src/api/apis";
 import { AuthContext } from "src/app/app";
 import ValidatedTextField from "src/components/ValidatedTextField";
@@ -63,7 +63,7 @@ const Splash = () => {
 			<CenterContainer>
 				<CenteredText variant='h2'>Financial Planner</CenteredText>
 					<Box component="form" onSubmit={handleSubmit} noValidate>
-						<SplashFieldsContainer>
+						<VerticalFieldsContainer>
 							<ValidatedTextField
 								name="username"
 								label="Email"
@@ -77,14 +77,14 @@ const Splash = () => {
 								validator={passwordValidator}
 								onChange={setLoginData}
 							/>
-						</SplashFieldsContainer>
-						<SplashFieldsContainer>
+						</VerticalFieldsContainer>
+						<VerticalFieldsContainer>
 							{!localLoading && <Button type="submit" variant="contained">Login</Button>}
-						</SplashFieldsContainer>
+						</VerticalFieldsContainer>
 					</Box>
-				<SplashFieldsContainer>
+				<VerticalFieldsContainer>
 					{localLoading && <CircularProgress color="primary" size={50} />}
-				</SplashFieldsContainer>
+				</VerticalFieldsContainer>
 			</CenterContainer>
     </StyledContainer>
   )

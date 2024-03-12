@@ -1,35 +1,39 @@
-
-import { Box, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material';
-import { CenteredText } from 'src/components/shared-components';
+import {
+	Box,
+	Table,
+	TableBody,
+	TableCell,
+	TableHead,
+	TableRow,
+	Typography,
+	useTheme
+} from '@mui/material';
 import { ExpenseDataType } from 'src/utils/shared-types';
 import { StyledTableCell } from './transactions-style';
 
 const ExpensesTable = ({expenses}: {expenses?: ExpenseDataType[]}) => {
+	const theme = useTheme();
 	console.log('table has expenses', expenses);
-
-	if (!expenses?.length)
-	return (
-		<CenteredText variant='h6'> Click + icon to start adding expenses </CenteredText>
-	);
-	const expensesKeys = Object.keys(expenses[0]);
+	
 	return (
 		<Box>
-			<Table aria-label="basic table">
+			<Table>
 				<TableHead>
 					<TableRow>
-						{expensesKeys?.map((key, index) => <TableCell key={index}>
-							<Typography variant="h5">
-								{key.charAt(0).toUpperCase() + key.slice(1)}
-							</Typography>
-						</TableCell>)}
+						<TableCell><Typography variant="h5">Date</Typography></TableCell>
+						<TableCell><Typography variant="h5">Category</Typography></TableCell>
+						<TableCell><Typography variant="h5">Amount</Typography></TableCell>
+						<TableCell><Typography variant="h5">Description</Typography></TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
 					{expenses?.map((row, index) => (
 						<TableRow key={index}>
-							<StyledTableCell valign="top">{new Date(row.date).toLocaleDateString()}</StyledTableCell>
-							<StyledTableCell valign="top">{row.category}</StyledTableCell>
-							<StyledTableCell>{row.amount}</StyledTableCell>
+							<StyledTableCell>{new Date(row.date).toLocaleDateString()}</StyledTableCell>
+							<StyledTableCell>{row.category}</StyledTableCell>
+							<StyledTableCell sx={{color: row.type === 'credit' ? theme.palette.success.main : theme.palette.error.main}}>
+								{row.amount}
+							</StyledTableCell>
 							<StyledTableCell>{row.description}</StyledTableCell>
 						</TableRow>
 					))}

@@ -7,9 +7,3 @@ export const CenterContainer = styled('div')(({ theme }) =>`
 	flex-direction: column;
 	height: 720px;
 `);
-	
-export const SplashFieldsContainer = styled('div')(({ theme }) =>`
-	display: flex;
-	flex-direction: column;
-	margin: 20px;
-`);

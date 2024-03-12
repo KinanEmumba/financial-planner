@@ -36,16 +36,16 @@ export type AppUserContextType = null | {
 	signout: () => void,
 };
 
+export type ExpenseType = 'credit' | 'debit';
+
 export type ExpenseDataType = {
-	amount: number,
+	amount: string | number,
 	category: string,
 	date: string,
 	description: string,
+	type: ExpenseType,
 };
 
 export type ExpensesResponseType = {expenses: ExpenseDataType[]};
 
-export type APIDataType = {
-	'user-auth': UserLoginType,
-	'user': UserType,
-};
+export type CreateExpenseResponseType = {message: string};

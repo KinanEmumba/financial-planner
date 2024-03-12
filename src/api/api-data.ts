@@ -1,4 +1,9 @@
-import { ExpensesResponseType, TokenResponseType, UserType } from "src/utils/shared-types";
+import {
+	CreateExpenseResponseType,
+	ExpensesResponseType,
+	TokenResponseType,
+	UserType
+} from "src/utils/shared-types";
 import { expenseData } from "src/api//expense-data";
 
 const getUserResponse: UserType = {
@@ -11,8 +16,11 @@ const getUserTokenResponse: TokenResponseType = {userToken: 'abcdef123456'};
 
 const getExpenses: ExpensesResponseType = {expenses: expenseData};
 
+const postExpense: CreateExpenseResponseType = {message: 'Expense added successfully'};
+
 export const data = {
 	'user': getUserResponse,
 	'user-token': getUserTokenResponse,
-	'expenses': getExpenses
+	'expenses': getExpenses,
+	'expense': postExpense
 };

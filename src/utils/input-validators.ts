@@ -9,3 +9,9 @@ export const passwordValidator = (value: string) => {
     return "Password must be atleast 8 characters";
   return false;
 };
+
+export const amountValidator = (value: string) => {
+  if (!parseFloat(value) || typeof parseFloat(value) !== 'number')
+    return "Invalid amount. Amount must be a number";
+  return false;
+};
