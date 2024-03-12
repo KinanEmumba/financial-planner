@@ -13,10 +13,10 @@ const HomeTabs = () => {
 	},[location.pathname, navigate]);
 
   const tabs = [
-		{ label: 'Dashboard', to: '/home/dashboard' },
-    { label: 'Goals', to: '/home/goals' },
-    { label: 'Transactions', to: '/home/transactions' },
-    { label: '', to: '' },
+		{ label: 'Dashboard', to: '/home/dashboard', type: 'link' },
+    { label: 'Goals', to: '/home/goals', type: 'link'  },
+    { label: 'Transactions', to: '/home/transactions', type: 'link'  },
+    { label: '', to: '', type: 'icon'  },
   ];
 
 	const getTabIndex = () => {
@@ -39,9 +39,9 @@ const HomeTabs = () => {
 						label={<Typography variant="subtitle1">{tab.label}</Typography>}
 						component={Link}
 						to={tab.to}
-						disableTouchRipple={index === 3}
-						icon={index !== 3 ? undefined : <UserAvatar />}
-						onClick={index !== 3 ? undefined : (e) => e.preventDefault()}
+						disableTouchRipple={tab.type === 'icon'}
+						icon={tab.type === 'icon' ? <UserAvatar /> : undefined }
+						onClick={tab.type === 'icon' ? (e) => e.preventDefault() : undefined }
 					/>
 				))}
 			</Tabs>
