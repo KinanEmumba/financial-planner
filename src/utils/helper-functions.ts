@@ -5,9 +5,21 @@ export const getMonthExpenses = (expenses: ExpenseDataType[], month?: number) =>
 	return expenses.filter(exp => getMonth(exp.date) === month);
 };
 
-export const guageConfigMaker = () => {
+export const sumOfDebitEntries = (expenses: ExpenseDataType[]) => {
+	return expenses.reduce((acc: number, current: ExpenseDataType): number => {
+		const currentAmount = parseFloat(current.amount as string);
+		acc = acc + (current.type === 'debit' ? currentAmount : 0);
+		return acc;
+	}, 0);
+};
+
+export const percentMaker = (totalExpense: number, limit: number) => {
+	return totalExpense * 100 / limit;
+};
+
+export const guageConfigMaker = (percent: number) => {
 	return {
-		percent: 0.75,
+		percent: percent / 100,
     range: {
       color: '#30BF78',
     },
