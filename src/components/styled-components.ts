@@ -1,4 +1,4 @@
-import { AppBar, Paper, TextField, Theme, styled } from '@mui/material';
+import { Paper, TextField, Theme, styled } from '@mui/material';
 
 export const bgGradient = (theme: Theme) => `
   linear-gradient(
@@ -11,10 +11,6 @@ export const bgGradient = (theme: Theme) => `
 export const StyledContainer = styled('div')(({ theme }) =>`
 	min-height: 1080px;	
 	background-image: ${bgGradient(theme)};
-`);
-
-export const StyledAppBar = styled(AppBar)(({ theme }) =>`
-	color: white;
 `);
 
 export const StyledTextField = styled(TextField)(({ theme }) =>`

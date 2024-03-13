@@ -6,16 +6,24 @@ const useStateContext = () => {
   const [userToken, setUserToken] = useState<TokenType>(storedToken || undefined);
   const [user, setUser] = useState<UserType | null>(null);
   const [expenses, setExpenses] = useState<ExpenseDataType[]>([]);
+  const [limit, setLimit] = useState<string | null>(null);
 
 	useEffect(() => {
-    const onExpensesChange = (e: StorageEvent) => {
-      const storedExpenses = localStorage.getItem('expenses');
-			const localExpensesData: ExpenseDataType[] = storedExpenses && JSON.parse(storedExpenses);
-			setExpenses(localExpensesData);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const onStorageChange = (e: any) => {
+			console.log('Storage changed', e.detail);
+			if (e.detail.includes('expense')) {
+				const storedExpenses = localStorage.getItem('expenses');
+				const localExpensesData: ExpenseDataType[] = storedExpenses && JSON.parse(storedExpenses);
+				setExpenses(localExpensesData);
+			} else if (e.detail.includes('limit')) {
+				const storedLimit = localStorage.getItem('limit');
+				setLimit(storedLimit);
+			}
     }
-    window.addEventListener('storage', onExpensesChange);
+    window.addEventListener('storage', onStorageChange);
     return () => {
-      window.removeEventListener('storage', onExpensesChange);
+      window.removeEventListener('storage', onStorageChange);
     }
   }, []);
 
@@ -45,7 +53,8 @@ const useStateContext = () => {
 		saveUser,
 		signout,
 		expenses,
-		setExpenses
+		setExpenses,
+		monthlyExpenseLimit: limit
 	};
 
   return {appState};

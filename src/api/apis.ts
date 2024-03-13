@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { API } from "src/api/api";
 import {
+	ChangeLimitResponseType,
 	CreateExpenseResponseType,
 	ExpenseDataType,
 	ExpensesResponseType,
@@ -51,5 +52,12 @@ export const useEditExpense = () => {
   return useMutation<CreateExpenseResponseType, Error, { expense: ExpenseDataType, id: number }>({
     mutationKey: ['expense'],
 		mutationFn: ({ expense, id }) => API({url: 'expense/edit', body: {expense, id}}) as Promise<CreateExpenseResponseType>
+  });
+};
+
+export const useChangeLimit = () => {
+  return useMutation<CreateExpenseResponseType, Error, { limit: number | string }>({
+    mutationKey: ['limit'],
+		mutationFn: ({ limit }) => API({url: 'limitChange', body: {limit}}) as Promise<ChangeLimitResponseType>
   });
 };

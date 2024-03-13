@@ -11,7 +11,7 @@ export const passwordValidator = (value: string) => {
 };
 
 export const amountValidator = (value: string) => {
-  if (!parseFloat(value) || typeof parseFloat(value) !== 'number')
+  if (isNaN(parseFloat(value)))
     return "Invalid amount. Amount must be a number";
   return false;
 };
