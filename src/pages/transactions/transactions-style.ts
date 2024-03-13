@@ -1,4 +1,4 @@
-import { Box, Fab, TableCell, styled } from "@mui/material";
+import { Box, Button, Fab, TableCell, styled } from "@mui/material";
 import { bgGradient } from "src/components/styled-components";
 
 export const StyledFab = styled(Fab)(({ theme }) =>`
@@ -11,6 +11,7 @@ export const StyledFab = styled(Fab)(({ theme }) =>`
 
 export const StyledTableCell = styled(TableCell)(({ theme }) =>`
 	vertical-align: top;
+	font-size: ${theme.typography.body1.fontSize}
 `);
 
 export const StyledModalBox = styled(Box)(({ theme }) =>`
@@ -21,4 +22,8 @@ export const StyledModalBox = styled(Box)(({ theme }) =>`
   boxShadow: 24;
 	padding: 20px;
 	background-image: ${bgGradient(theme)};
+`);
+
+export const EditDeleteButton = styled(Button)(({ theme }) =>`
+	margin: 10px;
 `);

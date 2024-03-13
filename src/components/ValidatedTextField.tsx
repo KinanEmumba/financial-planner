@@ -6,22 +6,26 @@ const ValidatedTextField = ({
 	name,
 	validator,
 	onChange,
-	type
+	type,
+	disabled,
+	value,
 }: {
 	label: string,
 	name: string,
+	disabled?: boolean,
+	value?: string | number,
 	validator?: (value: string) => boolean | string,
 	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 	type?: React.HTMLInputTypeAttribute | undefined
 
 }) => {
-  const [value, setValue] = useState("");
+  const [localValue, setLocalValue] = useState("");
   const [error, setError] = useState<string | boolean>(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     const errorMessage = validator ? validator(newValue) : '';
-    setValue(newValue);
+    setLocalValue(newValue);
     setError(errorMessage);
     onChange(e);
   };
@@ -31,10 +35,11 @@ const ValidatedTextField = ({
 			name={name}
 			type={type}
       label={label}
-      value={value}
+      value={value || localValue}
       onChange={handleChange}
       error={!!error}
       helperText={error}
+			disabled={disabled}
     />
   );
 };

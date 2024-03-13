@@ -1,5 +1,5 @@
 import { AlertColor } from "@mui/material";
-import { ReactNode } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 import { data } from "src/api/api-data";
 
 export type API_ERROR_TYPE = {status: number, message: string};
@@ -28,12 +28,16 @@ export type SnackbarOptions = {
   type?: AlertColor,
 }
 
-export type AppUserContextType = null | {
+export type AppStateType = null | {appState: StateContextType};
+
+export type StateContextType = {
 	saveToken: ({userTokenResponse}: {userTokenResponse: TokenResponseType}) => void,
 	saveUser: ({user}: {user: UserType}) => void,
 	user: UserType | null,
 	userToken: string | undefined,
 	signout: () => void,
+	expenses: ExpenseDataType[],
+	setExpenses: Dispatch<SetStateAction<ExpenseDataType[]>>
 };
 
 export type ExpenseType = 'credit' | 'debit';
@@ -48,4 +52,12 @@ export type ExpenseDataType = {
 
 export type ExpensesResponseType = {expenses: ExpenseDataType[]};
 
-export type CreateExpenseResponseType = {message: string};
+export type MessageObjectType = {message: string};
+
+export type CreateExpenseResponseType = MessageObjectType;
+
+export type DeleteExpenseResponseType = MessageObjectType;
+
+export type EditExpenseResponseType = MessageObjectType;
+
+export type AllReturnTypes = UserType | TokenResponseType | ExpensesResponseType | MessageObjectType;

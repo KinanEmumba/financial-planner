@@ -8,12 +8,21 @@ import {
 	Typography,
 	useTheme
 } from '@mui/material';
+import EditNoteIcon from '@mui/icons-material/EditNote';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { ExpenseDataType } from 'src/utils/shared-types';
-import { StyledTableCell } from './transactions-style';
+import { EditDeleteButton, StyledTableCell } from './transactions-style';
 
-const ExpensesTable = ({expenses}: {expenses?: ExpenseDataType[]}) => {
+const ExpensesTable = ({
+	expenses,
+	onEdit,
+	onDelete
+}: {
+	expenses?: ExpenseDataType[],
+	onEdit: ({index}: {index: number}) => void
+	onDelete: ({index}: {index: number}) => void
+}) => {
 	const theme = useTheme();
-	console.log('table has expenses', expenses);
 	
 	return (
 		<Box>
@@ -35,6 +44,22 @@ const ExpensesTable = ({expenses}: {expenses?: ExpenseDataType[]}) => {
 								{row.amount}
 							</StyledTableCell>
 							<StyledTableCell>{row.description}</StyledTableCell>
+							<StyledTableCell>
+								<EditDeleteButton
+									sx={{margin: '10px'}}
+									variant="outlined"
+									endIcon={<EditNoteIcon />}
+									onClick={() => onEdit({index})}>
+										Edit
+								</EditDeleteButton>
+								<EditDeleteButton
+									sx={{margin: '10px'}}
+									variant="contained"
+									endIcon={<DeleteForeverIcon />}
+									onClick={() => onDelete({index})}>
+										Delete
+								</EditDeleteButton>
+							</StyledTableCell>
 						</TableRow>
 					))}
 				</TableBody>

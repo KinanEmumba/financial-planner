@@ -6,18 +6,20 @@ import { CssBaseline } from '@mui/material';
 
 import AppRoutes from 'src/app/routes';
 import { theme } from 'src/app/theme';
-import useAppUserContext from 'src/app/app-user-context';
-import { AppUserContextType } from 'src/utils/shared-types';
+import useAppUserContext from 'src/app/app-state-context';
+import { AppStateType } from 'src/utils/shared-types';
 import { queryClient } from 'src/api/react-query-setup';
 import { SnackBarProvider } from 'src/app/snackbar-context';
 
-export const AuthContext = createContext<AppUserContextType>(null);
+export const StateContext = createContext<AppStateType>(null);
+
 export function App() {
 
-	const {userToken, saveToken, user, saveUser, signout} = useAppUserContext();
+	const {appState} = useAppUserContext();
+
   return (
     <BrowserRouter>
-      <AuthContext.Provider value={{userToken, saveToken, user, saveUser, signout}}>
+      <StateContext.Provider value={{appState}}>
         <ThemeProvider theme={theme}>
 					<QueryClientProvider client={queryClient}>
 						<CssBaseline />
@@ -26,7 +28,7 @@ export function App() {
 						</SnackBarProvider>
 					</QueryClientProvider>
         </ThemeProvider>
-      </AuthContext.Provider>
+      </StateContext.Provider>
     </BrowserRouter>
   );
 }

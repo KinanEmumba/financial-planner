@@ -33,10 +33,23 @@ export const useGetExpenses = ({ id } : { id: string }) => {
   });
 };
 
-export const usePostExpense = ({ expense } : { expense: ExpenseDataType }) => {
-	expense.date = new Date().toISOString();
-  return useMutation<CreateExpenseResponseType, Error>({
+export const usePostExpense = () => {
+  return useMutation<CreateExpenseResponseType, Error, { expense: ExpenseDataType }>({
     mutationKey: ['expense'],
-		mutationFn: () => API({url: 'expense'}) as Promise<CreateExpenseResponseType>
+		mutationFn: ({ expense }) => API({url: 'expense/post', body: {expense}}) as Promise<CreateExpenseResponseType>
+  });
+};
+
+export const useDeleteExpense = () => {
+  return useMutation<CreateExpenseResponseType, Error, { expense: ExpenseDataType, id: number }>({
+    mutationKey: ['expense'],
+		mutationFn: ({ expense, id }) => API({url: 'expense/delete', body: {expense, id}}) as Promise<CreateExpenseResponseType>
+  });
+};
+
+export const useEditExpense = () => {
+  return useMutation<CreateExpenseResponseType, Error, { expense: ExpenseDataType, id: number }>({
+    mutationKey: ['expense'],
+		mutationFn: ({ expense, id }) => API({url: 'expense/edit', body: {expense, id}}) as Promise<CreateExpenseResponseType>
   });
 };

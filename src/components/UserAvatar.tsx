@@ -1,9 +1,10 @@
 import { useContext, useState } from 'react'
 import { Avatar, Menu, Divider, MenuItem } from '@mui/material'
-import { AuthContext } from 'src/app/app';
+import { StateContext } from 'src/app/app';
 
 const UserAvatar = () => {
-	const { user, signout } = useContext(AuthContext) || {};
+	const { appState } = useContext(StateContext) || {};
+	const { user, signout } = appState || {};
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
