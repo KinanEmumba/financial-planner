@@ -5,8 +5,8 @@ import { StateContext } from "src/app/app";
 import { CenteredLoader, CenteredText } from "src/components/shared-components"
 import { StyledContainer } from "src/components/styled-components"
 import {
-	barConfigMaker,
-	createBarData,
+	colConfigMaker,
+	createColData,
 	createDashboardData,
 	createPieData,
 	guageConfigMaker,
@@ -15,8 +15,9 @@ import {
 import GuageChart from "src/components/GuageChart";
 import DashboardStats from "src/components/DashboardStats";
 import PieChart from "src/components/PieChart";
-import BarChart from "src/components/BarChart";
+
 import { theme } from "src/app/theme";
+import ColumnChart from "src/components/ColumnChart";
 
 const Dashboard = () => {
 	const {appState} = useContext(StateContext) || {};
@@ -35,8 +36,8 @@ const Dashboard = () => {
 	const guageConfig = guageConfigMaker(guagePercent);
 	const pieData = createPieData(expenses, currentMonth);
 	const pieConfig = pieConfigMaker(pieData);
-	const barData = createBarData(expenses);
-	const barConfig = barConfigMaker(barData, theme.palette.primary.main);
+	const colData = createColData(expenses);
+	const colConfig = colConfigMaker(colData, theme.palette.primary.main);
 
 	return (
 		<StyledContainer>
@@ -51,7 +52,7 @@ const Dashboard = () => {
 			{isLoading && <CenteredLoader />}
 			{data && <GuageChart guageConfig={guageConfig} totalExpense={totalExpense} expenseLimit={expenseLimit}/>}
 			{data && <PieChart pieConfig={pieConfig} />}
-			{data && <BarChart barConfig={barConfig} />}
+			{data && <ColumnChart colConfig={colConfig} />}
 		</StyledContainer>
 	)
 }

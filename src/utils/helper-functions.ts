@@ -2,13 +2,89 @@ import { getMonth } from "date-fns";
 import { ExpenseDataType, PieDataType } from "./shared-types";
 import { colors } from "@mui/material";
 
-export const createBarData = (expenses: ExpenseDataType[]) => {
+export const createColData = (expenses: ExpenseDataType[]) => {
 	return [
-		{ category: 'A', value: 10 },
-		{ category: 'B', value: 20 },
-		{ category: 'C', value: 15 },
-		{ category: 'D', value: 25 },
-	];
+		{
+			"name": "London",
+			"month": "Jan.",
+			"amount": 18.9
+		},
+		{
+			"name": "London",
+			"month": "Feb.",
+			"amount": 28.8
+		},
+		{
+			"name": "London",
+			"month": "Mar.",
+			"amount": 39.3
+		},
+		{
+			"name": "London",
+			"month": "Apr.",
+			"amount": 81.4
+		},
+		{
+			"name": "London",
+			"month": "May",
+			"amount": 47
+		},
+		{
+			"name": "London",
+			"month": "Jun.",
+			"amount": 20.3
+		},
+		{
+			"name": "London",
+			"month": "Jul.",
+			"amount": 24
+		},
+		{
+			"name": "London",
+			"month": "Aug.",
+			"amount": 35.6
+		},
+		{
+			"name": "Berlin",
+			"month": "Jan.",
+			"amount": 12.4
+		},
+		{
+			"name": "Berlin",
+			"month": "Feb.",
+			"amount": 23.2
+		},
+		{
+			"name": "Berlin",
+			"month": "Mar.",
+			"amount": 34.5
+		},
+		{
+			"name": "Berlin",
+			"month": "Apr.",
+			"amount": 99.7
+		},
+		{
+			"name": "Berlin",
+			"month": "May",
+			"amount": 52.6
+		},
+		{
+			"name": "Berlin",
+			"month": "Jun.",
+			"amount": 35.5
+		},
+		{
+			"name": "Berlin",
+			"month": "Jul.",
+			"amount": 37.4
+		},
+		{
+			"name": "Berlin",
+			"month": "Aug.",
+			"amount": 42.4
+		}
+  ];
 };
 
 export const createPieData = (expenses: ExpenseDataType[], month: number) => {
@@ -136,11 +212,14 @@ export const pieConfigMaker = (data :  {type: string, value: number}[]) => {
   };
 };
 
-export const barConfigMaker = (data: {category: string, value: number}[], appColor: string) => {
+export const colConfigMaker = (data: {name: string, month: string, amount: number}[], appColor: string) => {
 	return {
     data,
-    xField: 'type',
-    yField: 'month',
+    xField: 'month',
+    yField: 'amount',
+    colorField: 'name',
+    group: true,
     barStyle: { fill: appColor },
+		style: { inset: 5 },
   };
 };
