@@ -1,12 +1,4 @@
-import   { ExpenseDataType, ExpenseType   } from "src/utils/shared-types";
-
-export const emptyExpense = {
-	amount: 0 as number | string,
-	category: "",
-	date: "",
-	description: "",
-	type: "debit" as ExpenseType
-};
+import   { ExpenseDataType } from "src/utils/shared-types";
 
 export const expenseData: ExpenseDataType[] = [
   {
