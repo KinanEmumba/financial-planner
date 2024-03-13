@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useState } from "react"
+import { ChangeEvent, useState } from "react"
 import { Button, CircularProgress } from "@mui/material"
 import ValidatedTextField from "src/components/ValidatedTextField"
 import { CenteredText } from "src/components/shared-components"
@@ -6,12 +6,9 @@ import { StyledContainer, VerticalFieldsContainer } from "src/components/styled-
 import { CenterContainer } from "../splash/splash-style"
 import { amountValidator } from "src/utils/input-validators"
 import { useChangeLimit } from "src/api/apis"
-import { StateContext } from "src/app/app"
 
 const Goals = () => {
-	const {appState} = useContext(StateContext) || {};
-	const {monthlyExpenseLimit} = appState || {};
-	const [limit, setLimit] = useState<string | number>(monthlyExpenseLimit as string);
+	const [limit, setLimit] = useState<string | number>('');
 	const limitChangeAPI = useChangeLimit();
 	const loading = limitChangeAPI.isPending;
 

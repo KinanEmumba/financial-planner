@@ -5,11 +5,13 @@ import {
 	CreateExpenseResponseType,
 	ExpenseDataType,
 	ExpensesResponseType,
+	LimitResponseType,
 	TokenResponseType,
 	TokenType,
 	UserLoginType,
 	UserType
 } from "src/utils/shared-types";
+import { queryClient } from "./react-query-setup";
 
 export const useGetToken = ({ loginInfo } : { loginInfo: UserLoginType }) => {
   return useMutation<TokenResponseType, Error>({
@@ -28,7 +30,7 @@ export const useGetUser = ({ userToken } : { userToken: TokenType }) => {
 
 export const useGetExpenses = ({ id } : { id: string }) => {
   return useQuery<ExpensesResponseType, Error>({
-    queryKey: ['expenses', {id}],
+    queryKey: ['expenses'],
 		queryFn: () => API({url: 'expenses'}) as Promise<ExpensesResponseType>,
 		enabled: !!id,
   });
@@ -36,28 +38,39 @@ export const useGetExpenses = ({ id } : { id: string }) => {
 
 export const usePostExpense = () => {
   return useMutation<CreateExpenseResponseType, Error, { expense: ExpenseDataType }>({
-    mutationKey: ['expense'],
-		mutationFn: ({ expense }) => API({url: 'expense/post', body: {expense}}) as Promise<CreateExpenseResponseType>
+    mutationKey: ['expenses'],
+		mutationFn: ({ expense }) => API({url: 'expense/post', body: {expense}}) as Promise<CreateExpenseResponseType>,
+		onSuccess: () => queryClient. invalidateQueries({ queryKey: ['expenses'], refetchType: 'active'})
   });
 };
 
 export const useDeleteExpense = () => {
   return useMutation<CreateExpenseResponseType, Error, { expense: ExpenseDataType, id: number }>({
-    mutationKey: ['expense'],
-		mutationFn: ({ expense, id }) => API({url: 'expense/delete', body: {expense, id}}) as Promise<CreateExpenseResponseType>
+    mutationKey: ['expenses'],
+		mutationFn: ({ expense, id }) => API({url: 'expense/delete', body: {expense, id}}) as Promise<CreateExpenseResponseType>,
+		onSuccess: () => queryClient. invalidateQueries({ queryKey: ['expenses'], refetchType: 'active'})
   });
 };
 
 export const useEditExpense = () => {
   return useMutation<CreateExpenseResponseType, Error, { expense: ExpenseDataType, id: number }>({
-    mutationKey: ['expense'],
-		mutationFn: ({ expense, id }) => API({url: 'expense/edit', body: {expense, id}}) as Promise<CreateExpenseResponseType>
+    mutationKey: ['expenses'],
+		mutationFn: ({ expense, id }) => API({url: 'expense/edit', body: {expense, id}}) as Promise<CreateExpenseResponseType>,
+		onSuccess: () => queryClient. invalidateQueries({ queryKey: ['expenses'], refetchType: 'active'})
+  });
+};
+
+export const useGetLimit = () => {
+  return useQuery<LimitResponseType, Error>({
+    queryKey: ['limit'],
+		queryFn: () => API({url: 'limit'}) as Promise<LimitResponseType>
   });
 };
 
 export const useChangeLimit = () => {
   return useMutation<CreateExpenseResponseType, Error, { limit: number | string }>({
     mutationKey: ['limit'],
-		mutationFn: ({ limit }) => API({url: 'limitChange', body: {limit}}) as Promise<ChangeLimitResponseType>
+		mutationFn: ({ limit }) => API({url: 'limitChange', body: {limit}}) as Promise<ChangeLimitResponseType>,
+		onSuccess: () => queryClient. invalidateQueries({ queryKey: ['limit'], refetchType: 'active'})
   });
 };

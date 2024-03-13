@@ -37,8 +37,7 @@ export type StateContextType = {
 	userToken: string | undefined,
 	signout: () => void,
 	expenses: ExpenseDataType[],
-	setExpenses: Dispatch<SetStateAction<ExpenseDataType[]>>,
-	monthlyExpenseLimit: string | null
+	setExpenses: Dispatch<SetStateAction<ExpenseDataType[]>>
 };
 
 export type ExpenseType = 'credit' | 'debit';
@@ -63,4 +62,6 @@ export type EditExpenseResponseType = MessageObjectType;
 
 export type ChangeLimitResponseType = MessageObjectType;
 
-export type AllReturnTypes = UserType | TokenResponseType | ExpensesResponseType | MessageObjectType;
+export type LimitResponseType = {limit: string | null};
+
+export type AllReturnTypes = UserType | TokenResponseType | ExpensesResponseType | MessageObjectType | LimitResponseType;

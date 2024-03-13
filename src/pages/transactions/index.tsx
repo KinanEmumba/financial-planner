@@ -13,8 +13,7 @@ import { ExpenseDataType } from "src/utils/shared-types";
 
 const Transactions = () => {
 	const { appState } = useContext(StateContext) || {};
-	console.log('appState', appState);
-	const { user, expenses, setExpenses } = appState || {};
+	const { user } = appState || {};
 	const { data, isLoading, error } = useGetExpenses({id: user?.id || ''});
 	const deleteExpenseAPI = useDeleteExpense();
 	const {showSnackbar} = useContext(SnackBarContext);
@@ -22,12 +21,6 @@ const Transactions = () => {
 	const [editExpense, setEditExpense] = useState<null | {expense: ExpenseDataType, id: number}>(null);
 	const loading = deleteExpenseAPI.isPending || isLoading;
 	
-	useEffect(()=> {
-		if (data && setExpenses) {
-			setExpenses(data.expenses);
-		}
-	}, [data, setExpenses])
-
 	useEffect(()=> {
 		if (error) {
 			showSnackbar({
@@ -52,14 +45,14 @@ const Transactions = () => {
 	},[])
 	
 	const onEdit = ({index}: {index: number}) => {
-		if (!expenses) return;
-		setEditExpense({expense: expenses[index], id: index});
+		if (!data) return;
+		setEditExpense({expense: data.expenses[index], id: index});
 		addNewExpense();
 	}
 	
 	const onDelete = ({index}: {index: number}) => {
-		if (!expenses) return;
-		deleteExpenseAPI.mutate({expense: expenses[index], id: index});
+		if (!data) return;
+		deleteExpenseAPI.mutate({expense: data.expenses[index], id: index});
 	}
 
 	return (
@@ -72,13 +65,13 @@ const Transactions = () => {
 					</StyledFab>
 					{loading && <CenteredLoader />}
 					{error && <CenteredText variant='h6'> Unable to get expenses </CenteredText>}
-					{!loading && !expenses?.length && (
+					{!loading && !data?.expenses?.length && (
 						<CenteredText variant='h6'> Click + icon to start adding expenses </CenteredText>
 					)}
 				</FullCenteredView>
-				{expenses && (
+				{data?.expenses && (
 					<ExpensesTable
-						expenses={expenses}
+						expenses={data.expenses}
 						onEdit={onEdit}
 						onDelete={onDelete}
 					/>

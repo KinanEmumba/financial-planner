@@ -62,6 +62,11 @@ const editExpense = (body: {expense: ExpenseDataType, id: number}): EditExpenseR
 	return {message: 'Expense edited successfully'}
 };
 
+const getLimit = () => {
+	const expenseLimit = localStorage.getItem('limit');
+	return {limit: expenseLimit || null}
+};
+
 const limitChange = (body: {limit: string | number}) => {
 	localStorage.setItem('limit', body.limit as string);
 	window.dispatchEvent(new CustomEvent('storage', {detail: 'limit changed'} as {detail:  string}));
@@ -75,5 +80,6 @@ export const data = {
 	'expense/post': postExpense,
 	'expense/delete': deleteExpense,
 	'expense/edit': editExpense,
+	'limit': getLimit,
 	'limitChange': limitChange
 };
