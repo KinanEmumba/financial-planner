@@ -50,6 +50,8 @@ export type ExpenseDataType = {
 	type: ExpenseType,
 };
 
+export type PieDataType = {type: string, value: number};
+
 export type ExpensesResponseType = {expenses: ExpenseDataType[]};
 
 export type MessageObjectType = {message: string};

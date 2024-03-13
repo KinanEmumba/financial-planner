@@ -1,7 +1,7 @@
 import { Card, styled } from "@mui/material";
 
 export const StyledCard = styled(Card)(({ theme }) =>`
-	margin: 10px auto;
+	margin: 30px auto;
 	min-width: 300px;
 	min-height: 250px;
 	max-width: 500px;

@@ -32,7 +32,7 @@ export const useGetExpenses = ({ id } : { id: string }) => {
   return useQuery<ExpensesResponseType, Error>({
     queryKey: ['expenses'],
 		queryFn: () => API({url: 'expenses'}) as Promise<ExpensesResponseType>,
-		enabled: !!id,
+		// enabled: !!id,
   });
 };
 

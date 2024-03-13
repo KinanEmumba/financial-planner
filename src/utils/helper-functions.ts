@@ -1,8 +1,34 @@
 import { getMonth } from "date-fns";
-import { ExpenseDataType } from "./shared-types";
+import { ExpenseDataType, PieDataType } from "./shared-types";
 import { colors } from "@mui/material";
 
-export const createGuageData = (expenses: ExpenseDataType[], month: number, expenseLimit: number) => {
+export const createBarData = (expenses: ExpenseDataType[]) => {
+	return [
+		{ category: 'A', value: 10 },
+		{ category: 'B', value: 20 },
+		{ category: 'C', value: 15 },
+		{ category: 'D', value: 25 },
+	];
+};
+
+export const createPieData = (expenses: ExpenseDataType[], month: number) => {
+	const monthExpenses = getMonthExpenses(expenses, month);
+	const pieData: PieDataType[] = monthExpenses.reduce((acc: PieDataType[], expense: ExpenseDataType) => {
+		const index = acc.findIndex(item => item.type === expense.category);
+		if (index !== -1) {
+			acc[index].value += 1;
+		} else {
+			acc.push({ type: expense.category, value: 1 });
+		}
+		return acc;
+	}, []).map((item: PieDataType) => ({
+		...item,
+		value: (item.value / expenses.length) * 100
+	}));
+	return pieData;
+};
+
+export const createDashboardData = (expenses: ExpenseDataType[], month: number, expenseLimit: number) => {
 	const monthExpenses = getMonthExpenses(expenses, month);
 	console.log('current month expenses', monthExpenses);
 	const totalExpense = sumOfDebitEntries(monthExpenses);
@@ -79,5 +105,42 @@ export const guageConfigMaker = (percent: number) => {
         },
       },
     },
+  };
+};
+
+export const pieConfigMaker = (data :  {type: string, value: number}[]) => {
+	return {
+    appendPadding: 10,
+    data,
+    angleField: 'value',
+    colorField: 'type',
+    radius: 1,
+    startAngle: Math.PI,
+    endAngle: Math.PI * 3,
+    label: {
+      type: 'inner',
+      offset: '-8%',
+      content: '{name}',
+      style: {
+        fontSize: 18,
+      },
+    },
+    interactions: [
+      {
+        type: 'element-active',
+      },
+    ],
+    pieStyle: {
+      lineWidth: 0,
+    },
+  };
+};
+
+export const barConfigMaker = (data: {category: string, value: number}[], appColor: string) => {
+	return {
+    data,
+    xField: 'type',
+    yField: 'month',
+    barStyle: { fill: appColor },
   };
 };
