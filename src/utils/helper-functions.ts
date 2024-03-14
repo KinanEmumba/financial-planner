@@ -162,3 +162,9 @@ export const addNewCategoryFromExpense = (expenseCategory: string) => {
 	else catArray.unshift({title: expenseCategory, limit: 0});
 	localStorage.setItem('categories', JSON.stringify(catArray));
 };
+
+export const addEnumDataTypeToExpenses = (expenses: ExpenseDataType[]) => {
+	return expenses.map((exp: ExpenseDataType) => {
+		return {...exp, type: exp.type === 'debit' ? ExpenseType.debit : ExpenseType.credit};
+	});
+};

@@ -4,7 +4,7 @@ import { Pie } from '@ant-design/charts'
 
 import { StyledCard } from 'src/pages/dashboard/dashboard-style'
 import { createPieData, pieConfigMaker } from 'src/utils/helper-functions';
-import {  TimePeriod } from 'src/utils/shared-types';
+import { TimePeriod } from 'src/utils/shared-types';
 import ChartDropdown from 'src/components/ChartDropdown';
 import useExpenses from 'src/shared-hooks/useExpenses';
 
@@ -14,7 +14,6 @@ const PieChart = () => {
 	
 	const pieData = createPieData(expenses, timePeriod);
 	const pieConfig = pieConfigMaker(pieData);
-	console.log('pieData', pieData);
 
 	const onChange = (event: SelectChangeEvent) => {
     setTimePeriod(event.target.value as TimePeriod);

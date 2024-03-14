@@ -10,7 +10,7 @@ import {
 	UserType
 } from "src/utils/shared-types";
 import { expenseData, categoriesData } from "src/api/expense-data";
-import { addNewCategoryFromExpense } from "src/utils/helper-functions";
+import { addEnumDataTypeToExpenses, addNewCategoryFromExpense } from "src/utils/helper-functions";
 
 const getUserResponse = (): UserType => ({
 	id: '001',
@@ -25,7 +25,8 @@ const getExpenses = (): ExpensesResponseType => {
 	let localExpensesData;
 	const storedExpenses = localStorage.getItem('expenses');
 	if (!storedExpenses) {
-		localStorage.setItem('expenses', JSON.stringify(expenseData));
+		const cleanedExpenseData = addEnumDataTypeToExpenses(expenseData);
+		localStorage.setItem('expenses', JSON.stringify(cleanedExpenseData));
 		localExpensesData = {expenses: expenseData};
 	} else {
 		localExpensesData = {expenses: JSON.parse(storedExpenses)};

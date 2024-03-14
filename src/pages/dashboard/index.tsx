@@ -8,7 +8,7 @@ import useExpenses from "src/shared-hooks/useExpenses";
 
 const Dashboard = () => {
   const { expenses, isLoading, error } = useExpenses();
-
+	
 	return (
 		<StyledContainer>
 			<CenteredText variant='h2' color="primary"> Dashboard </CenteredText>

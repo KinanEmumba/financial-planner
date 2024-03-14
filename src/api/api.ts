@@ -3,7 +3,7 @@ import { AllReturnTypes } from "src/utils/shared-types";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const API = async ({ url, body }: { url: keyof typeof data, body?: any }) => {
-	console.log('API called with', url);
+	console.log(`API called with ${url}`);
 	const response: AllReturnTypes = await new Promise((resolve, reject) => {
 		const minValue = 1;
 		const maxValue = 3;
@@ -13,6 +13,6 @@ export const API = async ({ url, body }: { url: keyof typeof data, body?: any })
 		// }
 		setTimeout(() => resolve(data[url](body)), randomTime);
 	})
-	console.log('API response', response);
+	console.log(`API response for ${url}`, response);
 	return response;
 };
