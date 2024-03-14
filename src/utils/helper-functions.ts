@@ -1,6 +1,7 @@
 import { getYear, getWeek, getMonth, format } from "date-fns";
 import { ExpenseDataType, PieDataType, TimePeriod } from "./shared-types";
-import { green, red } from "@mui/material/colors";
+import { green, orange, red, yellow } from "@mui/material/colors";
+import { theme } from "src/app/theme";
 
 export const createColData = (expenses: ExpenseDataType[], timePeriod: TimePeriod, currentMonth: number) => {
 	const colData: {name: string, month: string, amount: number}[] = [];
@@ -75,20 +76,35 @@ export const percentMaker = (totalExpense: number, limit: number) => {
 	return totalExpense * 100 / limit;
 };
 
-export const guageConfigMaker = (total: number, current: number) => {
+export const guageConfigMaker = (total: number, current: number, title: string) => {
 	return {
 		width: 420,
     height: 420,
+		insetBottom: -100,
     autoFit: true,
     data: {
       target: current,
       total: total,
       name: 'expense',
     },
+		title: {
+			title: title,
+			align: 'center',
+			fill: theme.palette.primary.main,
+			titleFontFamily: 'Robotto',
+			titleFontSize: 20,
+			titleFontWeight: 500,
+		},
 		scale: {
       color: {
-        range: [`l(0) 0:${green[500]} 1:${red[900]}`],
+				range: [
+					`l(0) 0:${green[500]} 0.25:${yellow[500]} 1:${orange[900]}`,
+					`${red[900]}`
+				],
       },
+    },
+		style: {
+      textContent: () => ``,
     },
     legend: false,
   };
