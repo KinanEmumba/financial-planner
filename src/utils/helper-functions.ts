@@ -38,7 +38,7 @@ export const createPieData = (expenses: ExpenseDataType[], month: number) => {
 		return acc;
 	}, []).map((item: PieDataType) => ({
 		...item,
-		value: (item.value / expenses.length) * 100
+		value: parseFloat(((item.value / expenses.length) * 100).toFixed(1))
 	}));
 	return pieData;
 };
