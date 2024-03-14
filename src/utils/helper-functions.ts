@@ -1,90 +1,102 @@
-import { getMonth } from "date-fns";
+import { getMonth, format } from "date-fns";
 import { ExpenseDataType, PieDataType } from "./shared-types";
-import { colors } from "@mui/material";
+import { green, red } from "@mui/material/colors";
 
 export const createColData = (expenses: ExpenseDataType[]) => {
-	return [
-		{
-			"name": "London",
-			"month": "Jan.",
-			"amount": 18.9
-		},
-		{
-			"name": "London",
-			"month": "Feb.",
-			"amount": 28.8
-		},
-		{
-			"name": "London",
-			"month": "Mar.",
-			"amount": 39.3
-		},
-		{
-			"name": "London",
-			"month": "Apr.",
-			"amount": 81.4
-		},
-		{
-			"name": "London",
-			"month": "May",
-			"amount": 47
-		},
-		{
-			"name": "London",
-			"month": "Jun.",
-			"amount": 20.3
-		},
-		{
-			"name": "London",
-			"month": "Jul.",
-			"amount": 24
-		},
-		{
-			"name": "London",
-			"month": "Aug.",
-			"amount": 35.6
-		},
-		{
-			"name": "Berlin",
-			"month": "Jan.",
-			"amount": 12.4
-		},
-		{
-			"name": "Berlin",
-			"month": "Feb.",
-			"amount": 23.2
-		},
-		{
-			"name": "Berlin",
-			"month": "Mar.",
-			"amount": 34.5
-		},
-		{
-			"name": "Berlin",
-			"month": "Apr.",
-			"amount": 99.7
-		},
-		{
-			"name": "Berlin",
-			"month": "May",
-			"amount": 52.6
-		},
-		{
-			"name": "Berlin",
-			"month": "Jun.",
-			"amount": 35.5
-		},
-		{
-			"name": "Berlin",
-			"month": "Jul.",
-			"amount": 37.4
-		},
-		{
-			"name": "Berlin",
-			"month": "Aug.",
-			"amount": 42.4
-		}
-  ];
+	const colData: {name: string, month: string, amount: number}[] = [];
+	expenses.forEach((expense) => {
+		const month = format(new Date(expense.date), "MMM");
+		const name = expense.type === 'credit' ? 'Credit' : 'Debit';
+		colData.push({
+			name,
+			month,
+			amount: parseFloat(expense.amount.toString()),
+		});
+	});
+	colData.sort((a, b) => a.name.localeCompare(b.name));
+	return colData;
+	// return [
+	// 	{
+	// 		"name": "London",
+	// 		"month": "Jan.",
+	// 		"amount": 18.9
+	// 	},
+	// 	{
+	// 		"name": "London",
+	// 		"month": "Feb.",
+	// 		"amount": 28.8
+	// 	},
+	// 	{
+	// 		"name": "London",
+	// 		"month": "Mar.",
+	// 		"amount": 39.3
+	// 	},
+	// 	{
+	// 		"name": "London",
+	// 		"month": "Apr.",
+	// 		"amount": 81.4
+	// 	},
+	// 	{
+	// 		"name": "London",
+	// 		"month": "May",
+	// 		"amount": 47
+	// 	},
+	// 	{
+	// 		"name": "London",
+	// 		"month": "Jun.",
+	// 		"amount": 20.3
+	// 	},
+	// 	{
+	// 		"name": "London",
+	// 		"month": "Jul.",
+	// 		"amount": 24
+	// 	},
+	// 	{
+	// 		"name": "London",
+	// 		"month": "Aug.",
+	// 		"amount": 35.6
+	// 	},
+	// 	{
+	// 		"name": "Berlin",
+	// 		"month": "Jan.",
+	// 		"amount": 12.4
+	// 	},
+	// 	{
+	// 		"name": "Berlin",
+	// 		"month": "Feb.",
+	// 		"amount": 23.2
+	// 	},
+	// 	{
+	// 		"name": "Berlin",
+	// 		"month": "Mar.",
+	// 		"amount": 34.5
+	// 	},
+	// 	{
+	// 		"name": "Berlin",
+	// 		"month": "Apr.",
+	// 		"amount": 99.7
+	// 	},
+	// 	{
+	// 		"name": "Berlin",
+	// 		"month": "May",
+	// 		"amount": 52.6
+	// 	},
+	// 	{
+	// 		"name": "Berlin",
+	// 		"month": "Jun.",
+	// 		"amount": 35.5
+	// 	},
+	// 	{
+	// 		"name": "Berlin",
+	// 		"month": "Jul.",
+	// 		"amount": 37.4
+	// 	},
+	// 	{
+	// 		"name": "Berlin",
+	// 		"month": "Aug.",
+	// 		"amount": 42.4
+	// 	}
+  // ];
 };
 
 export const createPieData = (expenses: ExpenseDataType[], month: number) => {
@@ -138,76 +150,42 @@ export const percentMaker = (totalExpense: number, limit: number) => {
 	return totalExpense * 100 / limit;
 };
 
-export const guageConfigMaker = (percent: number) => {
+export const guageConfigMaker = (total: number, current: number) => {
 	return {
-		width: 250,
-		height: 250,
-		type: 'meter',
-		stepRatio: 1,
-		steps: 100,
-		gap: 100,
-		percent: percent / 100,
-    range: {
-      color: [colors.green[800], colors.red[900]],
+		width: 420,
+    height: 420,
+    autoFit: true,
+    data: {
+      target: current,
+      total: total,
+      name: 'expense',
     },
-    indicator: {
-      pointer: {
-        style: {
-          stroke: '#D0D0D0',
-        },
-      },
-      pin: {
-        style: {
-          stroke: '#D0D0D0',
-        },
+		scale: {
+      color: {
+        range: [`l(0) 0:${green[500]} 1:${red[900]}`],
       },
     },
-    axis: {
-      // label: {
-      //   formatter(v: number) {
-      //     return Number(v) * 100;
-      //   },
-      // },
-      subTickLine: {
-        count: 3,
-      },
-    },
-    statistic: {
-      content: {
-        // formatter: ({ percent }: {percent: number }) => `Monthly Limit: ${(percent * 100).toFixed(0)}%`,
-        style: {
-          color: 'rgba(0,0,0,0.65)',
-          fontSize: '25px',
-        },
-      },
-    },
+    legend: false,
   };
 };
 
 export const pieConfigMaker = (data :  {type: string, value: number}[]) => {
 	return {
-    appendPadding: 10,
     data,
     angleField: 'value',
     colorField: 'type',
-    radius: 1,
-    startAngle: Math.PI,
-    endAngle: Math.PI * 3,
     label: {
-      type: 'inner',
-      offset: '-8%',
-      content: '{name}',
+      text: 'value',
       style: {
-        fontSize: 18,
+        fontWeight: 'bold',
       },
     },
-    interactions: [
-      {
-        type: 'element-active',
+    legend: {
+      color: {
+        title: false,
+        position: 'right',
+        rowPadding: 5,
       },
-    ],
-    pieStyle: {
-      lineWidth: 0,
     },
   };
 };
@@ -220,6 +198,7 @@ export const colConfigMaker = (data: {name: string, month: string, amount: numbe
     colorField: 'name',
     group: true,
     barStyle: { fill: appColor },
-		style: { inset: 5 },
+		width: 500,
+		// color: ['#6EB8AF', '#D2691E'],
   };
 };
