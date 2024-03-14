@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react';
 import { Snackbar, Alert, Slide } from '@mui/material';
+
 import { SnackbarOptions } from 'src/utils/shared-types';
 
 const useSnackbar = () => {

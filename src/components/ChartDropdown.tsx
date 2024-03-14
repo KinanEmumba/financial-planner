@@ -1,6 +1,6 @@
 import { Select, MenuItem, SelectChangeEvent } from '@mui/material';
-import { TimePeriod } from 'src/utils/shared-types';
 
+import { TimePeriod } from 'src/utils/shared-types';
 
 const ChartDropdown = ({
 	value,

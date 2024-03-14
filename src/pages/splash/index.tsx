@@ -2,11 +2,10 @@ import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Button, CircularProgress } from "@mui/material";
 
-import { StyledContainer, VerticalFieldsContainer } from "src/components/styled-components";
-import { CenterContainer } from "src/pages/splash/splash-style";
+import ValidatedTextField from "src/components/ValidatedTextField";
+import { CenterContainer, StyledContainer, VerticalFieldsContainer } from "src/components/styled-components";
 import { useGetToken, useGetUser } from "src/api/apis";
 import { StateContext } from "src/app/app";
-import ValidatedTextField from "src/components/ValidatedTextField";
 import { emailValidator, passwordValidator } from "src/utils/input-validators";
 import { UserLoginType } from "src/utils/shared-types";
 import { SnackBarContext } from "src/app/snackbar-context";

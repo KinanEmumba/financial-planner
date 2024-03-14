@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react'
 import { Avatar, Menu, Divider, MenuItem } from '@mui/material'
+
 import { StateContext } from 'src/app/app';
 
 const UserAvatar = () => {

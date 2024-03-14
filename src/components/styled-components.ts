@@ -13,6 +13,14 @@ export const StyledContainer = styled('div')(({ theme }) =>`
 	background-image: ${bgGradient(theme)};
 `);
 
+export const CenterContainer = styled('div')(({ theme }) =>`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: 720px;
+`);
+
 export const StyledTextField = styled(TextField)(({ theme }) =>`
 	height: 75px;
 	margin: 5px 0px;

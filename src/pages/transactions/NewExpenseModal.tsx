@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react'
 import { Button, Modal, Switch } from '@mui/material';
+
 import ValidatedTextField from 'src/components/ValidatedTextField';
 import { StyledModalBox } from 'src/pages/transactions/transactions-style';
 import { amountValidator } from 'src/utils/input-validators';

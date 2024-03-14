@@ -5,8 +5,8 @@ import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 
 import AppRoutes from 'src/app/routes';
-import { theme } from 'src/app/theme';
 import useAppUserContext from 'src/app/app-state-context';
+import { theme } from 'src/app/theme';
 import { AppStateType } from 'src/utils/shared-types';
 import { queryClient } from 'src/api/react-query-setup';
 import { SnackBarProvider } from 'src/app/snackbar-context';

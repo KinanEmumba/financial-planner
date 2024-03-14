@@ -1,4 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { queryClient } from "./react-query-setup";
+
 import { API } from "src/api/api";
 import {
 	ChangeLimitResponseType,
@@ -11,7 +13,6 @@ import {
 	UserLoginType,
 	UserType
 } from "src/utils/shared-types";
-import { queryClient } from "./react-query-setup";
 
 export const useGetToken = ({ loginInfo } : { loginInfo: UserLoginType }) => {
   return useMutation<TokenResponseType, Error>({

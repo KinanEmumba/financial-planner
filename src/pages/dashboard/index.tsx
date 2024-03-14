@@ -1,6 +1,5 @@
 import { CenteredLoader, CenteredText } from "src/components/shared-components"
 import { StyledContainer } from "src/components/styled-components"
-
 import GaugeChart from "src/components/GaugeChart";
 import DashboardStats from "src/components/DashboardStats";
 import PieChart from "src/components/PieChart";

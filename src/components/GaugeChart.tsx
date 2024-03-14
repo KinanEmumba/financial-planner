@@ -1,9 +1,10 @@
 import { useMemo } from 'react';
 import { Gauge } from '@ant-design/charts'
+import { getMonth } from 'date-fns';
+
 import { StyledCard } from 'src/pages/dashboard/dashboard-style'
 import { createDashboardData, guageConfigMaker } from 'src/utils/helper-functions';
 import useExpenses from 'src/shared-hooks/useExpenses';
-import { getMonth } from 'date-fns';
 import useExpenseLimit from 'src/shared-hooks/useExpenseLimit';
 
 const GaugeChart = () => {

@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import { CircularProgress, Typography, TypographyProps } from '@mui/material'
+
 import { CenteredView, FullCenteredView } from 'src/components/styled-components'
 
 interface CenteredHeadingProps extends TypographyProps {

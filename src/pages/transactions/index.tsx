@@ -1,20 +1,18 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import AddIcon from '@mui/icons-material/Add';
 
+import NewExpenseModal from "src/pages/transactions/NewExpenseModal";
+import ExpensesTable from "src/pages/transactions/ExpensesTable";
+import useExpenses from "src/shared-hooks/useExpenses";
 import { FullCenteredView, StyledPaper } from "src/components/styled-components"
 import { StyledFab } from "src/pages/transactions/transactions-style";
 import { CenteredLoader, CenteredText } from "src/components/shared-components";
-import { StateContext } from "src/app/app";
-import ExpensesTable from "src/pages/transactions/ExpensesTable";
 import { SnackBarContext } from "src/app/snackbar-context";
-import NewExpenseModal from "./NewExpenseModal";
-import { useDeleteExpense, useGetExpenses } from "src/api/apis";
+import { useDeleteExpense } from "src/api/apis";
 import { ExpenseDataType } from "src/utils/shared-types";
 
 const Transactions = () => {
-	const { appState } = useContext(StateContext) || {};
-	const { user } = appState || {};
-	const { data, isLoading, error } = useGetExpenses({id: user?.id || ''});
+	const { expenses, isLoading, error } = useExpenses();
 	const deleteExpenseAPI = useDeleteExpense();
 	const {showSnackbar} = useContext(SnackBarContext);
 	const [modalVisible, setModalVisible] = useState(false);
@@ -45,14 +43,14 @@ const Transactions = () => {
 	},[])
 	
 	const onEdit = ({index}: {index: number}) => {
-		if (!data) return;
-		setEditExpense({expense: data.expenses[index], id: index});
+		if (!expenses) return;
+		setEditExpense({expense: expenses[index], id: index});
 		addNewExpense();
 	}
 	
 	const onDelete = ({index}: {index: number}) => {
-		if (!data) return;
-		deleteExpenseAPI.mutate({expense: data.expenses[index], id: index});
+		if (!expenses) return;
+		deleteExpenseAPI.mutate({expense: expenses[index], id: index});
 	}
 
 	return (
@@ -65,13 +63,13 @@ const Transactions = () => {
 					</StyledFab>
 					{loading && <CenteredLoader />}
 					{error && <CenteredText variant='h6'> Unable to get expenses </CenteredText>}
-					{!loading && !data?.expenses?.length && (
+					{!loading && !expenses?.length && (
 						<CenteredText variant='h6'> Click + icon to start adding expenses </CenteredText>
 					)}
 				</FullCenteredView>
-				{data?.expenses && (
+				{expenses && (
 					<ExpensesTable
-						expenses={data.expenses}
+						expenses={expenses}
 						onEdit={onEdit}
 						onDelete={onDelete}
 					/>
