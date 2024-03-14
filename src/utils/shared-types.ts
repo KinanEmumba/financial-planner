@@ -36,11 +36,6 @@ export enum TimePeriod {
 	'month' = 'This Month',
 }
 
-export enum ExpenseType {
-	credit,
-	debit
-}
-
 export type StateContextType = {
 	saveToken: ({userTokenResponse}: {userTokenResponse: TokenResponseType}) => void,
 	saveUser: ({user}: {user: UserType}) => void,
@@ -56,7 +51,7 @@ export type ExpenseDataType = {
 	category: string,
 	date: string,
 	description: string,
-	type: ExpenseType | string,
+	type: string,
 };
 
 export type CategoryDataType = {

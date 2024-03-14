@@ -6,7 +6,7 @@ import { StyledModalBox } from 'src/pages/transactions/transactions-style';
 import { amountValidator } from 'src/utils/input-validators';
 import { VerticalFieldsContainer } from 'src/components/styled-components';
 import { useEditExpense, usePostExpense } from 'src/api/apis';
-import { ExpenseDataType, ExpenseType } from 'src/utils/shared-types';
+import { ExpenseDataType } from 'src/utils/shared-types';
 import { CenteredLoader } from 'src/components/shared-components';
 import { SnackBarContext } from 'src/app/snackbar-context';
 
@@ -28,36 +28,32 @@ const NewExpenseModal = ({
 	const success = postExpenseAPI.isSuccess || editExpenseAPI.isSuccess;
 	const data = postExpenseAPI.data || editExpenseAPI.data;
 
-	const [expenseValues, setExpenseValues] = useState<ExpenseDataType>({
-		type: ExpenseType.debit,
+	const [initialState] = useState<ExpenseDataType>({
+		type: 'debit',
 		amount: '',
 		category: '',
 		description: '',
 		date: new Date().toISOString(),
 	});
+	const [expenseValues, setExpenseValues] = useState<ExpenseDataType>(initialState);
 
 	useEffect(() => {
 		if (editExpense) {
-			setExpenseValues(editExpense.expense || {
-				type: 'debit',
-				amount: '',
-				category: '',
-				description: '',
-				date: new Date().toISOString(),
-			});
+			setExpenseValues(editExpense.expense || initialState);
 		}
-	}, [editExpense])
+	}, [editExpense, initialState])
 
 	useEffect(() => {
 		if (success) {
 			console.log('got data', data);
 			showSnackbar({
-				message: `Expense ${editExpense ? 'Created' : 'Edited'}`,
+				message: `Expense ${editExpense ? 'Edited' : 'Created'}`,
 				type: "success"
 			});
+			setExpenseValues(initialState);
 			onSuccess && onSuccess();
 		}
-	}, [editExpense, onSuccess, success, showSnackbar, data]);
+	}, [editExpense, onSuccess, success, showSnackbar, data, initialState]);
 
 	useEffect(() => {
 		if (postExpenseAPI.error) {
@@ -81,7 +77,11 @@ const NewExpenseModal = ({
 	const handleExpenseInput = (e: ChangeEvent<HTMLInputElement>) => {
     setExpenseValues({
       ...expenseValues,
-      [e.target.name]: e.target.name !== 'type' ? e.target.value : e.target.checked? 'credit' : 'debit' ,
+      [e.target.name]: e.target.name !== 'type' ?
+				e.target.value :
+				e.target.checked ?
+					'credit' :
+					'debit',
     });
 	};
 
@@ -91,12 +91,12 @@ const NewExpenseModal = ({
 			{isPending && <CenteredLoader />}
 				<VerticalFieldsContainer>
 					<div>
-						{(expenseValues.type).toString().replace(/^./, (expenseValues.type).toString()[0].toUpperCase())}
+						{expenseValues.type === 'debit' ? 'Debit' : 'Credit'}
 						<Switch
 							name='type' 
 							onChange={handleExpenseInput}
 							disabled={isPending}
-							checked={expenseValues.type === ExpenseType.credit}
+							checked={expenseValues.type === 'credit'}
 						/>
 					</div>
 					<ValidatedTextField

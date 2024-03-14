@@ -44,7 +44,7 @@ export const usePostExpense = () => {
   return useMutation<CreateExpenseResponseType, Error, { expense: ExpenseDataType }>({
     mutationKey: ['expenses'],
 		mutationFn: ({ expense }) => API({url: 'expense/post', body: {expense}}) as Promise<CreateExpenseResponseType>,
-		onSuccess: () => queryClient. invalidateQueries({ queryKey: ['expenses', 'categories'], refetchType: 'active'})
+		onSuccess: () => queryClient.invalidateQueries({ queryKey: ['expenses'], refetchType: 'active'})
   });
 };
 
@@ -52,7 +52,7 @@ export const useDeleteExpense = () => {
   return useMutation<CreateExpenseResponseType, Error, { expense: ExpenseDataType, id: number }>({
     mutationKey: ['expenses'],
 		mutationFn: ({ expense, id }) => API({url: 'expense/delete', body: {expense, id}}) as Promise<CreateExpenseResponseType>,
-		onSuccess: () => queryClient. invalidateQueries({ queryKey: ['expenses'], refetchType: 'active'})
+		onSuccess: () => queryClient.invalidateQueries({ queryKey: ['expenses'], refetchType: 'active'})
   });
 };
 
@@ -60,7 +60,7 @@ export const useEditExpense = () => {
   return useMutation<CreateExpenseResponseType, Error, { expense: ExpenseDataType, id: number }>({
     mutationKey: ['expenses'],
 		mutationFn: ({ expense, id }) => API({url: 'expense/edit', body: {expense, id}}) as Promise<CreateExpenseResponseType>,
-		onSuccess: () => queryClient. invalidateQueries({ queryKey: ['expenses'], refetchType: 'active'})
+		onSuccess: () => queryClient.invalidateQueries({ queryKey: ['expenses'], refetchType: 'active'})
   });
 };
 
@@ -75,7 +75,7 @@ export const useChangeLimit = () => {
 	return useMutation<CreateExpenseResponseType, Error, { limit: number | string }>({
 		mutationKey: ['limit'],
 		mutationFn: ({ limit }) => API({url: 'limitChange', body: {limit}}) as Promise<ChangeLimitResponseType>,
-		onSuccess: () => queryClient. invalidateQueries({ queryKey: ['limit'], refetchType: 'active'})
+		onSuccess: () => queryClient.invalidateQueries({ queryKey: ['limit'], refetchType: 'active'})
   });
 };
 
@@ -90,6 +90,6 @@ export const useSetCategories = () => {
 	return useMutation<ChangeCategoriesResponseType, Error, {categories: CategoryDataType[]}>({
 		mutationKey: ['categories'],
 		mutationFn: ({ categories }) => API({url: 'categoriesChange', body: {categories}}) as Promise<ChangeCategoriesResponseType>,
-		onSuccess: () => queryClient. invalidateQueries({ queryKey: ['categories'], refetchType: 'active'})
+		onSuccess: () => queryClient.invalidateQueries({ queryKey: ['categories'], refetchType: 'active'})
 	});
 };

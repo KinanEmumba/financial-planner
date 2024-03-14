@@ -4,13 +4,12 @@ import {
 	DeleteExpenseResponseType,
 	EditExpenseResponseType,
 	ExpenseDataType,
-	ExpenseType,
 	ExpensesResponseType,
 	TokenResponseType,
 	UserType
 } from "src/utils/shared-types";
 import { expenseData, categoriesData } from "src/api/expense-data";
-import { addEnumDataTypeToExpenses, addNewCategoryFromExpense } from "src/utils/helper-functions";
+import { addNewCategoryFromExpense } from "src/utils/helper-functions";
 
 const getUserResponse = (): UserType => ({
 	id: '001',
@@ -25,8 +24,7 @@ const getExpenses = (): ExpensesResponseType => {
 	let localExpensesData;
 	const storedExpenses = localStorage.getItem('expenses');
 	if (!storedExpenses) {
-		const cleanedExpenseData = addEnumDataTypeToExpenses(expenseData);
-		localStorage.setItem('expenses', JSON.stringify(cleanedExpenseData));
+		localStorage.setItem('expenses', JSON.stringify(expenseData));
 		localExpensesData = {expenses: expenseData};
 	} else {
 		localExpensesData = {expenses: JSON.parse(storedExpenses)};
@@ -35,7 +33,7 @@ const getExpenses = (): ExpensesResponseType => {
 };
 
 const postExpense = (body: {expense: ExpenseDataType}): CreateExpenseResponseType => {
-	if (body.expense.type === ExpenseType.debit) {
+	if (body.expense.type === 'debit') {
 		addNewCategoryFromExpense(body.expense.category);
 	}
 	const storedExpenses = localStorage.getItem('expenses');

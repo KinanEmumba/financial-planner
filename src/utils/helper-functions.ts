@@ -1,7 +1,7 @@
 import { getYear, getMonth, format } from "date-fns";
 import { green, orange, red, yellow } from "@mui/material/colors";
 
-import { CategoryDataType, ExpenseDataType, ExpenseType, PieDataType, TimePeriod } from "src/utils//shared-types";
+import { CategoryDataType, ExpenseDataType, PieDataType, TimePeriod } from "src/utils//shared-types";
 import { theme } from "src/app/theme";
 
 export const createColData = (expenses: ExpenseDataType[], timePeriod: TimePeriod) => {
@@ -14,7 +14,7 @@ export const createColData = (expenses: ExpenseDataType[], timePeriod: TimePerio
 	}
 	localExpenses.forEach((expense) => {
 		const month = format(new Date(expense.date), timePeriod === TimePeriod.year ? 'MMM' : 'wo');
-		const name = expense.type === ExpenseType.credit ? 'Credit' : 'Debit';
+		const name = expense.type === 'credit' ? 'Credit' : 'Debit';
 		colData.push({
 			name,
 			month,
@@ -65,14 +65,14 @@ export const getYearExpenses = (expenses: ExpenseDataType[], year?: number) => {
 };
 
 export const sumOfDebitEntries = (expenses: ExpenseDataType[]) => {
-	return sumEntriesByType(expenses, ExpenseType.debit);
+	return sumEntriesByType(expenses, 'debit');
 };
 
 export const sumOfCreditEntries = (expenses: ExpenseDataType[]) => {
-	return sumEntriesByType(expenses, ExpenseType.credit);
+	return sumEntriesByType(expenses, 'credit');
 };
 
-export const sumEntriesByType = (expenses: ExpenseDataType[], type: ExpenseType) => {
+export const sumEntriesByType = (expenses: ExpenseDataType[], type: string) => {
 	return expenses.reduce((acc: number, current: ExpenseDataType): number => {
 		const currentAmount = parseFloat(current.amount as string);
 		acc = acc + (current.type === type ? currentAmount : 0);
@@ -161,10 +161,4 @@ export const addNewCategoryFromExpense = (expenseCategory: string) => {
 	if (exists) return;
 	else catArray.unshift({title: expenseCategory, limit: 0});
 	localStorage.setItem('categories', JSON.stringify(catArray));
-};
-
-export const addEnumDataTypeToExpenses = (expenses: ExpenseDataType[]) => {
-	return expenses.map((exp: ExpenseDataType) => {
-		return {...exp, type: exp.type === 'debit' ? ExpenseType.debit : ExpenseType.credit};
-	});
 };
