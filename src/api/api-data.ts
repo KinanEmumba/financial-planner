@@ -1,4 +1,5 @@
 import {
+	CategoryDataType,
 	CreateExpenseResponseType,
 	DeleteExpenseResponseType,
 	EditExpenseResponseType,
@@ -7,7 +8,7 @@ import {
 	TokenResponseType,
 	UserType
 } from "src/utils/shared-types";
-import { expenseData } from "src/api//expense-data";
+import { expenseData, categoriesData } from "src/api/expense-data";
 
 const getUserResponse = (): UserType => ({
 	id: '001',
@@ -21,7 +22,7 @@ const getUserTokenResponse = (): TokenResponseType => ({userToken: 'abcdef123456
 const getExpenses = (): ExpensesResponseType => {
 	let localExpensesData;
 	const storedExpenses = localStorage.getItem('expenses');
-	if (!storedExpenses?.length) {
+	if (!storedExpenses) {
 		localStorage.setItem('expenses', JSON.stringify(expenseData));
 		localExpensesData = {expenses: expenseData};
 	} else {
@@ -30,11 +31,27 @@ const getExpenses = (): ExpensesResponseType => {
 	return localExpensesData;
 };
 
+const checkIfCategoryExists = (expenseCategory: string, storedCats: CategoryDataType[]) => {
+	const cats = storedCats.map((cat: CategoryDataType) => cat.title);
+	return cats.find(cat => cat === expenseCategory);
+};
+
+const addNewCategory = (expenseCategory: string) => {
+	const storedCats = localStorage.getItem('categories');
+	if (!storedCats) return;
+	const catArray = JSON.parse(storedCats);
+	const exists = checkIfCategoryExists(expenseCategory, catArray);
+	if (exists) return;
+	else catArray.unshift({title: expenseCategory, limit: 0});
+	localStorage.setItem('categories', JSON.stringify(catArray));
+};
+
 const postExpense = (body: {expense: ExpenseDataType}): CreateExpenseResponseType => {
+	if (body.expense.type === "debit")
+	addNewCategory(body.expense.category);
 	const storedExpenses = localStorage.getItem('expenses');
 	const localExpensesData: ExpenseDataType[] = storedExpenses && JSON.parse(storedExpenses);
 	localStorage.setItem('expenses', JSON.stringify([body?.expense, ...localExpensesData]));
-	window.dispatchEvent(new CustomEvent('storage', {detail: 'expense added'} as {detail:  string}));
 	return {message: 'Expense added successfully'}
 };
 
@@ -43,7 +60,6 @@ const deleteExpense = (body: {expense: ExpenseDataType, id: number}): DeleteExpe
 	const localExpensesData: ExpenseDataType[] = storedExpenses && JSON.parse(storedExpenses);
 	const newArray = [...localExpensesData.slice(0, body.id), ...localExpensesData.slice(body.id + 1)];
 	localStorage.setItem('expenses', JSON.stringify([...newArray]));
-	window.dispatchEvent(new CustomEvent('storage', {detail: 'expense deleted'} as {detail:  string}));
 	return {message: 'Expense deleted successfully'}
 };
 
@@ -58,7 +74,6 @@ const editExpense = (body: {expense: ExpenseDataType, id: number}): EditExpenseR
 		}
 	});
 	localStorage.setItem('expenses', JSON.stringify([...newArray]));
-	window.dispatchEvent(new CustomEvent('storage', {detail: 'expense edited'} as {detail:  string}));
 	return {message: 'Expense edited successfully'}
 };
 
@@ -69,8 +84,24 @@ const getLimit = () => {
 
 const limitChange = (body: {limit: string | number}) => {
 	localStorage.setItem('limit', body.limit as string);
-	window.dispatchEvent(new CustomEvent('storage', {detail: 'limit changed'} as {detail:  string}));
 	return {message: 'Monthly limit changed successfully'}
+};
+
+const getCategories = () => {
+	let localCats;
+	const storedCats = localStorage.getItem('categories');
+	if (!storedCats) {
+		localStorage.setItem('categories', JSON.stringify(categoriesData));
+		localCats = {categories: categoriesData};
+	} else {
+		localCats = {categories: JSON.parse(storedCats)};
+	}
+	return localCats;
+};
+
+const setCategories = (body: {categories: CategoryDataType[]}) => {
+	localStorage.setItem('categories', JSON.stringify(body?.categories));
+	return {message: 'Categories updated'}
 };
 
 export const data = {
@@ -81,5 +112,7 @@ export const data = {
 	'expense/delete': deleteExpense,
 	'expense/edit': editExpense,
 	'limit': getLimit,
-	'limitChange': limitChange
+	'limitChange': limitChange,
+	'categories': getCategories,
+	'categoriesChange': setCategories,
 };

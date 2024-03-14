@@ -1,7 +1,7 @@
 import { getYear, getMonth, format } from "date-fns";
 import { green, orange, red, yellow } from "@mui/material/colors";
 
-import { ExpenseDataType, PieDataType, TimePeriod } from "src/utils//shared-types";
+import { CategoryDataType, ExpenseDataType, ExpenseType, PieDataType, TimePeriod } from "src/utils//shared-types";
 import { theme } from "src/app/theme";
 
 export const createColData = (expenses: ExpenseDataType[], timePeriod: TimePeriod) => {
@@ -14,7 +14,7 @@ export const createColData = (expenses: ExpenseDataType[], timePeriod: TimePerio
 	}
 	localExpenses.forEach((expense) => {
 		const month = format(new Date(expense.date), timePeriod === TimePeriod.year ? 'MMM' : 'wo');
-		const name = expense.type === 'credit' ? 'Credit' : 'Debit';
+		const name = expense.type === ExpenseType.credit ? 'Credit' : 'Debit';
 		colData.push({
 			name,
 			month,
@@ -65,14 +65,14 @@ export const getYearExpenses = (expenses: ExpenseDataType[], year?: number) => {
 };
 
 export const sumOfDebitEntries = (expenses: ExpenseDataType[]) => {
-	return sumEntriesByType(expenses, 'debit');
+	return sumEntriesByType(expenses, ExpenseType.debit);
 };
 
 export const sumOfCreditEntries = (expenses: ExpenseDataType[]) => {
-	return sumEntriesByType(expenses, 'credit');
+	return sumEntriesByType(expenses, ExpenseType.credit);
 };
 
-export const sumEntriesByType = (expenses: ExpenseDataType[], type: string) => {
+export const sumEntriesByType = (expenses: ExpenseDataType[], type: ExpenseType) => {
 	return expenses.reduce((acc: number, current: ExpenseDataType): number => {
 		const currentAmount = parseFloat(current.amount as string);
 		acc = acc + (current.type === type ? currentAmount : 0);
@@ -150,4 +150,15 @@ export const colConfigMaker = (data: {name: string, month: string, amount: numbe
 		width: 500,
 		// color: ['#6EB8AF', '#D2691E'],
   };
+};
+
+export const addNewCategoryFromExpense = (expenseCategory: string) => {
+	const storedCats = localStorage.getItem('categories');
+	if (!storedCats) return;
+	const catArray = JSON.parse(storedCats);
+	const cats: string[] = catArray.map((cat: CategoryDataType) => cat.title);
+	const exists = cats.find((cat: string) => cat === expenseCategory);
+	if (exists) return;
+	else catArray.unshift({title: expenseCategory, limit: 0});
+	localStorage.setItem('categories', JSON.stringify(catArray));
 };

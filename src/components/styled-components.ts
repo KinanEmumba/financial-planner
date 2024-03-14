@@ -38,7 +38,7 @@ export const StyledPaper = styled(Paper)(({ theme }) =>`
 export const VerticalFieldsContainer = styled('div')(({ theme }) =>`
 	display: flex;
 	flex-direction: column;
-	margin: 20px;
+	margin: 10px 20px;
 `);
 
 export const CenteredView = styled('div')(({ theme }) =>`
@@ -51,3 +51,6 @@ export const FullCenteredView = styled('div')(({ theme }) =>`
 	text-align: center;
 `);
 
+export const Spacer = styled('div')<{margin?: string}>(({ theme, margin }) =>`
+	margin: ${margin || '10px 10px'};
+`);

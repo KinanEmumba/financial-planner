@@ -7,9 +7,9 @@ User Authentication: Implement a simple login/logout functionality with mock aut
 Dashboard: Present a summary of the user's financial overview, including total balance, income, and expenses.
 Transaction Management: Allow users to add, edit, and delete transactions (income and expenses) with details such as amount, category, date, and description.
 Responsive Design: Ensure the application is responsive and provides a consistent experience across desktop and mobile devices.
-
 Analytics: Provide graphical representations (e.g., pie charts, bar graphs) of expenses and income, categorized by type over selectable periods (month, year).
 Categorisation: Transactions should be categorised (e.g., groceries, salary, rent) for better analysis.
+
 Budget Planning: Allow users to set monthly budgets for different categories and track their progress.
 Alerts: Notify users when they exceed their budget or reach a financial goal.
 

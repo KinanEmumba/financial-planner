@@ -3,6 +3,9 @@ import { queryClient } from "./react-query-setup";
 
 import { API } from "src/api/api";
 import {
+	CategoriesResponseType,
+	CategoryDataType,
+	ChangeCategoriesResponseType,
 	ChangeLimitResponseType,
 	CreateExpenseResponseType,
 	ExpenseDataType,
@@ -41,7 +44,7 @@ export const usePostExpense = () => {
   return useMutation<CreateExpenseResponseType, Error, { expense: ExpenseDataType }>({
     mutationKey: ['expenses'],
 		mutationFn: ({ expense }) => API({url: 'expense/post', body: {expense}}) as Promise<CreateExpenseResponseType>,
-		onSuccess: () => queryClient. invalidateQueries({ queryKey: ['expenses'], refetchType: 'active'})
+		onSuccess: () => queryClient. invalidateQueries({ queryKey: ['expenses', 'categories'], refetchType: 'active'})
   });
 };
 
@@ -69,9 +72,24 @@ export const useGetLimit = () => {
 };
 
 export const useChangeLimit = () => {
-  return useMutation<CreateExpenseResponseType, Error, { limit: number | string }>({
-    mutationKey: ['limit'],
+	return useMutation<CreateExpenseResponseType, Error, { limit: number | string }>({
+		mutationKey: ['limit'],
 		mutationFn: ({ limit }) => API({url: 'limitChange', body: {limit}}) as Promise<ChangeLimitResponseType>,
 		onSuccess: () => queryClient. invalidateQueries({ queryKey: ['limit'], refetchType: 'active'})
   });
+};
+
+export const useGetCategories = () => {
+	return useQuery<CategoriesResponseType, Error>({
+		queryKey: ['categories'],
+		queryFn: () => API({url: 'categories'}) as Promise<CategoriesResponseType>
+	});
+};
+
+export const useSetCategories = () => {
+	return useMutation<ChangeCategoriesResponseType, Error, {categories: CategoryDataType[]}>({
+		mutationKey: ['categories'],
+		mutationFn: ({ categories }) => API({url: 'categoriesChange', body: {categories}}) as Promise<ChangeCategoriesResponseType>,
+		onSuccess: () => queryClient. invalidateQueries({ queryKey: ['categories'], refetchType: 'active'})
+	});
 };

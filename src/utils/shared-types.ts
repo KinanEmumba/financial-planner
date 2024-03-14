@@ -36,6 +36,11 @@ export enum TimePeriod {
 	'month' = 'This Month',
 }
 
+export enum ExpenseType {
+	credit,
+	debit
+}
+
 export type StateContextType = {
 	saveToken: ({userTokenResponse}: {userTokenResponse: TokenResponseType}) => void,
 	saveUser: ({user}: {user: UserType}) => void,
@@ -46,21 +51,28 @@ export type StateContextType = {
 	setExpenses: Dispatch<SetStateAction<ExpenseDataType[]>>
 };
 
-export type ExpenseType = 'credit' | 'debit';
-
 export type ExpenseDataType = {
 	amount: string | number,
 	category: string,
 	date: string,
 	description: string,
-	type: ExpenseType,
+	type: ExpenseType | string,
+};
+
+export type CategoryDataType = {
+	title: string,
+	limit: number,
 };
 
 export type PieDataType = {type: string, value: number};
 
 export type ExpensesResponseType = {expenses: ExpenseDataType[]};
 
+export type CategoriesResponseType = {categories: CategoryDataType[]};
+
 export type MessageObjectType = {message: string};
+
+export type ChangeCategoriesResponseType = MessageObjectType;
 
 export type CreateExpenseResponseType = MessageObjectType;
 
@@ -72,4 +84,11 @@ export type ChangeLimitResponseType = MessageObjectType;
 
 export type LimitResponseType = {limit: string | null};
 
-export type AllReturnTypes = UserType | TokenResponseType | ExpensesResponseType | MessageObjectType | LimitResponseType;
+export type AllReturnTypes =
+	UserType |
+	TokenResponseType |
+	ExpensesResponseType |
+	MessageObjectType |
+	LimitResponseType |
+	CategoriesResponseType
+;

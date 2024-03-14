@@ -1,4 +1,10 @@
-import   { ExpenseDataType } from "src/utils/shared-types";
+import { CategoryDataType, ExpenseDataType } from "src/utils/shared-types";
+
+export const categoriesData: CategoryDataType[] = [
+	{title: 'rent', limit: 0},
+	{title: 'groceries', limit: 0},
+	{title: 'fuel', limit: 0},
+];
 
 export const expenseData: ExpenseDataType[] = [
   {

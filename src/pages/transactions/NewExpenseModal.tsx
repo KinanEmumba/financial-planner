@@ -6,7 +6,7 @@ import { StyledModalBox } from 'src/pages/transactions/transactions-style';
 import { amountValidator } from 'src/utils/input-validators';
 import { VerticalFieldsContainer } from 'src/components/styled-components';
 import { useEditExpense, usePostExpense } from 'src/api/apis';
-import { ExpenseDataType } from 'src/utils/shared-types';
+import { ExpenseDataType, ExpenseType } from 'src/utils/shared-types';
 import { CenteredLoader } from 'src/components/shared-components';
 import { SnackBarContext } from 'src/app/snackbar-context';
 
@@ -29,7 +29,7 @@ const NewExpenseModal = ({
 	const data = postExpenseAPI.data || editExpenseAPI.data;
 
 	const [expenseValues, setExpenseValues] = useState<ExpenseDataType>({
-		type: 'debit',
+		type: ExpenseType.debit,
 		amount: '',
 		category: '',
 		description: '',
@@ -91,12 +91,12 @@ const NewExpenseModal = ({
 			{isPending && <CenteredLoader />}
 				<VerticalFieldsContainer>
 					<div>
-						{expenseValues.type.replace(/^./, expenseValues.type[0].toUpperCase())}
+						{(expenseValues.type).toString().replace(/^./, (expenseValues.type).toString()[0].toUpperCase())}
 						<Switch
 							name='type' 
 							onChange={handleExpenseInput}
 							disabled={isPending}
-							checked={expenseValues.type === 'credit'}
+							checked={expenseValues.type === ExpenseType.credit}
 						/>
 					</div>
 					<ValidatedTextField
