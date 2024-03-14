@@ -44,7 +44,6 @@ export const createPieData = (expenses: ExpenseDataType[], month: number) => {
 
 export const createDashboardData = (expenses: ExpenseDataType[], month: number, expenseLimit: number) => {
 	const monthExpenses = getMonthExpenses(expenses, month);
-	console.log('current month expenses', monthExpenses);
 	const totalExpense = sumOfDebitEntries(monthExpenses);
 	const totalIncome = sumOfCreditEntries(monthExpenses);
 	const guagePercent = percentMaker(totalExpense, expenseLimit);

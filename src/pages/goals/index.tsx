@@ -1,16 +1,23 @@
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import { Button, CircularProgress } from "@mui/material"
 import ValidatedTextField from "src/components/ValidatedTextField"
 import { CenteredText } from "src/components/shared-components"
 import { StyledContainer, VerticalFieldsContainer } from "src/components/styled-components"
 import { CenterContainer } from "../splash/splash-style"
 import { amountValidator } from "src/utils/input-validators"
-import { useChangeLimit } from "src/api/apis"
+import { useChangeLimit, useGetLimit } from "src/api/apis"
 
 const Goals = () => {
+	const { data: currentLimit } = useGetLimit();
 	const [limit, setLimit] = useState<string | number>('');
 	const limitChangeAPI = useChangeLimit();
 	const loading = limitChangeAPI.isPending;
+
+	useEffect(() => {
+		if (currentLimit) {
+			setLimit(currentLimit?.limit as string);
+		}
+	}, [currentLimit]);
 
 	const setMonthlyLimit = (e: ChangeEvent<HTMLInputElement>) => {
 		setLimit(e.target.value);
