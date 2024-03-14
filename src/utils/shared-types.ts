@@ -30,6 +30,11 @@ export type SnackbarOptions = {
 
 export type AppStateType = null | {appState: StateContextType};
 
+export enum TimePeriod {
+	'year' = 'This Year',
+	'month' = 'This Month',
+}
+
 export type StateContextType = {
 	saveToken: ({userTokenResponse}: {userTokenResponse: TokenResponseType}) => void,
 	saveUser: ({user}: {user: UserType}) => void,

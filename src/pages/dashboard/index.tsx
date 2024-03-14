@@ -29,7 +29,7 @@ const Dashboard = () => {
 				<DashboardStats expenses={expenses} expenseLimit={expenseLimit} currentMonth={currentMonth} />
 				<GaugeChart expenses={expenses} currentMonth={currentMonth} expenseLimit={expenseLimit} />
 				<PieChart expenses={expenses} currentMonth={currentMonth} />
-				<ColumnChart expenses={expenses} />
+				<ColumnChart expenses={expenses} currentMonth={currentMonth} />
 			</>
 			)}
 		</StyledContainer>
