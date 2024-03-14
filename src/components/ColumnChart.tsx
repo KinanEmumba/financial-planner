@@ -1,26 +1,29 @@
 import { useMemo, useState } from 'react';
+import { SelectChangeEvent } from '@mui/material';
 import { Column } from '@ant-design/charts'
 import { theme } from 'src/app/theme';
 import { StyledCard } from 'src/pages/dashboard/dashboard-style'
 import ChartDropdown from './ChartDropdown';
 import { colConfigMaker, createColData } from 'src/utils/helper-functions';
-import { ExpenseDataType, TimePeriod } from 'src/utils/shared-types';
-import { SelectChangeEvent } from '@mui/material';
+import { TimePeriod } from 'src/utils/shared-types';
+import useExpenses from 'src/shared-hooks/useExpenses';
 
-const ColumnChart = ({expenses}: {expenses: ExpenseDataType[]}) => {
+const ColumnChart = () => {
+	const { expenses } = useExpenses();
+	const [timePeriod, setTimePeriod] = useState(TimePeriod.year as string);
 
-	const [selectedOption, setSelectedOption] = useState(TimePeriod.year as string);
-
-  const colData = useMemo(() => createColData(expenses, selectedOption as TimePeriod), [expenses, selectedOption]);
+  const colData = useMemo(
+		() => createColData(expenses, timePeriod as TimePeriod),
+	[expenses, timePeriod]);
   const colConfig = useMemo(() => colConfigMaker(colData, theme.palette.primary.main), [colData]);
 
 	const onChange = (event: SelectChangeEvent) => {
-    setSelectedOption(event.target.value);
+    setTimePeriod(event.target.value);
   };
 
   return (
     <StyledCard>
-      <ChartDropdown onChange={onChange} value={selectedOption} />
+      <ChartDropdown onChange={onChange} value={timePeriod} />
       <Column {...colConfig} />
     </StyledCard>
   );

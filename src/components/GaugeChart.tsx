@@ -2,17 +2,15 @@ import { useMemo } from 'react';
 import { Gauge } from '@ant-design/charts'
 import { StyledCard } from 'src/pages/dashboard/dashboard-style'
 import { createDashboardData, guageConfigMaker } from 'src/utils/helper-functions';
-import { ExpenseDataType } from 'src/utils/shared-types';
+import useExpenses from 'src/shared-hooks/useExpenses';
+import { getMonth } from 'date-fns';
+import useExpenseLimit from 'src/shared-hooks/useExpenseLimit';
 
-const GaugeChart = ({
-	expenses,
-	currentMonth,
-	expenseLimit
-}: {
-	expenses: ExpenseDataType[],
-	currentMonth: number,
-	expenseLimit: number,
-}) => {
+const GaugeChart = () => {
+	const { expenses } = useExpenses();
+	const { expenseLimit } =	useExpenseLimit();
+	const currentMonth = getMonth(new Date());
+
   const dashboardData = useMemo(
     () => createDashboardData(expenses, currentMonth, expenseLimit),
     [currentMonth, expenses, expenseLimit]

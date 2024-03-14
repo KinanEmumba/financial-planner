@@ -1,17 +1,15 @@
-import { getYear, getWeek, getMonth, format } from "date-fns";
+import { getYear, getMonth, format } from "date-fns";
 import { ExpenseDataType, PieDataType, TimePeriod } from "./shared-types";
 import { green, orange, red, yellow } from "@mui/material/colors";
 import { theme } from "src/app/theme";
 
-export const createColData = (expenses: ExpenseDataType[], timePeriod: TimePeriod, currentMonth: number) => {
+export const createColData = (expenses: ExpenseDataType[], timePeriod: TimePeriod) => {
 	const colData: {name: string, month: string, amount: number}[] = [];
-	const currentYear = getYear(new Date());
-	const currentWeek = getWeek(new Date());
 	let localExpenses = expenses;
 	if (timePeriod === TimePeriod.year) {
-		localExpenses = localExpenses.filter(expense => getYear(new Date(expense.date)) === currentYear);
+		localExpenses = getYearExpenses(expenses);
 	} else if ((timePeriod === TimePeriod.month)) {
-		localExpenses = localExpenses.filter(expense => getWeek(new Date(expense.date)) === currentWeek);
+		localExpenses = getMonthExpenses(expenses);
 	}
 	localExpenses.forEach((expense) => {
 		const month = format(new Date(expense.date), timePeriod === TimePeriod.year ? 'MMM' : 'wo');
@@ -26,9 +24,14 @@ export const createColData = (expenses: ExpenseDataType[], timePeriod: TimePerio
 	return colData;
 };
 
-export const createPieData = (expenses: ExpenseDataType[], month: number) => {
-	const monthExpenses = getMonthExpenses(expenses, month);
-	const pieData: PieDataType[] = monthExpenses.reduce((acc: PieDataType[], expense: ExpenseDataType) => {
+export const createPieData = (expenses: ExpenseDataType[], timePeriod: TimePeriod) => {
+	let localExpenses = expenses;
+	if (timePeriod === TimePeriod.year) {
+		localExpenses = getYearExpenses(expenses);
+	} else if ((timePeriod === TimePeriod.month)) {
+		localExpenses = getMonthExpenses(expenses);
+	}
+	const pieData: PieDataType[] = localExpenses.reduce((acc: PieDataType[], expense: ExpenseDataType) => {
 		const index = acc.findIndex(item => item.type === expense.category);
 		if (index !== -1) {
 			acc[index].value += 1;
@@ -53,7 +56,11 @@ export const createDashboardData = (expenses: ExpenseDataType[], month: number, 
 };
 
 export const getMonthExpenses = (expenses: ExpenseDataType[], month?: number) => {
-	return expenses.filter(exp => getMonth(exp.date) === month);
+	return expenses.filter(exp => getMonth(exp.date) === (month || getMonth(new Date())));
+};
+
+export const getYearExpenses = (expenses: ExpenseDataType[], year?: number) => {
+	return expenses.filter(exp => getYear(exp.date) === (year || getYear(new Date())));
 };
 
 export const sumOfDebitEntries = (expenses: ExpenseDataType[]) => {
@@ -116,7 +123,7 @@ export const pieConfigMaker = (data :  {type: string, value: number}[]) => {
     angleField: 'value',
     colorField: 'type',
     label: {
-      text: 'value',
+      text: (value: {value: number}) => value.value,
       style: {
         fontWeight: 'bold',
       },

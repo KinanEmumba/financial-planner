@@ -1,17 +1,14 @@
 import { useMemo } from 'react';
 import { CenteredText } from './shared-components'
 import { createDashboardData } from 'src/utils/helper-functions';
-import { ExpenseDataType } from 'src/utils/shared-types';
+import useExpenses from 'src/shared-hooks/useExpenses';
+import { getMonth } from 'date-fns';
+import useExpensesLimit from 'src/shared-hooks/useExpenseLimit';
 
-const DashboardStats = ({
-	expenses,
-	expenseLimit,
-	currentMonth
-}: {
-	expenses: ExpenseDataType[],
-	expenseLimit: number,
-	currentMonth: number
-}) => {
+const DashboardStats = () => {
+	const { expenses } = useExpenses();
+	const { expenseLimit } =	useExpensesLimit();
+	const currentMonth = getMonth(new Date());
 
   const dashboardData = useMemo(
     () => createDashboardData(expenses, currentMonth, expenseLimit),
