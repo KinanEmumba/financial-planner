@@ -4,11 +4,13 @@ import {
 	DeleteExpenseResponseType,
 	EditExpenseResponseType,
 	ExpenseDataType,
+	ExpenseType,
 	ExpensesResponseType,
 	TokenResponseType,
 	UserType
 } from "src/utils/shared-types";
 import { expenseData, categoriesData } from "src/api/expense-data";
+import { addNewCategoryFromExpense } from "src/utils/helper-functions";
 
 const getUserResponse = (): UserType => ({
 	id: '001',
@@ -31,24 +33,10 @@ const getExpenses = (): ExpensesResponseType => {
 	return localExpensesData;
 };
 
-const checkIfCategoryExists = (expenseCategory: string, storedCats: CategoryDataType[]) => {
-	const cats = storedCats.map((cat: CategoryDataType) => cat.title);
-	return cats.find(cat => cat === expenseCategory);
-};
-
-const addNewCategory = (expenseCategory: string) => {
-	const storedCats = localStorage.getItem('categories');
-	if (!storedCats) return;
-	const catArray = JSON.parse(storedCats);
-	const exists = checkIfCategoryExists(expenseCategory, catArray);
-	if (exists) return;
-	else catArray.unshift({title: expenseCategory, limit: 0});
-	localStorage.setItem('categories', JSON.stringify(catArray));
-};
-
 const postExpense = (body: {expense: ExpenseDataType}): CreateExpenseResponseType => {
-	if (body.expense.type === "debit")
-	addNewCategory(body.expense.category);
+	if (body.expense.type === ExpenseType.debit) {
+		addNewCategoryFromExpense(body.expense.category);
+	}
 	const storedExpenses = localStorage.getItem('expenses');
 	const localExpensesData: ExpenseDataType[] = storedExpenses && JSON.parse(storedExpenses);
 	localStorage.setItem('expenses', JSON.stringify([body?.expense, ...localExpensesData]));
