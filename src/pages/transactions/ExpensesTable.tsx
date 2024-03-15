@@ -8,13 +8,13 @@ import {
 	TableRow,
 	Typography,
 	useTheme
-} from '@mui/material';
-import EditNoteIcon from '@mui/icons-material/EditNote';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+} from '@mui/material'
+import EditNoteIcon from '@mui/icons-material/EditNote'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 
-import { ExpenseDataType, ExpenseType } from 'src/utils/shared-types';
-import { StyledTableCell } from './transactions-style';
-import { Spacer } from 'src/components/styled-components';
+import { ExpenseDataType, ExpenseType } from 'src/utils/shared-types'
+import { StyledTableCell } from './transactions-style'
+import { Spacer } from 'src/components/styled-components'
 
 const ExpensesTable = ({
 	expenses,
@@ -36,6 +36,7 @@ const ExpensesTable = ({
 						<TableCell><Typography variant="h5">Category</Typography></TableCell>
 						<TableCell><Typography variant="h5">Amount</Typography></TableCell>
 						<TableCell><Typography variant="h5">Description</Typography></TableCell>
+						<TableCell />
 					</TableRow>
 				</TableHead>
 				<TableBody>

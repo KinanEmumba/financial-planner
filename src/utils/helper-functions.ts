@@ -1,7 +1,13 @@
-import { getYear, getMonth, format } from "date-fns";
-import { green, red, yellow } from "@mui/material/colors";
+import { getYear, getMonth, format } from "date-fns"
+import { green, red, yellow } from "@mui/material/colors"
 
-import { CategoryDataType, ExpenseDataType, ExpenseType, PieDataType, TimePeriod } from "src/utils//shared-types";
+import {
+	CategoryDataType,
+	ExpenseDataType,
+	ExpenseType,
+	PieDataType,
+	TimePeriod
+} from "src/utils/shared-types"
 
 export const createColData = (expenses: ExpenseDataType[], timePeriod: TimePeriod) => {
 	const colData: {name: string, month: string, amount: number}[] = [];

@@ -1,14 +1,14 @@
-import { useMemo } from 'react';
+import { useMemo } from 'react'
 import { Gauge } from '@ant-design/charts'
-import { getMonth } from 'date-fns';
+import { getMonth } from 'date-fns'
 
-import useExpenses from 'src/shared-hooks/useExpenses';
-import useExpenseLimit from 'src/shared-hooks/useExpenseLimit';
+import useExpenses from 'src/shared-hooks/useExpenses'
+import useExpenseLimit from 'src/shared-hooks/useExpenseLimit'
 import { StyledCard } from 'src/pages/dashboard/dashboard-style'
-import { createDashboardData, guageConfigMaker } from 'src/utils/helper-functions';
-import { CenteredLoader, CenteredText } from './shared-components';
-import { Spacer } from './styled-components';
-import { theme } from 'src/app/theme';
+import { createDashboardData, guageConfigMaker } from 'src/utils/helper-functions'
+import { CenteredLoader, CenteredText } from './shared-components'
+import { Spacer } from './styled-components'
+import { theme } from 'src/app/theme'
 
 const GaugeChart = () => {
 	const { expenses, expensesLoading, expensesError } = useExpenses();

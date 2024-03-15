@@ -1,6 +1,6 @@
-import { Box, Fab, TableCell, styled } from "@mui/material";
+import { Box, Fab, TableCell, styled } from "@mui/material"
 
-import { bgGradient } from "src/components/styled-components";
+import { bgGradient } from "src/components/styled-components"
 
 export const StyledFab = styled(Fab)(({ theme }) =>`
 	position: fixed;

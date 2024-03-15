@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from 'react'
 
-import { useGetExpenses } from 'src/api/apis';
-import { StateContext } from 'src/app/app';
-import { ExpenseDataType } from 'src/utils/shared-types';
+import { useGetExpenses } from 'src/api/apis'
+import { StateContext } from 'src/app/app'
+import { ExpenseDataType } from 'src/utils/shared-types'
 
 const useExpenses = () => {
 	const { appState } = useContext(StateContext) || {};

@@ -1,15 +1,15 @@
-import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Box, Button } from "@mui/material";
+import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { Box, Button } from "@mui/material"
 
-import ValidatedTextField from "src/components/ValidatedTextField";
-import { CenterContainer, StyledContainer, VerticalFieldsContainer } from "src/components/styled-components";
-import { useGetToken, useGetUser } from "src/api/apis";
-import { StateContext } from "src/app/app";
-import { emailValidator, passwordValidator } from "src/utils/input-validators";
-import { UserLoginType } from "src/utils/shared-types";
-import { SnackBarContext } from "src/app/snackbar-context";
-import { CenteredLoader, CenteredText } from "src/components/shared-components";
+import ValidatedTextField from "src/components/ValidatedTextField"
+import { CenterContainer, StyledBGContainer, VerticalFieldsContainer } from "src/components/styled-components"
+import { useGetToken, useGetUser } from "src/api/apis"
+import { StateContext } from "src/app/app"
+import { emailValidator, passwordValidator } from "src/utils/input-validators"
+import { UserLoginType } from "src/utils/shared-types"
+import { SnackBarContext } from "src/app/snackbar-context"
+import { CenteredLoader, CenteredText } from "src/components/shared-components"
 
 const Splash = () => {
 	const navigate = useNavigate();
@@ -58,7 +58,7 @@ const Splash = () => {
 	}
 
   return (
-    <StyledContainer>
+    <StyledBGContainer>
 			<CenterContainer>
 				<CenteredText variant='h2'>Financial Planner</CenteredText>
 					<Box component="form" onSubmit={handleSubmit} noValidate>
@@ -85,7 +85,7 @@ const Splash = () => {
 					{localLoading && <CenteredLoader />}
 				</VerticalFieldsContainer>
 			</CenterContainer>
-    </StyledContainer>
+    </StyledBGContainer>
   )
 }
 

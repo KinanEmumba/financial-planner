@@ -1,11 +1,11 @@
-import { useMemo } from 'react';
-import { getMonth } from 'date-fns';
+import { useMemo } from 'react'
+import { getMonth } from 'date-fns'
 
-import useExpenses from 'src/shared-hooks/useExpenses';
-import useExpensesLimit from 'src/shared-hooks/useExpenseLimit';
+import useExpenses from 'src/shared-hooks/useExpenses'
+import useExpensesLimit from 'src/shared-hooks/useExpenseLimit'
 import { CenteredLoader, CenteredText, KeyValueRow } from 'src/components/shared-components'
-import { createDashboardData } from 'src/utils/helper-functions';
-import { StyledDashboardStats } from 'src/pages/dashboard/dashboard-style';
+import { createDashboardData } from 'src/utils/helper-functions'
+import { StyledDashboardStats } from 'src/pages/dashboard/dashboard-style'
 
 const DashboardStats = () => {
 	const { expenses } = useExpenses();

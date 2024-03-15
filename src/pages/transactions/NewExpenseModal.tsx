@@ -1,14 +1,14 @@
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react'
-import { Button, Modal, Switch } from '@mui/material';
+import { Button, Modal, Switch } from '@mui/material'
 
-import ValidatedTextField from 'src/components/ValidatedTextField';
-import { StyledModalBox } from 'src/pages/transactions/transactions-style';
-import { amountValidator } from 'src/utils/input-validators';
-import { VerticalFieldsContainer } from 'src/components/styled-components';
-import { useEditExpense, usePostExpense } from 'src/api/apis';
-import { ExpenseDataType, ExpenseType } from 'src/utils/shared-types';
-import { CenteredLoader } from 'src/components/shared-components';
-import { SnackBarContext } from 'src/app/snackbar-context';
+import ValidatedTextField from 'src/components/ValidatedTextField'
+import { StyledModalBox } from 'src/pages/transactions/transactions-style'
+import { amountValidator } from 'src/utils/input-validators'
+import { VerticalFieldsContainer } from 'src/components/styled-components'
+import { useEditExpense, usePostExpense } from 'src/api/apis'
+import { ExpenseDataType, ExpenseType } from 'src/utils/shared-types'
+import { CenteredLoader } from 'src/components/shared-components'
+import { SnackBarContext } from 'src/app/snackbar-context'
 
 const NewExpenseModal = ({
 	visible,

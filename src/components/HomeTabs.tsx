@@ -1,8 +1,8 @@
-import { useEffect } from "react";
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { Tabs, Tab, AppBar, Typography } from "@mui/material";
+import { useEffect } from "react"
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom"
+import { Tabs, Tab, AppBar, Typography } from "@mui/material"
 
-import UserAvatar from "src/components/UserAvatar";
+import UserAvatar from "src/components/UserAvatar"
 
 const HomeTabs = () => {
 	const location = useLocation();

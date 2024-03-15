@@ -1,7 +1,7 @@
-import { Dispatch, ReactNode, SetStateAction } from "react";
-import { AlertColor } from "@mui/material";
+import { Dispatch, ReactNode, SetStateAction } from "react"
+import { AlertColor } from "@mui/material"
 
-import { data } from "src/api/mock-database";
+import { data } from "src/api/mock-database"
 
 export type API_ERROR_TYPE = {status: number, message: string};
 export type TokenType = string | undefined;

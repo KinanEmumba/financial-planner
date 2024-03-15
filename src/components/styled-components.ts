@@ -1,4 +1,4 @@
-import { Paper, TextField, Theme, styled } from '@mui/material';
+import { Paper, TextField, Theme, styled } from '@mui/material'
 
 export const bgGradient = (theme: Theme) => `
   linear-gradient(
@@ -8,9 +8,11 @@ export const bgGradient = (theme: Theme) => `
   )
 `;
 
-export const StyledContainer = styled('div')(({ theme }) =>`
-	min-height: 1080px;	
+export const StyledBGContainer = styled('div')(({ theme }) =>`
 	background-image: ${bgGradient(theme)};
+	height: 100vh;
+	overflow-y: scroll;
+	padding-bottom: ${theme.spacing(50)};
 `);
 
 export const CenterContainer = styled('div')(({ theme }) =>`
@@ -41,7 +43,7 @@ export const VerticalFieldsContainer = styled('div')(({ theme }) =>`
 `);
 
 export const CenteredView = styled('div')(({ theme }) =>`
-	margin: 0px auto;
+	margin: ${theme.spacing(5)} auto;
 	text-align: center;
 `);
 

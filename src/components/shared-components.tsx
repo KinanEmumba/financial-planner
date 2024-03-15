@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import { CircularProgress, Typography, TypographyProps } from '@mui/material'
 
 import { CenteredView, FullCenteredView } from 'src/components/styled-components'
-import { FlexRow, SingleFlex } from 'src/pages/dashboard/dashboard-style';
+import { FlexRow, SingleFlex } from 'src/pages/dashboard/dashboard-style'
 
 interface CenteredHeadingProps extends TypographyProps {
   children: ReactNode;

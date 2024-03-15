@@ -1,16 +1,16 @@
-import { useCallback, useContext, useEffect, useState } from "react";
-import AddIcon from '@mui/icons-material/Add';
+import { useCallback, useContext, useEffect, useState } from "react"
+import AddIcon from '@mui/icons-material/Add'
 
-import NewExpenseModal from "src/pages/transactions/NewExpenseModal";
-import ExpensesTable from "src/pages/transactions/ExpensesTable";
-import useExpenses from "src/shared-hooks/useExpenses";
-import { CenteredView, Spacer, StyledPaper } from "src/components/styled-components"
-import { StyledFab } from "src/pages/transactions/transactions-style";
-import { CenteredLoader, CenteredText } from "src/components/shared-components";
-import { SnackBarContext } from "src/app/snackbar-context";
-import { useDeleteExpense } from "src/api/apis";
-import { ExpenseDataType } from "src/utils/shared-types";
-import { theme } from "src/app/theme";
+import NewExpenseModal from "src/pages/transactions/NewExpenseModal"
+import ExpensesTable from "src/pages/transactions/ExpensesTable"
+import useExpenses from "src/shared-hooks/useExpenses"
+import { CenteredView, Spacer, StyledBGContainer } from "src/components/styled-components"
+import { StyledFab } from "src/pages/transactions/transactions-style"
+import { CenteredLoader, CenteredText } from "src/components/shared-components"
+import { SnackBarContext } from "src/app/snackbar-context"
+import { useDeleteExpense } from "src/api/apis"
+import { ExpenseDataType } from "src/utils/shared-types"
+import { theme } from "src/app/theme"
 
 const Transactions = () => {
 	const { expenses, expensesLoading, expensesError } = useExpenses();
@@ -56,9 +56,9 @@ const Transactions = () => {
 
 	return (
 		<>
-			<StyledPaper>
+			<StyledBGContainer>
 				{loading && <CenteredLoader />}
-				<CenteredText variant='h2'> Transactions </CenteredText>
+				<CenteredText variant='h2' color="primary"> Dashboard </CenteredText>
 				<CenteredView>
 					<StyledFab color="secondary" onClick={addNewExpense}>
 						<AddIcon />
@@ -76,7 +76,7 @@ const Transactions = () => {
 						onDelete={onDelete}
 					/>
 				)}
-			</StyledPaper>
+			</StyledBGContainer>
 			<NewExpenseModal
 				visible={modalVisible}
 				editExpense={editExpense}

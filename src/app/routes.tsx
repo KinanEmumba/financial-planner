@@ -1,10 +1,10 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom"
 
-import HomeTabs from "src/components/HomeTabs";
-import Dashboard from "src/pages/dashboard";
-import Goals from "src/pages/goals";
-import Splash from "src/pages/splash";
-import Transactions from "src/pages/transactions";
+import HomeTabs from "src/components/HomeTabs"
+import Dashboard from "src/pages/dashboard"
+import Goals from "src/pages/goals"
+import Splash from "src/pages/splash"
+import Transactions from "src/pages/transactions"
 
 const AppRoutes = () => {
   return (
@@ -19,4 +19,4 @@ const AppRoutes = () => {
   )
 }
 
-export default AppRoutes;
+export default AppRoutes

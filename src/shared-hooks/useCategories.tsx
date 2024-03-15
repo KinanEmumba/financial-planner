@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
-import { useGetCategories } from 'src/api/apis';
-import { CategoryDataType } from 'src/utils/shared-types';
+import { useGetCategories } from 'src/api/apis'
+import { CategoryDataType } from 'src/utils/shared-types'
 
 const useCategories = () => {
 	const [categories, setCategories] = useState<CategoryDataType[]>([]);

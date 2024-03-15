@@ -1,5 +1,5 @@
-import { data } from "src/api/mock-database";
-import { AllReturnTypes } from "src/utils/shared-types";
+import { data } from "src/api/mock-database"
+import { AllReturnTypes } from "src/utils/shared-types"
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const API = async ({ url, body }: { url: keyof typeof data, body?: any }) => {

@@ -1,7 +1,7 @@
-import { useCallback, useState } from 'react';
-import { Snackbar, Alert, Slide } from '@mui/material';
+import { useCallback, useState } from 'react'
+import { Snackbar, Alert, Slide } from '@mui/material'
 
-import { SnackbarOptions } from 'src/utils/shared-types';
+import { SnackbarOptions } from 'src/utils/shared-types'
 
 const useSnackbar = () => {
   const [snackbar, setSnackbar] = useState<{ open: boolean; options: SnackbarOptions }>({

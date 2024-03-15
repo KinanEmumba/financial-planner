@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { ExpenseDataType, TokenResponseType, TokenType, UserType } from 'src/utils/shared-types';
+import { ExpenseDataType, TokenResponseType, TokenType, UserType } from 'src/utils/shared-types'
 
 const useStateContext = () => {
   const storedToken = localStorage.getItem('userToken');
@@ -9,7 +9,7 @@ const useStateContext = () => {
   const [expenses, setExpenses] = useState<ExpenseDataType[]>([]);
 
   const gotoHome = () => {
-    window.location.replace('/')
+    window.location.replace('/');
   }
 
   const signout = () => {

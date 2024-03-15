@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { useGetLimit } from 'src/api/apis';
+import { useGetLimit } from 'src/api/apis'
 
 const useExpenseLimit = () => {
 	const [expenseLimit, setExpenseLimit] = useState<number>(0);

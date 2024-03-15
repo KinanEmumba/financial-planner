@@ -1,7 +1,8 @@
-import { blueGrey, pink } from "@mui/material/colors";
-import { createTheme } from "@mui/material/styles";
+import { blueGrey, pink } from "@mui/material/colors"
+import { createTheme } from "@mui/material/styles"
 
 const baseWhite = blueGrey[50]; // #eceff1;
+const bgWhite = blueGrey['A100']; // #455a64;
 const baseBlack = blueGrey[900];  // #263238
 const basePink = pink['A400']; // #f50057
 const transparentWhite = 'rgba(255, 255, 255, 0.1)';
@@ -31,7 +32,7 @@ export const theme = createTheme({
     },
     secondary: {
       main: basePink,
-			contrastText: baseWhite,
+			contrastText: bgWhite,
     },
     background: {
       default: baseBlack,

@@ -2,11 +2,10 @@ import { ChangeEvent, useEffect, useState } from "react"
 import { Button } from "@mui/material"
 
 import { CenteredLoader, CenteredText } from "src/components/shared-components"
-import { StyledContainer, CenterContainer, Spacer, RowWrapContainer } from "src/components/styled-components"
+import { StyledBGContainer, CenterContainer, RowWrapContainer } from "src/components/styled-components"
 import { amountValidator } from "src/utils/input-validators"
 import { useChangeLimit, useSetCategories } from "src/api/apis"
 import { CategoryDataType } from "src/utils/shared-types"
-import { theme } from "src/app/theme"
 import useCategories from 'src/shared-hooks/useCategories'
 import useExpenseLimit from 'src/shared-hooks/useExpenseLimit'
 import SingleFieldValue from "src/pages/goals/SingleFieldValue"
@@ -48,7 +47,7 @@ const Goals = () => {
 	};
 
 	return (
-		<StyledContainer>
+		<StyledBGContainer>
 			{loading && <CenteredLoader />}
 			<CenteredText variant='h2' color="primary"> Goals </CenteredText>
 			<CenterContainer>
@@ -60,9 +59,7 @@ const Goals = () => {
 					onChange={setMonthlyLimit}
 					validator={amountValidator}
 				/>
-				<Spacer margin={`${theme.spacing(2)} 0`} />
 				<CenteredText variant='h4' color="primary"> Individual category limits </CenteredText>
-				<Spacer margin={`${theme.spacing(2)} 0`} />
 				<RowWrapContainer>
 					{cats.map(cat => (
 						<SingleFieldValue
@@ -82,7 +79,7 @@ const Goals = () => {
 					</Button>
 				</FloatingButtonContainer>
 			</CenterContainer>
-		</StyledContainer>
+		</StyledBGContainer>
 	)
 }
 

@@ -8,9 +8,9 @@ import {
 	ExpensesResponseType,
 	TokenResponseType,
 	UserType
-} from "src/utils/shared-types";
-import { expenseData, categoriesData } from "src/api/expense-data";
-import { addNewCategoryFromExpense } from "src/utils/helper-functions";
+} from "src/utils/shared-types"
+import { expenseData, categoriesData } from "src/api/expense-data"
+import { addNewCategoryFromExpense } from "src/utils/helper-functions"
 
 const getUserResponse = (): UserType => ({
 	id: '001',
