@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from "react"
 import { Button } from "@mui/material"
 
 import { CenteredLoader, CenteredText } from "src/components/shared-components"
-import { StyledContainer, VerticalFieldsContainer, CenterContainer, Spacer } from "src/components/styled-components"
+import { StyledContainer, CenterContainer, Spacer, RowWrapContainer } from "src/components/styled-components"
 import { amountValidator } from "src/utils/input-validators"
 import { useChangeLimit, useSetCategories } from "src/api/apis"
 import { CategoryDataType } from "src/utils/shared-types"
@@ -10,6 +10,7 @@ import { theme } from "src/app/theme"
 import useCategories from 'src/shared-hooks/useCategories'
 import useExpenseLimit from 'src/shared-hooks/useExpenseLimit'
 import SingleFieldValue from "src/pages/goals/SingleFieldValue"
+import { FloatingButtonContainer } from "./goals-style"
 
 const Goals = () => {
 	const [limit, setLimit] = useState<string | number>('');
@@ -62,22 +63,24 @@ const Goals = () => {
 				<Spacer margin={`${theme.spacing(2)} 0`} />
 				<CenteredText variant='h4' color="primary"> Individual category limits </CenteredText>
 				<Spacer margin={`${theme.spacing(2)} 0`} />
-				{cats.map(cat => (
-					<SingleFieldValue
-						key={cat.title}
-						title={cat.title}
-						name={cat.title}
-						label={`${cat.title} expense limit`}
-						value={cat.limit}
-						onChange={onCatChange}
-						validator={amountValidator}
-					/>
-				))}
-				<VerticalFieldsContainer>
+				<RowWrapContainer>
+					{cats.map(cat => (
+						<SingleFieldValue
+							key={cat.title}
+							title={cat.title}
+							name={cat.title}
+							label={`${cat.title} expense limit`}
+							value={cat.limit}
+							onChange={onCatChange}
+							validator={amountValidator}
+						/>
+					))}
+				</RowWrapContainer>
+				<FloatingButtonContainer>
 					<Button variant="contained" onClick={saveSettings} disabled={loading}>
 						Save Settings
 					</Button>
-				</VerticalFieldsContainer>
+				</FloatingButtonContainer>
 			</CenterContainer>
 		</StyledContainer>
 	)

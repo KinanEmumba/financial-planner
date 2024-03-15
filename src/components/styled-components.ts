@@ -54,3 +54,11 @@ export const FullCenteredView = styled('div')(({ theme }) =>`
 export const Spacer = styled('div')<{margin?: string}>(({ theme, margin }) =>`
 	margin: ${margin || theme.spacing(1) + ' ' + theme.spacing(1)};
 `);
+
+export const RowWrapContainer = styled('div')(({ theme }) =>`
+	display: flex;
+	flex: 1;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+`);

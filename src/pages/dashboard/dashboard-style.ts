@@ -25,11 +25,3 @@ export const SingleFlex = styled('div')(({ theme }) =>`
 	display: flex;
 	flex: 1;
 `);
-
-export const DashboardContainer = styled('div')(({ theme }) =>`
-	display: flex;
-	flex: 1;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: center;
-`);
