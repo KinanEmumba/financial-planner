@@ -5,6 +5,7 @@ import { CenteredText } from 'src/components/shared-components'
 import { createDashboardData } from 'src/utils/helper-functions';
 import useExpenses from 'src/shared-hooks/useExpenses';
 import useExpensesLimit from 'src/shared-hooks/useExpenseLimit';
+import { Box } from '@mui/material';
 
 const DashboardStats = () => {
 	const { expenses } = useExpenses();
@@ -18,12 +19,12 @@ const DashboardStats = () => {
   const { totalExpense, totalIncome, balance } = dashboardData;
 	
   return (
-    <>
+    <Box>
       <CenteredText variant="h6" color="primary"> Total Income: {totalIncome} </CenteredText>
       <CenteredText variant="h6" color="primary"> Total Expense: {totalExpense} </CenteredText>
       <CenteredText variant="h6" color="primary"> Balance: {balance} </CenteredText>
       <CenteredText variant="h6" color="primary"> Limit: {expenseLimit} </CenteredText>
-    </>
+    </Box>
   );
 }
 

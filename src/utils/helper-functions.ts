@@ -1,8 +1,7 @@
 import { getYear, getMonth, format } from "date-fns";
-import { green, orange, red, yellow } from "@mui/material/colors";
+import { green, red, yellow } from "@mui/material/colors";
 
 import { CategoryDataType, ExpenseDataType, PieDataType, TimePeriod } from "src/utils//shared-types";
-import { theme } from "src/app/theme";
 
 export const createColData = (expenses: ExpenseDataType[], timePeriod: TimePeriod) => {
 	const colData: {name: string, month: string, amount: number}[] = [];
@@ -84,29 +83,19 @@ export const percentMaker = (totalExpense: number, limit: number) => {
 	return totalExpense * 100 / limit;
 };
 
-export const guageConfigMaker = (total: number, current: number, title: string) => {
+export const guageConfigMaker = (total: number, current: number) => {
 	return {
-		width: 420,
-    height: 420,
 		insetBottom: -100,
     autoFit: true,
     data: {
-      target: current,
+      target: current >= total ? total : current,
       total: total,
       name: 'expense',
     },
-		title: {
-			title: title,
-			align: 'center',
-			fill: theme.palette.primary.main,
-			titleFontFamily: 'Robotto',
-			titleFontSize: 20,
-			titleFontWeight: 500,
-		},
 		scale: {
       color: {
 				range: [
-					`l(0) 0:${green[500]} 0.25:${yellow[500]} 1:${orange[900]}`,
+					`l(0) 0:${green[500]} 0.25:${yellow[500]} 1:${red[900]}`,
 					`${red[900]}`
 				],
       },
@@ -129,10 +118,12 @@ export const pieConfigMaker = (data :  {type: string, value: number}[]) => {
         fontWeight: 'bold',
       },
     },
+		tooltip: {
+			value:{ text: (value: {value: number}) => value.value,}
+		},
     legend: {
-      color: {
+			color: {
         title: false,
-        position: 'right',
         rowPadding: 5,
       },
     },
@@ -142,6 +133,7 @@ export const pieConfigMaker = (data :  {type: string, value: number}[]) => {
 export const colConfigMaker = (data: {name: string, month: string, amount: number}[], appColor: string) => {
 	return {
     data,
+		autoFit: true,
     xField: 'month',
     yField: 'amount',
     colorField: 'name',

@@ -18,7 +18,6 @@ export const CenterContainer = styled('div')(({ theme }) =>`
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	height: 720px;
 `);
 
 export const StyledTextField = styled(TextField)(({ theme }) =>`

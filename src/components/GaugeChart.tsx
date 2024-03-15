@@ -6,6 +6,8 @@ import { StyledCard } from 'src/pages/dashboard/dashboard-style'
 import { createDashboardData, guageConfigMaker } from 'src/utils/helper-functions';
 import useExpenses from 'src/shared-hooks/useExpenses';
 import useExpenseLimit from 'src/shared-hooks/useExpenseLimit';
+import { CenteredText } from './shared-components';
+import { Spacer } from './styled-components';
 
 const GaugeChart = () => {
 	const { expenses } = useExpenses();
@@ -17,14 +19,14 @@ const GaugeChart = () => {
     [currentMonth, expenses, expenseLimit]
   );
   const { totalExpense } = dashboardData;
-  const guageConfig = useMemo(() => guageConfigMaker(
-		expenseLimit,
-		totalExpense,
-		`Monthly Limit: ${totalExpense} of ${expenseLimit}`
-	), [expenseLimit, totalExpense]);
+  const guageConfig = useMemo(
+		() => guageConfigMaker(expenseLimit, totalExpense), [expenseLimit, totalExpense]
+	);
 
   return (
     <StyledCard>
+			<Spacer margin='20px 0px'/>
+			<CenteredText variant="h6" color="primary"> {`${totalExpense} out of ${expenseLimit}`} </CenteredText>
       <Gauge {...guageConfig} />
     </StyledCard>
   );

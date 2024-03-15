@@ -14,10 +14,10 @@ const Goals = () => {
 	const [limit, setLimit] = useState<string | number>('');
 	const [cats, setCats] = useState<CategoryDataType[]>([]);
 	const { expenseLimit, isLoading } = useExpenseLimit();
-	const {categories} = useCategories();
+	const {categories, isLoading: catsLoading} = useCategories();
 	const limitChangeAPI = useChangeLimit();
 	const categoryChangeAPI = useSetCategories();
-	const loading = isLoading || limitChangeAPI.isPending || categoryChangeAPI.isPending;
+	const loading = isLoading || catsLoading || limitChangeAPI.isPending || categoryChangeAPI.isPending;
 
 	useEffect(() => {
 		if (categories) {

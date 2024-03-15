@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { SelectChangeEvent } from '@mui/material';
 import { Pie } from '@ant-design/charts'
 
@@ -12,8 +12,8 @@ const PieChart = () => {
 	const { expenses } = useExpenses();
 	const [timePeriod, setTimePeriod] = useState(TimePeriod.year);
 	
-	const pieData = createPieData(expenses, timePeriod);
-	const pieConfig = pieConfigMaker(pieData);
+	const pieData =  useMemo(() => createPieData(expenses, timePeriod), [expenses, timePeriod]);
+	const pieConfig = useMemo(() => pieConfigMaker(pieData), [pieData]);
 
 	const onChange = (event: SelectChangeEvent) => {
     setTimePeriod(event.target.value as TimePeriod);
