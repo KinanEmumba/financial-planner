@@ -1,5 +1,6 @@
 import {
 	Box,
+	Button,
 	Table,
 	TableBody,
 	TableCell,
@@ -12,7 +13,8 @@ import EditNoteIcon from '@mui/icons-material/EditNote';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 import { ExpenseDataType } from 'src/utils/shared-types';
-import { EditDeleteButton, StyledTableCell } from './transactions-style';
+import { StyledTableCell } from './transactions-style';
+import { Spacer } from 'src/components/styled-components';
 
 const ExpensesTable = ({
 	expenses,
@@ -46,20 +48,19 @@ const ExpensesTable = ({
 							</StyledTableCell>
 							<StyledTableCell>{row.description}</StyledTableCell>
 							<StyledTableCell>
-								<EditDeleteButton
-									sx={{margin: '10px'}}
+								<Button
 									variant="outlined"
 									endIcon={<EditNoteIcon />}
 									onClick={() => onEdit({index})}>
 										Edit
-								</EditDeleteButton>
-								<EditDeleteButton
-									sx={{margin: '10px'}}
+								</Button>
+								<Spacer margin='10px' />
+								<Button
 									variant="contained"
 									endIcon={<DeleteForeverIcon />}
 									onClick={() => onDelete({index})}>
 										Delete
-								</EditDeleteButton>
+								</Button>
 							</StyledTableCell>
 						</TableRow>
 					))}

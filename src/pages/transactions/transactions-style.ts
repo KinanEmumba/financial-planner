@@ -1,4 +1,4 @@
-import { Box, Button, Fab, TableCell, styled } from "@mui/material";
+import { Box, Fab, TableCell, styled } from "@mui/material";
 
 import { bgGradient } from "src/components/styled-components";
 
@@ -23,8 +23,4 @@ export const StyledModalBox = styled(Box)(({ theme }) =>`
   boxShadow: 24;
 	padding: 20px;
 	background-image: ${bgGradient(theme)};
-`);
-
-export const EditDeleteButton = styled(Button)(({ theme }) =>`
-	margin: 10px;
 `);
