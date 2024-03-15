@@ -46,8 +46,9 @@ export const CenteredView = styled('div')(({ theme }) =>`
 `);
 
 export const FullCenteredView = styled('div')(({ theme }) =>`
-	margin: auto;
-	text-align: center;
+	position: absolute;
+	top: 50vh;
+	left: 50vw;
 `);
 
 export const Spacer = styled('div')<{margin?: string}>(({ theme, margin }) =>`

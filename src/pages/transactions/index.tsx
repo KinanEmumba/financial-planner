@@ -4,7 +4,7 @@ import AddIcon from '@mui/icons-material/Add';
 import NewExpenseModal from "src/pages/transactions/NewExpenseModal";
 import ExpensesTable from "src/pages/transactions/ExpensesTable";
 import useExpenses from "src/shared-hooks/useExpenses";
-import { FullCenteredView, Spacer, StyledPaper } from "src/components/styled-components"
+import { CenteredView, Spacer, StyledPaper } from "src/components/styled-components"
 import { StyledFab } from "src/pages/transactions/transactions-style";
 import { CenteredLoader, CenteredText } from "src/components/shared-components";
 import { SnackBarContext } from "src/app/snackbar-context";
@@ -13,21 +13,21 @@ import { ExpenseDataType } from "src/utils/shared-types";
 import { theme } from "src/app/theme";
 
 const Transactions = () => {
-	const { expenses, isLoading, error } = useExpenses();
+	const { expenses, expensesLoading, expensesError } = useExpenses();
 	const deleteExpenseAPI = useDeleteExpense();
 	const {showSnackbar} = useContext(SnackBarContext);
 	const [modalVisible, setModalVisible] = useState(false);
 	const [editExpense, setEditExpense] = useState<null | {expense: ExpenseDataType, id: number}>(null);
-	const loading = deleteExpenseAPI.isPending || isLoading;
+	const loading = deleteExpenseAPI.isPending || expensesLoading;
 	
 	useEffect(()=> {
-		if (error) {
+		if (expensesError) {
 			showSnackbar({
-				message: `Error logging in ${error.message}`,
+				message: `Error logging in ${expensesError.message}`,
 				type: "error"
 			});
 		}
-	}, [error, showSnackbar])
+	}, [expensesError, showSnackbar])
 
 	const addNewExpense = () => {
 		setModalVisible(true);
@@ -57,17 +57,17 @@ const Transactions = () => {
 	return (
 		<>
 			<StyledPaper>
+				{loading && <CenteredLoader />}
 				<CenteredText variant='h2'> Transactions </CenteredText>
-				<FullCenteredView>
+				<CenteredView>
 					<StyledFab color="secondary" onClick={addNewExpense}>
 						<AddIcon />
 					</StyledFab>
-					{loading && <CenteredLoader />}
-					{error && <CenteredText variant='h6'> Unable to get expenses </CenteredText>}
+					{expensesError && <CenteredText variant='h6'> Unable to get expenses </CenteredText>}
 					{!loading && !expenses?.length && (
 						<CenteredText variant='h6'> Click + icon to start adding expenses </CenteredText>
 					)}
-				</FullCenteredView>
+				</CenteredView>
 				<Spacer margin={`${theme.spacing(2)} 0px`} />
 				{expenses && (
 					<ExpensesTable

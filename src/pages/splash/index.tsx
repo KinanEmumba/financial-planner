@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Button, CircularProgress } from "@mui/material";
+import { Box, Button } from "@mui/material";
 
 import ValidatedTextField from "src/components/ValidatedTextField";
 import { CenterContainer, StyledContainer, VerticalFieldsContainer } from "src/components/styled-components";
@@ -9,7 +9,7 @@ import { StateContext } from "src/app/app";
 import { emailValidator, passwordValidator } from "src/utils/input-validators";
 import { UserLoginType } from "src/utils/shared-types";
 import { SnackBarContext } from "src/app/snackbar-context";
-import { CenteredText } from "src/components/shared-components";
+import { CenteredLoader, CenteredText } from "src/components/shared-components";
 
 const Splash = () => {
 	const navigate = useNavigate();
@@ -82,7 +82,7 @@ const Splash = () => {
 						</VerticalFieldsContainer>
 					</Box>
 				<VerticalFieldsContainer>
-					{localLoading && <CircularProgress color="primary" size={50} />}
+					{localLoading && <CenteredLoader />}
 				</VerticalFieldsContainer>
 			</CenterContainer>
     </StyledContainer>

@@ -22,7 +22,7 @@ const useExpenseLimit = () => {
 	}, [expenseLimitLoading])
 	
 	return {
-		expenseLimit, error, isLoading
+		expenseLimit, expenseLimitError: error, expensesLimitLoading: isLoading
 	}
 }
 

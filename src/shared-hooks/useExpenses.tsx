@@ -31,7 +31,7 @@ const useExpenses = () => {
 	}, [expensesLoading])
 
 	return {
-		expenses, error, isLoading
+		expenses, expensesError: error, expensesLoading: isLoading
 	}
 }
 

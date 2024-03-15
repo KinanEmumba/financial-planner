@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useState } from "react"
-import { Button, CircularProgress } from "@mui/material"
+import { Button } from "@mui/material"
 
-import { CenteredText } from "src/components/shared-components"
+import { CenteredLoader, CenteredText } from "src/components/shared-components"
 import { StyledContainer, VerticalFieldsContainer, CenterContainer, Spacer } from "src/components/styled-components"
 import { amountValidator } from "src/utils/input-validators"
 import { useChangeLimit, useSetCategories } from "src/api/apis"
@@ -14,11 +14,11 @@ import SingleFieldValue from "src/pages/goals/SingleFieldValue"
 const Goals = () => {
 	const [limit, setLimit] = useState<string | number>('');
 	const [cats, setCats] = useState<CategoryDataType[]>([]);
-	const { expenseLimit, isLoading } = useExpenseLimit();
+	const { expenseLimit, expensesLimitLoading } = useExpenseLimit();
 	const {categories, isLoading: catsLoading} = useCategories();
 	const limitChangeAPI = useChangeLimit();
 	const categoryChangeAPI = useSetCategories();
-	const loading = isLoading || catsLoading || limitChangeAPI.isPending || categoryChangeAPI.isPending;
+	const loading = expensesLimitLoading || catsLoading || limitChangeAPI.isPending || categoryChangeAPI.isPending;
 
 	useEffect(() => {
 		if (categories) {
@@ -48,9 +48,9 @@ const Goals = () => {
 
 	return (
 		<StyledContainer>
+			{loading && <CenteredLoader />}
 			<CenteredText variant='h2' color="primary"> Goals </CenteredText>
 			<CenterContainer>
-				{loading && <CircularProgress color="primary" size={50} />}
 				<SingleFieldValue
 					title="Total Monthly Expense Limit"
 					name="monthlyLimit"
