@@ -12,7 +12,7 @@ import {
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
-import { ExpenseDataType } from 'src/utils/shared-types';
+import { ExpenseDataType, ExpenseType } from 'src/utils/shared-types';
 import { StyledTableCell } from './transactions-style';
 import { Spacer } from 'src/components/styled-components';
 
@@ -43,7 +43,7 @@ const ExpensesTable = ({
 						<TableRow key={index}>
 							<StyledTableCell>{new Date(row.date).toLocaleDateString()}</StyledTableCell>
 							<StyledTableCell>{row.category}</StyledTableCell>
-							<StyledTableCell sx={{color: row.type === 'credit' ? theme.palette.success.main : theme.palette.error.main}}>
+							<StyledTableCell sx={{color: row.type === ExpenseType.credit ? theme.palette.success.main : theme.palette.error.main}}>
 								{row.amount}
 							</StyledTableCell>
 							<StyledTableCell>{row.description}</StyledTableCell>
