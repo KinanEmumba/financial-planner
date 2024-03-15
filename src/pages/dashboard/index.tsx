@@ -4,15 +4,18 @@ import GaugeChart from "src/components/GaugeChart";
 import DashboardStats from "src/components/DashboardStats";
 import PieChart from "src/components/PieChart";
 import ColumnChart from "src/components/ColumnChart";
+import { DashboardContainer } from "./dashboard-style";
 
 const Dashboard = () => {
 	return (
 		<StyledContainer>
 			<CenteredText variant='h2' color="primary"> Dashboard </CenteredText>
 			<DashboardStats />
-			<GaugeChart />
-			<PieChart />
-			<ColumnChart />
+			<DashboardContainer>
+				<GaugeChart />
+				<PieChart />
+				<ColumnChart />
+			</DashboardContainer>
 		</StyledContainer>
 	)
 }
