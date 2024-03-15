@@ -54,7 +54,7 @@ const ExpensesTable = ({
 									onClick={() => onEdit({index})}>
 										Edit
 								</Button>
-								<Spacer margin='10px' />
+								<Spacer margin={theme.spacing(1)} />
 								<Button
 									variant="contained"
 									endIcon={<DeleteForeverIcon />}

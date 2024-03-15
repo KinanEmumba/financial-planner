@@ -6,8 +6,9 @@ import { StyledContainer, VerticalFieldsContainer, CenterContainer, Spacer } fro
 import { amountValidator } from "src/utils/input-validators"
 import { useChangeLimit, useSetCategories } from "src/api/apis"
 import { CategoryDataType } from "src/utils/shared-types"
-import useCategories from 'src/shared-hooks/useCategories';
-import useExpenseLimit from 'src/shared-hooks/useExpenseLimit';
+import { theme } from "src/app/theme"
+import useCategories from 'src/shared-hooks/useCategories'
+import useExpenseLimit from 'src/shared-hooks/useExpenseLimit'
 import SingleFieldValue from "src/pages/goals/SingleFieldValue"
 
 const Goals = () => {
@@ -58,9 +59,9 @@ const Goals = () => {
 					onChange={setMonthlyLimit}
 					validator={amountValidator}
 				/>
-				<Spacer margin='20px 0'/>
+				<Spacer margin={`${theme.spacing(2)} 0`} />
 				<CenteredText variant='h4' color="primary"> Individual category limits </CenteredText>
-				<Spacer margin='20px 0'/>
+				<Spacer margin={`${theme.spacing(2)} 0`} />
 				{cats.map(cat => (
 					<SingleFieldValue
 						key={cat.title}

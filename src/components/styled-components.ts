@@ -22,12 +22,12 @@ export const CenterContainer = styled('div')(({ theme }) =>`
 
 export const StyledTextField = styled(TextField)(({ theme }) =>`
 	height: 75px;
-	margin: 5px 0px;
+	margin: ${theme.spacing(1)} 0px;
 	width: 250px;
 `);
 
 export const StyledPaper = styled(Paper)(({ theme }) =>`
-	padding: 20px;
+	padding: ${theme.spacing(2)};
   min-height: 1000px;
   display: flex;
   flex-direction: column;
@@ -37,7 +37,7 @@ export const StyledPaper = styled(Paper)(({ theme }) =>`
 export const VerticalFieldsContainer = styled('div')(({ theme }) =>`
 	display: flex;
 	flex-direction: column;
-	margin: 10px 20px;
+	margin: ${theme.spacing(1)} ${theme.spacing(2)};
 `);
 
 export const CenteredView = styled('div')(({ theme }) =>`
@@ -51,5 +51,5 @@ export const FullCenteredView = styled('div')(({ theme }) =>`
 `);
 
 export const Spacer = styled('div')<{margin?: string}>(({ theme, margin }) =>`
-	margin: ${margin || '10px 10px'};
+	margin: ${margin || theme.spacing(1) + ' ' + theme.spacing(1)};
 `);

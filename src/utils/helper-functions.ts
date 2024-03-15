@@ -122,7 +122,6 @@ export const pieConfigMaker = (data :  {type: string, value: number}[]) => {
     legend: {
 			color: {
         title: false,
-        rowPadding: 5,
       },
     },
   };

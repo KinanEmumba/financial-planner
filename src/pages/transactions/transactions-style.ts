@@ -21,6 +21,6 @@ export const StyledModalBox = styled(Box)(({ theme }) =>`
   left: 50%;
   transform: translate(-50%, -50%);
   boxShadow: 24;
-	padding: 20px;
+	padding: ${theme.spacing(2)};
 	background-image: ${bgGradient(theme)};
 `);

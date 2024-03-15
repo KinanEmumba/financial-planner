@@ -4,12 +4,13 @@ import AddIcon from '@mui/icons-material/Add';
 import NewExpenseModal from "src/pages/transactions/NewExpenseModal";
 import ExpensesTable from "src/pages/transactions/ExpensesTable";
 import useExpenses from "src/shared-hooks/useExpenses";
-import { FullCenteredView, StyledPaper } from "src/components/styled-components"
+import { FullCenteredView, Spacer, StyledPaper } from "src/components/styled-components"
 import { StyledFab } from "src/pages/transactions/transactions-style";
 import { CenteredLoader, CenteredText } from "src/components/shared-components";
 import { SnackBarContext } from "src/app/snackbar-context";
 import { useDeleteExpense } from "src/api/apis";
 import { ExpenseDataType } from "src/utils/shared-types";
+import { theme } from "src/app/theme";
 
 const Transactions = () => {
 	const { expenses, isLoading, error } = useExpenses();
@@ -67,6 +68,7 @@ const Transactions = () => {
 						<CenteredText variant='h6'> Click + icon to start adding expenses </CenteredText>
 					)}
 				</FullCenteredView>
+				<Spacer margin={`${theme.spacing(2)} 0px`} />
 				{expenses && (
 					<ExpensesTable
 						expenses={expenses}
