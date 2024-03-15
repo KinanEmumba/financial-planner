@@ -118,10 +118,7 @@ export const pieConfigMaker = (data :  {type: string, value: number}[]) => {
         fontWeight: 'bold',
       },
     },
-		tooltip: (value: {type: string, value: number}) => {
-			console.log(value);
-			return ({name: value.type, value: value.value})
-		},
+		tooltip: (value: {type: string, value: number}) => ({name: value.type, value: value.value}),
     legend: {
 			color: {
         title: false,
