@@ -4,6 +4,7 @@ import {
 	DeleteExpenseResponseType,
 	EditExpenseResponseType,
 	ExpenseDataType,
+	ExpenseType,
 	ExpensesResponseType,
 	TokenResponseType,
 	UserType
@@ -33,7 +34,7 @@ const getExpenses = (): ExpensesResponseType => {
 };
 
 const postExpense = (body: {expense: ExpenseDataType}): CreateExpenseResponseType => {
-	if (body.expense.type === 'debit') {
+	if (body.expense.type === ExpenseType.debit) {
 		addNewCategoryFromExpense(body.expense.category);
 	}
 	const storedExpenses = localStorage.getItem('expenses');

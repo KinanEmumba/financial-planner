@@ -1,7 +1,7 @@
 import { getYear, getMonth, format } from "date-fns";
 import { green, red, yellow } from "@mui/material/colors";
 
-import { CategoryDataType, ExpenseDataType, PieDataType, TimePeriod } from "src/utils//shared-types";
+import { CategoryDataType, ExpenseDataType, ExpenseType, PieDataType, TimePeriod } from "src/utils//shared-types";
 
 export const createColData = (expenses: ExpenseDataType[], timePeriod: TimePeriod) => {
 	const colData: {name: string, month: string, amount: number}[] = [];
@@ -13,7 +13,7 @@ export const createColData = (expenses: ExpenseDataType[], timePeriod: TimePerio
 	}
 	localExpenses.forEach((expense) => {
 		const month = format(new Date(expense.date), timePeriod === TimePeriod.year ? 'MMM' : 'wo');
-		const name = expense.type === 'credit' ? 'Credit' : 'Debit';
+		const name = expense.type === ExpenseType.credit ? 'Credit' : 'Debit';
 		colData.push({
 			name,
 			month,
@@ -64,11 +64,11 @@ export const getYearExpenses = (expenses: ExpenseDataType[], year?: number) => {
 };
 
 export const sumOfDebitEntries = (expenses: ExpenseDataType[]) => {
-	return sumEntriesByType(expenses, 'debit');
+	return sumEntriesByType(expenses, ExpenseType.debit);
 };
 
 export const sumOfCreditEntries = (expenses: ExpenseDataType[]) => {
-	return sumEntriesByType(expenses, 'credit');
+	return sumEntriesByType(expenses, ExpenseType.credit);
 };
 
 export const sumEntriesByType = (expenses: ExpenseDataType[], type: string) => {

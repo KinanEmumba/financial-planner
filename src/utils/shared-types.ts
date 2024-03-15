@@ -1,7 +1,7 @@
 import { Dispatch, ReactNode, SetStateAction } from "react";
 import { AlertColor } from "@mui/material";
 
-import { data } from "src/api/api-data";
+import { data } from "src/api/mock-database";
 
 export type API_ERROR_TYPE = {status: number, message: string};
 export type TokenType = string | undefined;
@@ -36,6 +36,11 @@ export enum TimePeriod {
 	'month' = 'This Month',
 }
 
+export enum ExpenseType {
+	credit = 'credit',
+	debit = 'debit',
+}
+
 export type StateContextType = {
 	saveToken: ({userTokenResponse}: {userTokenResponse: TokenResponseType}) => void,
 	saveUser: ({user}: {user: UserType}) => void,
@@ -51,7 +56,7 @@ export type ExpenseDataType = {
 	category: string,
 	date: string,
 	description: string,
-	type: string,
+	type: ExpenseType | string,
 };
 
 export type CategoryDataType = {
