@@ -2,7 +2,7 @@ import { ChangeEvent } from 'react'
 
 import ValidatedTextField from 'src/components/ValidatedTextField'
 import { CenteredText } from 'src/components/shared-components'
-import { VerticalFieldsContainer } from 'src/components/styled-components'
+import { InLineContainer, VerticalFieldsContainer } from 'src/components/styled-components'
 import { CategoryExpenseRow } from 'src/pages/goals/goals-style'
 
 const SingleFieldValue = ({
@@ -23,7 +23,9 @@ const SingleFieldValue = ({
 	return (
 		<VerticalFieldsContainer>
 			<CategoryExpenseRow>
-				<CenteredText variant='h6' color="primary"> {title} </CenteredText>
+				<InLineContainer>
+					<CenteredText variant='h6' color="primary"> {title} </CenteredText>
+				</InLineContainer>
 				<ValidatedTextField
 					name={name}
 					label={label}

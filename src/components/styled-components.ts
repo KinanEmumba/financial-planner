@@ -64,3 +64,11 @@ export const RowWrapContainer = styled('div')(({ theme }) =>`
 	flex-wrap: wrap;
 	justify-content: center;
 `);
+
+export const InLineContainer = styled('div')<{maxHeight?: string}>(({ theme, maxHeight }) =>`
+	max-Height: ${maxHeight || '100px'};
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow-y: scroll;
+`);
