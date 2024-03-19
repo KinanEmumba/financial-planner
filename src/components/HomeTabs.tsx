@@ -1,17 +1,22 @@
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom"
 import { Tabs, Tab, AppBar, Typography } from "@mui/material"
 
 import UserAvatar from "src/components/UserAvatar"
+import { StateContext } from "src/app/app"
 
 const HomeTabs = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
+	const { appState } = useContext(StateContext) || {};
+	const { user } = appState || {};
 	
 	useEffect(() => {
+		if (location.pathname.includes('/home') && !user)
+			navigate('/', {replace: true});
 		if (location.pathname === '/home')
 			navigate('dashboard');
-	},[location.pathname, navigate]);
+	},[location.pathname, navigate, user]);
 
   const tabs = [
 		{ label: 'Dashboard', to: '/home/dashboard', type: 'link' },

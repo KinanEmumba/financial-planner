@@ -30,3 +30,12 @@ Views:
   each list item has (amount, category, date, and description)
   (a filter in the view to filter by specific category)
 5- A warning popup if user is exceeding monthly budget/financial goal(antd guage)
+
+
+To Improve:
+
+1- Change background theme
+2- Snackbar can update component tree because of state change
+3- Better naming conventions
+4- Performance improvement
+5- Add url guard validation
