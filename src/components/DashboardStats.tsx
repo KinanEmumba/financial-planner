@@ -3,7 +3,7 @@ import { getMonth } from 'date-fns'
 
 import useExpenses from 'src/shared-hooks/useExpenses'
 import useExpensesLimit from 'src/shared-hooks/useExpenseLimit'
-import { CenteredLoader, CenteredText, KeyValueRow } from 'src/components/shared-components'
+import { FullScreenLoader, CenterAlignedText, HorizontalTextsRow } from 'src/components/shared-components'
 import { createDashboardData } from 'src/utils/helper-functions'
 import { StyledDashboardStats } from 'src/pages/dashboard/dashboard-style'
 
@@ -21,13 +21,13 @@ const DashboardStats = () => {
 
   return (
     <StyledDashboardStats>
-			{expensesLimitLoading && <CenteredLoader />}
-			{expenseLimitError && <CenteredText variant='h6'> {`Unable to get data ${expenseLimitError.message}`} </CenteredText>}
+			{expensesLimitLoading && <FullScreenLoader />}
+			{expenseLimitError && <CenterAlignedText variant='h6'> {`Unable to get data ${expenseLimitError.message}`} </CenterAlignedText>}
 			{expenseLimit && (<>
-				<KeyValueRow title={'Total Income:'} value={totalIncome} />
-				<KeyValueRow title={'Total Expense:'} value={totalExpense} />
-				<KeyValueRow title={'Balance:'} value={balance} />
-				<KeyValueRow title={'Limit:'} value={expenseLimit} />
+				<HorizontalTextsRow title={'Total Income:'} value={totalIncome} />
+				<HorizontalTextsRow title={'Total Expense:'} value={totalExpense} />
+				<HorizontalTextsRow title={'Balance:'} value={balance} />
+				<HorizontalTextsRow title={'Limit:'} value={expenseLimit} />
 			</>)}
     </StyledDashboardStats>
   );

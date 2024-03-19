@@ -19,17 +19,11 @@ const useExpenses = () => {
 	} = useGetExpenses({ id: user?.id || '' });
 
 	useEffect(() => {
-		if (data) setExpenses(data?.expenses)
-	}, [data])
-	
-	useEffect(() => {
-		if (expensesError) setError(expensesError)
-	}, [expensesError])
-	
-	useEffect(() => {
+		data && setExpenses(data?.expenses)
+		expensesError && setError(expensesError)
 		setIsLoading(expensesLoading)
-	}, [expensesLoading])
-
+	}, [data, expensesError, expensesLoading])
+	
 	return {
 		expenses, expensesError: error, expensesLoading: isLoading
 	}

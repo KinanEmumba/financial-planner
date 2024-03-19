@@ -1,32 +1,32 @@
 import { ReactNode } from 'react'
 import { CircularProgress, Typography, TypographyProps } from '@mui/material'
 
-import { CenteredView, FullCenteredView } from 'src/components/styled-components'
+import { CenteredContentView, FullScreenCenteredContentView } from 'src/components/styled-components'
 import { FlexRow, SingleFlex } from 'src/pages/dashboard/dashboard-style'
 
 interface CenteredHeadingProps extends TypographyProps {
   children: ReactNode;
 }
 
-export const CenteredText = ({children, ...props}: CenteredHeadingProps) => {
+export const CenterAlignedText = ({children, ...props}: CenteredHeadingProps) => {
 	return (
-		<CenteredView>
+		<CenteredContentView>
 			<Typography {...props}>
 				{children}
 			</Typography>
-		</CenteredView>
+		</CenteredContentView>
 	)
 }
 
-export const CenteredLoader = () => {
+export const FullScreenLoader = () => {
 	return (
-		<FullCenteredView>
+		<FullScreenCenteredContentView>
 			<CircularProgress color="primary" size={50} />
-		</FullCenteredView>
+		</FullScreenCenteredContentView>
 	)
 }
 
-export const KeyValueRow = ({title, value}: {title?: ReactNode, value?: ReactNode}) => {
+export const HorizontalTextsRow = ({title, value}: {title?: ReactNode, value?: ReactNode}) => {
 	return (
 		<FlexRow>
 			<SingleFlex>

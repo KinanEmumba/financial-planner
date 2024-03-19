@@ -37,5 +37,5 @@ To Improve:
 1- Change background theme
 2- Snackbar can update component tree because of state change
 3- Better naming conventions
-4- Performance improvement
-5- Add url guard validation
+4- UseEffect improvement (done)
+5- Add url guard validation (done)

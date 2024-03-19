@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom"
 import { Box, Button } from "@mui/material"
 
 import ValidatedTextField from "src/components/ValidatedTextField"
-import { CenterContainer, StyledBGContainer, VerticalFieldsContainer } from "src/components/styled-components"
+import { CenteredFlexContainer, StyledBGContainer, VerticalFieldsContainer } from "src/components/styled-components"
 import { useGetToken, useGetUser } from "src/api/apis"
 import { StateContext } from "src/app/app"
 import { emailValidator, passwordValidator } from "src/utils/input-validators"
 import { UserLoginType } from "src/utils/shared-types"
 import { SnackBarContext } from "src/app/snackbar-context"
-import { CenteredLoader, CenteredText } from "src/components/shared-components"
+import { FullScreenLoader, CenterAlignedText } from "src/components/shared-components"
 
 const Splash = () => {
 	const navigate = useNavigate();
@@ -59,8 +59,8 @@ const Splash = () => {
 
   return (
     <StyledBGContainer>
-			<CenterContainer>
-				<CenteredText variant='h2'>Financial Planner</CenteredText>
+			<CenteredFlexContainer>
+				<CenterAlignedText variant='h2'>Financial Planner</CenterAlignedText>
 					<Box component="form" onSubmit={handleSubmit} noValidate>
 						<VerticalFieldsContainer>
 							<ValidatedTextField
@@ -82,9 +82,9 @@ const Splash = () => {
 						</VerticalFieldsContainer>
 					</Box>
 				<VerticalFieldsContainer>
-					{localLoading && <CenteredLoader />}
+					{localLoading && <FullScreenLoader />}
 				</VerticalFieldsContainer>
-			</CenterContainer>
+			</CenteredFlexContainer>
     </StyledBGContainer>
   )
 }

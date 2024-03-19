@@ -1,11 +1,11 @@
 import { ChangeEvent } from 'react'
 
 import ValidatedTextField from 'src/components/ValidatedTextField'
-import { CenteredText } from 'src/components/shared-components'
+import { CenterAlignedText } from 'src/components/shared-components'
 import { InLineContainer, VerticalFieldsContainer } from 'src/components/styled-components'
 import { CategoryExpenseRow } from 'src/pages/goals/goals-style'
 
-const SingleFieldValue = ({
+const InputWithLabel = ({
 	title,
 	name,
 	label,
@@ -24,7 +24,7 @@ const SingleFieldValue = ({
 		<VerticalFieldsContainer>
 			<CategoryExpenseRow>
 				<InLineContainer>
-					<CenteredText variant='h6' color="primary"> {title} </CenteredText>
+					<CenterAlignedText variant='h6' color="primary"> {title} </CenterAlignedText>
 				</InLineContainer>
 				<ValidatedTextField
 					name={name}
@@ -38,4 +38,4 @@ const SingleFieldValue = ({
 	)
 }
 
-export default SingleFieldValue
+export default InputWithLabel

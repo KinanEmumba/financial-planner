@@ -1,5 +1,5 @@
-import { CenteredText } from "src/components/shared-components"
-import { RowWrapContainer, StyledBGContainer } from "src/components/styled-components"
+import { CenterAlignedText } from "src/components/shared-components"
+import { RowWrappingContainer, StyledBGContainer } from "src/components/styled-components"
 import GaugeChart from "src/components/GaugeChart"
 import DashboardStats from "src/components/DashboardStats"
 import PieChart from "src/components/PieChart"
@@ -8,13 +8,13 @@ import ColumnChart from "src/components/ColumnChart"
 const Dashboard = () => {
 	return (
 		<StyledBGContainer>
-			<CenteredText variant='h2' color="primary"> Dashboard </CenteredText>
+			<CenterAlignedText variant='h2' color="primary"> Dashboard </CenterAlignedText>
 			<DashboardStats />
-			<RowWrapContainer>
+			<RowWrappingContainer>
 				<GaugeChart />
 				<PieChart />
 				<ColumnChart />
-			</RowWrapContainer>
+			</RowWrappingContainer>
 		</StyledBGContainer>
 	)
 }

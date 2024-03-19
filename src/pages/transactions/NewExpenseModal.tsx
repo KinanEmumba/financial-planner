@@ -7,7 +7,7 @@ import { amountValidator } from 'src/utils/input-validators'
 import { VerticalFieldsContainer } from 'src/components/styled-components'
 import { useEditExpense, usePostExpense } from 'src/api/apis'
 import { ExpenseDataType, ExpenseType } from 'src/utils/shared-types'
-import { CenteredLoader } from 'src/components/shared-components'
+import { FullScreenLoader } from 'src/components/shared-components'
 import { SnackBarContext } from 'src/app/snackbar-context'
 
 const NewExpenseModal = ({
@@ -87,7 +87,7 @@ const NewExpenseModal = ({
 	return (
 		<Modal open={visible} onClose={onCancel}>
 			<StyledModalBox component="form" onSubmit={handleSubmit}>
-			{isPending && <CenteredLoader />}
+			{isPending && <FullScreenLoader />}
 				<VerticalFieldsContainer>
 					<div>
 						{expenseValues.type === ExpenseType.debit ? 'Debit' : 'Credit'}

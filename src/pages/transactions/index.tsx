@@ -4,9 +4,9 @@ import AddIcon from '@mui/icons-material/Add'
 import NewExpenseModal from "src/pages/transactions/NewExpenseModal"
 import ExpensesTable from "src/pages/transactions/ExpensesTable"
 import useExpenses from "src/shared-hooks/useExpenses"
-import { CenteredView, Spacer, StyledBGContainer } from "src/components/styled-components"
+import { CenteredContentView, Spacer, StyledBGContainer } from "src/components/styled-components"
 import { StyledFab } from "src/pages/transactions/transactions-style"
-import { CenteredLoader, CenteredText } from "src/components/shared-components"
+import { FullScreenLoader, CenterAlignedText } from "src/components/shared-components"
 import { SnackBarContext } from "src/app/snackbar-context"
 import { useDeleteExpense } from "src/api/apis"
 import { ExpenseDataType } from "src/utils/shared-types"
@@ -57,17 +57,17 @@ const Transactions = () => {
 	return (
 		<>
 			<StyledBGContainer>
-				{loading && <CenteredLoader />}
-				<CenteredText variant='h2' color="primary"> Dashboard </CenteredText>
-				<CenteredView>
+				{loading && <FullScreenLoader />}
+				<CenterAlignedText variant='h2' color="primary"> Dashboard </CenterAlignedText>
+				<CenteredContentView>
 					<StyledFab color="secondary" onClick={addNewExpense}>
 						<AddIcon />
 					</StyledFab>
-					{expensesError && <CenteredText variant='h6'> Unable to get expenses </CenteredText>}
+					{expensesError && <CenterAlignedText variant='h6'> Unable to get expenses </CenterAlignedText>}
 					{!loading && !expenses?.length && (
-						<CenteredText variant='h6'> Click + icon to start adding expenses </CenteredText>
+						<CenterAlignedText variant='h6'> Click + icon to start adding expenses </CenterAlignedText>
 					)}
-				</CenteredView>
+				</CenteredContentView>
 				<Spacer margin={`${theme.spacing(2)} 0px`} />
 				{expenses && (
 					<ExpensesTable

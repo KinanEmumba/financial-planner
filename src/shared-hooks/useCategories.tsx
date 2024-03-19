@@ -15,16 +15,10 @@ const useCategories = () => {
 	} = useGetCategories();
 
 	useEffect(() => {
-		if (data) setCategories(data?.categories)
-	}, [data])
-	
-	useEffect(() => {
-		if (catsError) setError(catsError)
-	}, [catsError])
-	
-	useEffect(() => {
+		data && setCategories(data?.categories);
+		catsError && setError(catsError);
 		setIsLoading(catsLoading)
-	}, [catsLoading])
+	}, [catsError, catsLoading, data])
 
 	return {
 		categories, error, isLoading

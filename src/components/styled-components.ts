@@ -15,7 +15,7 @@ export const StyledBGContainer = styled('div')(({ theme }) =>`
 	padding-bottom: ${theme.spacing(50)};
 `);
 
-export const CenterContainer = styled('div')(({ theme }) =>`
+export const CenteredFlexContainer = styled('div')(({ theme }) =>`
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -42,12 +42,12 @@ export const VerticalFieldsContainer = styled('div')(({ theme }) =>`
 	margin: ${theme.spacing(1)} ${theme.spacing(2)};
 `);
 
-export const CenteredView = styled('div')(({ theme }) =>`
+export const CenteredContentView = styled('div')(({ theme }) =>`
 	margin: ${theme.spacing(5)} auto;
 	text-align: center;
 `);
 
-export const FullCenteredView = styled('div')(({ theme }) =>`
+export const FullScreenCenteredContentView = styled('div')(({ theme }) =>`
 	position: absolute;
 	top: 50vh;
 	left: 50vw;
@@ -57,7 +57,7 @@ export const Spacer = styled('div')<{margin?: string}>(({ theme, margin }) =>`
 	margin: ${margin || theme.spacing(1) + ' ' + theme.spacing(1)};
 `);
 
-export const RowWrapContainer = styled('div')(({ theme }) =>`
+export const RowWrappingContainer = styled('div')(({ theme }) =>`
 	display: flex;
 	flex: 1;
 	flex-direction: row;

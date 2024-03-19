@@ -1,14 +1,14 @@
 import { ChangeEvent, useEffect, useState } from "react"
 import { Button } from "@mui/material"
 
-import { CenteredLoader, CenteredText } from "src/components/shared-components"
-import { StyledBGContainer, CenterContainer, RowWrapContainer } from "src/components/styled-components"
+import { FullScreenLoader, CenterAlignedText } from "src/components/shared-components"
+import { StyledBGContainer, CenteredFlexContainer, RowWrappingContainer } from "src/components/styled-components"
 import { amountValidator } from "src/utils/input-validators"
 import { useChangeLimit, useSetCategories } from "src/api/apis"
 import { CategoryDataType } from "src/utils/shared-types"
 import useCategories from 'src/shared-hooks/useCategories'
 import useExpenseLimit from 'src/shared-hooks/useExpenseLimit'
-import SingleFieldValue from "src/pages/goals/SingleFieldValue"
+import InputWithLabel from "src/pages/goals/InputWithLabel"
 import { FloatingButtonContainer } from "./goals-style"
 
 const Goals = () => {
@@ -19,18 +19,11 @@ const Goals = () => {
 	const limitChangeAPI = useChangeLimit();
 	const categoryChangeAPI = useSetCategories();
 	const loading = expensesLimitLoading || catsLoading || limitChangeAPI.isPending || categoryChangeAPI.isPending;
-
-	useEffect(() => {
-		if (categories) {
-			setCats(categories);
-		}
-	}, [categories]);
 	
 	useEffect(() => {
-		if (expenseLimit) {
-			setLimit(expenseLimit);
-		}
-	}, [expenseLimit]);
+		categories && setCats(categories);
+		expenseLimit && setLimit(expenseLimit);
+	}, [categories, expenseLimit]);
 
 	const setMonthlyLimit = (e: ChangeEvent<HTMLInputElement>) => {
 		setLimit(e.target.value);
@@ -48,10 +41,10 @@ const Goals = () => {
 
 	return (
 		<StyledBGContainer>
-			{loading && <CenteredLoader />}
-			<CenteredText variant='h2' color="primary"> Goals </CenteredText>
-			<CenterContainer>
-				<SingleFieldValue
+			{loading && <FullScreenLoader />}
+			<CenterAlignedText variant='h2' color="primary"> Goals </CenterAlignedText>
+			<CenteredFlexContainer>
+				<InputWithLabel
 					title="Total Monthly Expense Limit"
 					name="monthlyLimit"
 					label="Monthly expense limit"
@@ -59,10 +52,10 @@ const Goals = () => {
 					onChange={setMonthlyLimit}
 					validator={amountValidator}
 				/>
-				<CenteredText variant='h4' color="primary"> Individual category limits </CenteredText>
-				<RowWrapContainer>
+				<CenterAlignedText variant='h4' color="primary"> Individual category limits </CenterAlignedText>
+				<RowWrappingContainer>
 					{cats.map(cat => (
-						<SingleFieldValue
+						<InputWithLabel
 							key={cat.title}
 							title={cat.title}
 							name={cat.title}
@@ -72,13 +65,13 @@ const Goals = () => {
 							validator={amountValidator}
 						/>
 					))}
-				</RowWrapContainer>
+				</RowWrappingContainer>
 				<FloatingButtonContainer>
 					<Button variant="contained" onClick={saveSettings} disabled={loading}>
 						Save Settings
 					</Button>
 				</FloatingButtonContainer>
-			</CenterContainer>
+			</CenteredFlexContainer>
 		</StyledBGContainer>
 	)
 }

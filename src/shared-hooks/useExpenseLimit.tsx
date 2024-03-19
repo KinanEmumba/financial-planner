@@ -10,16 +10,10 @@ const useExpenseLimit = () => {
 	const { data, isLoading: expenseLimitLoading, error: expenseLimitError } = useGetLimit();
 
 	useEffect(() => {
-		if (data) setExpenseLimit(parseFloat(data.limit || '0'))
-	}, [data]);
-	
-	useEffect(() => {
-		if (expenseLimitError) setError(expenseLimitError)
-	}, [expenseLimitError])
-	
-	useEffect(() => {
+		data && setExpenseLimit(parseFloat(data.limit || '0'))
+		expenseLimitError && setError(expenseLimitError)
 		setIsLoading(expenseLimitLoading)
-	}, [expenseLimitLoading])
+	}, [data, expenseLimitError, expenseLimitLoading]);
 	
 	return {
 		expenseLimit, expenseLimitError: error, expensesLimitLoading: isLoading

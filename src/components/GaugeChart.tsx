@@ -6,7 +6,7 @@ import useExpenses from 'src/shared-hooks/useExpenses'
 import useExpenseLimit from 'src/shared-hooks/useExpenseLimit'
 import { StyledCard } from 'src/pages/dashboard/dashboard-style'
 import { createDashboardData, guageConfigMaker } from 'src/utils/helper-functions'
-import { CenteredLoader, CenteredText } from './shared-components'
+import { FullScreenLoader, CenterAlignedText } from './shared-components'
 import { Spacer } from './styled-components'
 import { theme } from 'src/app/theme'
 
@@ -28,10 +28,10 @@ const GaugeChart = () => {
 
   return (
     <StyledCard>
-			{isLoading && <CenteredLoader />}
-			{error && <CenteredText variant='h6'> {`Unable to get data ${error?.message}`} </CenteredText>}
+			{isLoading && <FullScreenLoader />}
+			{error && <CenterAlignedText variant='h6'> {`Unable to get data ${error?.message}`} </CenterAlignedText>}
 			<Spacer margin={`${theme.spacing(2)} 0px`} />
-			<CenteredText variant="h6" color="primary"> {`${totalExpense} out of ${expenseLimit}`} </CenteredText>
+			<CenterAlignedText variant="h6" color="primary"> {`${totalExpense} out of ${expenseLimit}`} </CenterAlignedText>
       <Gauge {...guageConfig} />
     </StyledCard>
   );
